@@ -1,3 +1,10 @@
+html {
+    background-color:black;
+}
+body {
+    background-color:white;
+    padding:15px;
+}
 pre {
     border: 1px solid black;
     padding: 7px;
