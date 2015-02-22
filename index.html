@@ -32,6 +32,28 @@
         <pre><code>:{range}sort u</code></pre>
         <span>See :help sort</span>
     </p>
+    <p>
+      <span>Install from source</span>
+        <pre><code>
+        $ # Create the directories you need
+        $ sudo mkdir -p /opt/local/bin
+        $ cd ~
+        $ hg clone https://code.google.com/p/vim/
+        $ cd vim
+        $ ./configure --with-features=huge \
+            --enable-multibyte \
+            --enable-rubyinterp \
+            --enable-pythoninterp \
+            --with-python-config-dir=/usr/lib/python2.7/config \
+            --enable-perlinterp \
+            --enable-luainterp \
+            --enable-gui=gtk2 --enable-cscope --prefix=/opt/local
+        $ # Add the binary to your path, ahead of /usr/bin
+        $ echo 'PATH=/opt/local/bin:$PATH' >> ~/.bash_profile
+        </code></pre>
+        <span>See http://stackoverflow.com/questions/7211820/update-built-in-vim-on-mac-os-x</span>
+        <span>https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source</span>
+    </p>
 
     <!--=======================================
                 LINKS
