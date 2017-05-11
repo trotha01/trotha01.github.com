@@ -1,26 +1,65 @@
-module Page.About exposing (view)
+module Page.About exposing (Model, Msg, init, view, update)
 
+import Css exposing (..)
 import Html exposing (Html, button, div, text, a)
+import Html.Attributes
 import Route
+import Page.Header as Header
 
 
-view : Html msg
-view =
+-- MODEL
+
+
+type alias Model =
+    { header : Header.Model }
+
+
+init : Model
+init =
+    { header = Header.init }
+
+
+
+-- UPDATE
+
+
+type Msg
+    = HeaderMsg Header.Msg
+
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        HeaderMsg headerMsg ->
+            { model | header = Header.update headerMsg model.header }
+
+
+
+-- View
+
+
+view : Model -> Html Msg
+view model =
     div []
-        [ homeButton
-        , about
+        [ --  Header.view model.header |> Html.map HeaderMsg
+          about
         ]
 
 
 about : Html msg
 about =
-    div []
-        [ text "ABOUT"
+    div
+        [ styles
+            [ padding (px 10)
+            ]
+        ]
+        [ Html.text "About"
         ]
 
 
-homeButton : Html msg
-homeButton =
-    div []
-        [ a [ Route.href Route.Home ] [ text "Home" ]
-        ]
+
+-- STYLE
+
+
+styles =
+    (Css.asPairs >> Html.Attributes.style)
