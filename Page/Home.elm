@@ -1,8 +1,8 @@
 module Page.Home exposing (Model, Msg, init, view, update)
 
 import Css exposing (..)
-import Html exposing (Html, button, div, text, a)
-import Html.Attributes
+import Html exposing (Html, button, div, text, a, img)
+import Html.Attributes as Attr
 import Route
 import Page.Header as Header
 
@@ -11,12 +11,12 @@ import Page.Header as Header
 
 
 type alias Model =
-    { header : Header.Model }
+    {}
 
 
 init : Model
 init =
-    { header = Header.init }
+    {}
 
 
 
@@ -29,9 +29,7 @@ type Msg
 
 update : Msg -> Model -> Model
 update msg model =
-    case msg of
-        HeaderMsg headerMsg ->
-            { model | header = Header.update headerMsg model.header }
+    model
 
 
 
@@ -41,9 +39,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ -- Header.view model.header |> Html.map HeaderMsg
-          home
-        ]
+        [ home ]
 
 
 home : Html msg
@@ -53,6 +49,26 @@ home =
             [ padding (px 10)
             ]
         ]
+        [ profilePic
+        , description
+        ]
+
+
+profilePic : Html msg
+profilePic =
+    img
+        [ styles
+            [ width (px 300)
+            , height (px 300)
+            ]
+        , Attr.src "imgs/profile.jpg"
+        ]
+        []
+
+
+description : Html msg
+description =
+    div []
         [ Html.text "Home"
         ]
 
@@ -62,4 +78,4 @@ home =
 
 
 styles =
-    (Css.asPairs >> Html.Attributes.style)
+    (Css.asPairs >> Attr.style)

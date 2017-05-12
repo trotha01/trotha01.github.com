@@ -9,6 +9,9 @@ import Page.Header as Header
 import Util exposing ((=>))
 import Page.Home as Home
 import Page.About as About
+import Page.Projects as Projects
+import Page.Resume as Resume
+import Page.Contact as Contact
 import Page.Errored as Errored exposing (PageLoadError)
 import Navigation exposing (Location)
 
@@ -25,12 +28,16 @@ main =
 type alias Model =
     { page : Page
     , header : Header.Model
+    , route : Route
     }
 
 
 type Page
     = Home Home.Model
     | About About.Model
+    | Projects Projects.Model
+    | Resume Resume.Model
+    | Contact Contact.Model
 
 
 init : Location -> ( Model, Cmd Msg )
@@ -43,6 +50,7 @@ init location =
 initialModel =
     { page = Home Home.init
     , header = Header.init
+    , route = Route.Home
     }
 
 
@@ -54,6 +62,9 @@ type Msg
     = SetRoute (Maybe Route)
     | HomeMsg Home.Msg
     | AboutMsg About.Msg
+    | ProjectsMsg Projects.Msg
+    | ResumeMsg Resume.Msg
+    | ContactMsg Contact.Msg
     | HeaderMsg Header.Msg
 
 
@@ -64,29 +75,54 @@ setRoute maybeRoute model =
             ( model, Cmd.none )
 
         Just (Route.Home) ->
-            ( { model | page = Home Home.init }, Cmd.none )
+            ( { model | route = Route.Home, page = Home Home.init }, Cmd.none )
 
         Just (Route.About) ->
-            ( { model | page = About About.init }, Cmd.none )
+            ( { model | route = Route.About, page = About About.init }, Cmd.none )
+
+        Just (Route.Projects) ->
+            ( { model | route = Route.Projects, page = Projects Projects.init }, Cmd.none )
+
+        Just (Route.Resume) ->
+            ( { model | route = Route.Resume, page = Resume Resume.init }, Cmd.none )
+
+        Just (Route.Contact) ->
+            ( { model | route = Route.Contact, page = Contact Contact.init }, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    case ( msg, model.page ) of
-        ( SetRoute route, _ ) ->
-            setRoute route model
+    let
+        headerUpdate newHeader =
+            { model | header = newHeader } => Cmd.none
 
-        ( HomeMsg homeMsg, Home home ) ->
-            ( { model | page = Home (Home.update homeMsg home) }, Cmd.none )
+        pageUpdate page update =
+            { model | page = page update } => Cmd.none
+    in
+        case ( msg, model.page ) of
+            ( SetRoute route, _ ) ->
+                setRoute route model
 
-        ( AboutMsg aboutMsg, About about ) ->
-            ( { model | page = About (About.update aboutMsg about) }, Cmd.none )
+            ( HomeMsg homeMsg, Home home ) ->
+                pageUpdate Home (Home.update homeMsg home)
 
-        ( HeaderMsg headerMsg, _ ) ->
-            ( { model | header = (Header.update headerMsg model.header) }, Cmd.none )
+            ( AboutMsg aboutMsg, About about ) ->
+                pageUpdate About (About.update aboutMsg about)
 
-        _ ->
-            model => Cmd.none
+            ( ProjectsMsg aboutMsg, Projects about ) ->
+                pageUpdate Projects (Projects.update aboutMsg about)
+
+            ( ResumeMsg aboutMsg, Resume about ) ->
+                pageUpdate Resume (Resume.update aboutMsg about)
+
+            ( ContactMsg aboutMsg, Contact about ) ->
+                pageUpdate Contact (Contact.update aboutMsg about)
+
+            ( HeaderMsg headerMsg, _ ) ->
+                headerUpdate (Header.update headerMsg model.header)
+
+            _ ->
+                model => Cmd.none
 
 
 
@@ -103,9 +139,18 @@ view model =
 
                 About subModel ->
                     About.view subModel |> Html.map AboutMsg
+
+                Projects subModel ->
+                    Projects.view subModel |> Html.map ProjectsMsg
+
+                Resume subModel ->
+                    Resume.view subModel |> Html.map ResumeMsg
+
+                Contact subModel ->
+                    Contact.view subModel |> Html.map ContactMsg
     in
         div []
-            [ Header.view model.header |> Html.map HeaderMsg
+            [ Header.view model.route model.header |> Html.map HeaderMsg
             , div
                 [ styles
                     [ property "background" "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px"
@@ -120,7 +165,7 @@ view model =
                 [ div
                     [ styles
                         [ backgroundColor (rgb 255 255 255)
-                        , width (pct 80)
+                        , width (px 700)
                         , height (px 500)
                         ]
                     ]

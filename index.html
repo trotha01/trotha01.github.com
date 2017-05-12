@@ -14957,7 +14957,8 @@ var _user$project$Page_Header$Select = function (a) {
 };
 var _user$project$Page_Header$button = F3(
 	function (model, page, str) {
-		var background = _rtfeldman$elm_css$Css$backgroundColor(_rtfeldman$elm_css$Css$inherit);
+		var background = _elm_lang$core$Native_Utils.eq(model.selected, str) ? _rtfeldman$elm_css$Css$backgroundColor(
+			A3(_rtfeldman$elm_css$Css$hsl, 189, 0.55, 0.61)) : _rtfeldman$elm_css$Css$backgroundColor(_rtfeldman$elm_css$Css$inherit);
 		return A2(
 			_elm_lang$html$Html$a,
 			{
@@ -14996,7 +14997,17 @@ var _user$project$Page_Header$button = F3(
 														ctor: '::',
 														_0: _rtfeldman$elm_css$Css$color(
 															A3(_rtfeldman$elm_css$Css$rgb, 255, 255, 255)),
-														_1: {ctor: '[]'}
+														_1: {
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$hover(
+																{
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$backgroundColor(
+																		A3(_rtfeldman$elm_css$Css$hsl, 189, 0.55, 0.91)),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
 													}
 												}
 											}
@@ -15103,17 +15114,10 @@ var _user$project$Page_Home$view = function (model) {
 };
 var _user$project$Page_Home$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				header: A2(_user$project$Page_Header$update, _p1._0, model.header)
-			});
+		return model;
 	});
-var _user$project$Page_Home$init = {header: _user$project$Page_Header$init};
-var _user$project$Page_Home$Model = function (a) {
-	return {header: a};
-};
+var _user$project$Page_Home$init = {};
+var _user$project$Page_Home$Model = {};
 var _user$project$Page_Home$HeaderMsg = function (a) {
 	return {ctor: 'HeaderMsg', _0: a};
 };
@@ -15136,8 +15140,37 @@ var _user$project$Page_About$about = A2(
 	},
 	{
 		ctor: '::',
-		_0: _elm_lang$html$Html$text('About'),
-		_1: {ctor: '[]'}
+		_0: A2(
+			_elm_lang$html$Html$p,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Thanks for stopping by my page. My name is Trevor Rothaus and my interests lie in improving education.'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('I understand the best way to learn anything is interactively, so I am focusing on making educational games.'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('My background consists of a Bachelor\'s degree in Computer Science from Tufts University and about 3 years of high scale, distributed systems at SendGrid Inc. I was also involved in about 6 months of front end programming at SendGrid.'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		}
 	});
 var _user$project$Page_About$view = function (model) {
 	return A2(
@@ -15151,17 +15184,10 @@ var _user$project$Page_About$view = function (model) {
 };
 var _user$project$Page_About$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				header: A2(_user$project$Page_Header$update, _p1._0, model.header)
-			});
+		return model;
 	});
-var _user$project$Page_About$init = {header: _user$project$Page_Header$init};
-var _user$project$Page_About$Model = function (a) {
-	return {header: a};
-};
+var _user$project$Page_About$init = {};
+var _user$project$Page_About$Model = {};
 var _user$project$Page_About$HeaderMsg = function (a) {
 	return {ctor: 'HeaderMsg', _0: a};
 };
@@ -15229,6 +15255,25 @@ var _user$project$Main$init = function (location) {
 };
 var _user$project$Main$update = F2(
 	function (msg, model) {
+		var pageUpdate = F2(
+			function (page, update) {
+				return A2(
+					_user$project$Util_ops['=>'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							page: page(update)
+						}),
+					_elm_lang$core$Platform_Cmd$none);
+			});
+		var headerUpdate = function (newHeader) {
+			return A2(
+				_user$project$Util_ops['=>'],
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{header: newHeader}),
+				_elm_lang$core$Platform_Cmd$none);
+		};
 		var _p2 = {ctor: '_Tuple2', _0: msg, _1: model.page};
 		_v1_4:
 		do {
@@ -15238,44 +15283,25 @@ var _user$project$Main$update = F2(
 						return A2(_user$project$Main$setRoute, _p2._0._0, model);
 					case 'HomeMsg':
 						if (_p2._1.ctor === 'Home') {
-							return {
-								ctor: '_Tuple2',
-								_0: _elm_lang$core$Native_Utils.update(
-									model,
-									{
-										page: _user$project$Main$Home(
-											A2(_user$project$Page_Home$update, _p2._0._0, _p2._1._0))
-									}),
-								_1: _elm_lang$core$Platform_Cmd$none
-							};
+							return A2(
+								pageUpdate,
+								_user$project$Main$Home,
+								A2(_user$project$Page_Home$update, _p2._0._0, _p2._1._0));
 						} else {
 							break _v1_4;
 						}
 					case 'AboutMsg':
 						if (_p2._1.ctor === 'About') {
-							return {
-								ctor: '_Tuple2',
-								_0: _elm_lang$core$Native_Utils.update(
-									model,
-									{
-										page: _user$project$Main$About(
-											A2(_user$project$Page_About$update, _p2._0._0, _p2._1._0))
-									}),
-								_1: _elm_lang$core$Platform_Cmd$none
-							};
+							return A2(
+								pageUpdate,
+								_user$project$Main$About,
+								A2(_user$project$Page_About$update, _p2._0._0, _p2._1._0));
 						} else {
 							break _v1_4;
 						}
 					default:
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									header: A2(_user$project$Page_Header$update, _p2._0._0, model.header)
-								}),
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
+						return headerUpdate(
+							A2(_user$project$Page_Header$update, _p2._0._0, model.header));
 				}
 			} else {
 				break _v1_4;
@@ -15372,7 +15398,7 @@ var _user$project$Main$view = function (model) {
 										_1: {
 											ctor: '::',
 											_0: _rtfeldman$elm_css$Css$width(
-												_rtfeldman$elm_css$Css$pct(80)),
+												_rtfeldman$elm_css$Css$px(700)),
 											_1: {
 												ctor: '::',
 												_0: _rtfeldman$elm_css$Css$height(
