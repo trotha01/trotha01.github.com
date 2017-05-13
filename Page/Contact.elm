@@ -2,7 +2,7 @@ module Page.Contact exposing (Model, Msg, init, view, update)
 
 import Css exposing (..)
 import Html exposing (Html, button, div, text, a, p, ul, li)
-import Html.Attributes
+import Html.Attributes as Attr
 import Route
 import Page.Header as Header
 
@@ -49,6 +49,13 @@ contact =
             ]
         ]
         [ Html.text "How to reach me..."
+        , ul []
+            [ li [] [ Html.text "trotha01 at gmail" ]
+            , li []
+                [ Html.text "Or through "
+                , a [ Attr.href "https://www.linkedin.com/in/trevorrothaus/" ] [ Html.text "LinkedIn" ]
+                ]
+            ]
         ]
 
 
@@ -57,4 +64,4 @@ contact =
 
 
 styles =
-    (Css.asPairs >> Html.Attributes.style)
+    (Css.asPairs >> Attr.style)

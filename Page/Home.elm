@@ -69,7 +69,7 @@ profilePic =
 description : Html msg
 description =
     div []
-        [ Html.text "Home"
+        [ Html.text "Home Page. TODO: add stuff here"
         ]
 
 

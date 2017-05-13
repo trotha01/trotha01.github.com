@@ -14891,14 +14891,33 @@ var _rtfeldman$elm_css$Css$blink = _rtfeldman$elm_css$Css$IntentionallyUnsupport
 var _user$project$Route$routeToString = function (page) {
 	var pieces = function () {
 		var _p0 = page;
-		if (_p0.ctor === 'Home') {
-			return {ctor: '[]'};
-		} else {
-			return {
-				ctor: '::',
-				_0: 'about',
-				_1: {ctor: '[]'}
-			};
+		switch (_p0.ctor) {
+			case 'Home':
+				return {ctor: '[]'};
+			case 'About':
+				return {
+					ctor: '::',
+					_0: 'about',
+					_1: {ctor: '[]'}
+				};
+			case 'Projects':
+				return {
+					ctor: '::',
+					_0: 'projects',
+					_1: {ctor: '[]'}
+				};
+			case 'Resume':
+				return {
+					ctor: '::',
+					_0: 'resume',
+					_1: {ctor: '[]'}
+				};
+			default:
+				return {
+					ctor: '::',
+					_0: 'contact',
+					_1: {ctor: '[]'}
+				};
 		}
 	}();
 	return A2(
@@ -14910,6 +14929,9 @@ var _user$project$Route$href = function (route) {
 	return _elm_lang$html$Html_Attributes$href(
 		_user$project$Route$routeToString(route));
 };
+var _user$project$Route$Contact = {ctor: 'Contact'};
+var _user$project$Route$Resume = {ctor: 'Resume'};
+var _user$project$Route$Projects = {ctor: 'Projects'};
 var _user$project$Route$About = {ctor: 'About'};
 var _user$project$Route$Home = {ctor: 'Home'};
 var _user$project$Route$route = _evancz$url_parser$UrlParser$oneOf(
@@ -14925,7 +14947,28 @@ var _user$project$Route$route = _evancz$url_parser$UrlParser$oneOf(
 				_evancz$url_parser$UrlParser$map,
 				_user$project$Route$About,
 				_evancz$url_parser$UrlParser$s('about')),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_evancz$url_parser$UrlParser$map,
+					_user$project$Route$Projects,
+					_evancz$url_parser$UrlParser$s('projects')),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_evancz$url_parser$UrlParser$map,
+						_user$project$Route$Resume,
+						_evancz$url_parser$UrlParser$s('resume')),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_evancz$url_parser$UrlParser$map,
+							_user$project$Route$Contact,
+							_evancz$url_parser$UrlParser$s('contact')),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
 		}
 	});
 var _user$project$Route$fromLocation = function (location) {
@@ -14946,7 +14989,7 @@ var _user$project$Page_Header$init = _user$project$Page_Header$Model(
 var _user$project$Page_Header$update = F2(
 	function (msg, _p1) {
 		var _p2 = _p1;
-		var _p3 = A2(_elm_lang$core$Debug$log, 'header msg', msg);
+		var _p3 = msg;
 		return _user$project$Page_Header$Model(
 			_elm_lang$core$Native_Utils.update(
 				_p2._0,
@@ -14956,8 +14999,8 @@ var _user$project$Page_Header$Select = function (a) {
 	return {ctor: 'Select', _0: a};
 };
 var _user$project$Page_Header$button = F3(
-	function (model, page, str) {
-		var background = _elm_lang$core$Native_Utils.eq(model.selected, str) ? _rtfeldman$elm_css$Css$backgroundColor(
+	function (currentRoute, page, str) {
+		var background = _elm_lang$core$Native_Utils.eq(currentRoute, page) ? _rtfeldman$elm_css$Css$backgroundColor(
 			A3(_rtfeldman$elm_css$Css$hsl, 189, 0.55, 0.61)) : _rtfeldman$elm_css$Css$backgroundColor(_rtfeldman$elm_css$Css$inherit);
 		return A2(
 			_elm_lang$html$Html$a,
@@ -15036,45 +15079,70 @@ var _user$project$Page_Header$homeButton = function (model) {
 var _user$project$Page_Header$aboutButton = function (model) {
 	return A3(_user$project$Page_Header$button, model, _user$project$Route$About, 'About');
 };
-var _user$project$Page_Header$view = function (_p4) {
-	var _p5 = _p4;
-	var _p6 = _p5._0;
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _user$project$Page_Header$styles(
-				{
-					ctor: '::',
-					_0: _rtfeldman$elm_css$Css$overflow(_rtfeldman$elm_css$Css$hidden),
-					_1: {
+var _user$project$Page_Header$projectsButton = function (model) {
+	return A3(_user$project$Page_Header$button, model, _user$project$Route$Projects, 'Projects');
+};
+var _user$project$Page_Header$resumeButton = function (model) {
+	return A3(_user$project$Page_Header$button, model, _user$project$Route$Resume, 'Resume');
+};
+var _user$project$Page_Header$contactButton = function (model) {
+	return A3(_user$project$Page_Header$button, model, _user$project$Route$Contact, 'Contact');
+};
+var _user$project$Page_Header$view = F2(
+	function (route, _p4) {
+		var _p5 = _p4;
+		var _p6 = A2(
+			_elm_lang$core$Debug$log,
+			'(route, model)',
+			{ctor: '_Tuple2', _0: route, _1: _p5._0});
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Header$styles(
+					{
 						ctor: '::',
-						_0: _rtfeldman$elm_css$Css$backgroundColor(
-							A3(_rtfeldman$elm_css$Css$hsl, 175, 0.67, 0.39)),
+						_0: _rtfeldman$elm_css$Css$overflow(_rtfeldman$elm_css$Css$hidden),
 						_1: {
 							ctor: '::',
-							_0: A4(
-								_rtfeldman$elm_css$Css$boxShadow4,
-								_rtfeldman$elm_css$Css$px(0),
-								_rtfeldman$elm_css$Css$px(2),
-								_rtfeldman$elm_css$Css$px(5),
-								A3(_rtfeldman$elm_css$Css$rgb, 100, 100, 100)),
-							_1: {ctor: '[]'}
+							_0: _rtfeldman$elm_css$Css$backgroundColor(
+								A3(_rtfeldman$elm_css$Css$hsl, 175, 0.67, 0.39)),
+							_1: {
+								ctor: '::',
+								_0: A4(
+									_rtfeldman$elm_css$Css$boxShadow4,
+									_rtfeldman$elm_css$Css$px(0),
+									_rtfeldman$elm_css$Css$px(2),
+									_rtfeldman$elm_css$Css$px(5),
+									A3(_rtfeldman$elm_css$Css$rgb, 100, 100, 100)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Page_Header$homeButton(route),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Page_Header$aboutButton(route),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Page_Header$projectsButton(route),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Page_Header$resumeButton(route),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Page_Header$contactButton(route),
+								_1: {ctor: '[]'}
+							}
 						}
 					}
-				}),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Page_Header$homeButton(_p6),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Page_Header$aboutButton(_p6),
-				_1: {ctor: '[]'}
-			}
-		});
-};
+				}
+			});
+	});
 var _user$project$Util_ops = _user$project$Util_ops || {};
 _user$project$Util_ops['=>'] = F2(
 	function (v0, v1) {
@@ -15084,6 +15152,37 @@ var _user$project$Page_Home$styles = function (_p0) {
 	return _elm_lang$html$Html_Attributes$style(
 		_rtfeldman$elm_css$Css$asPairs(_p0));
 };
+var _user$project$Page_Home$description = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('Home Page. TODO: add stuff here'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Page_Home$profilePic = A2(
+	_elm_lang$html$Html$img,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Home$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$width(
+					_rtfeldman$elm_css$Css$px(300)),
+				_1: {
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$height(
+						_rtfeldman$elm_css$Css$px(300)),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$src('imgs/profile.jpg'),
+			_1: {ctor: '[]'}
+		}
+	},
+	{ctor: '[]'});
 var _user$project$Page_Home$home = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -15099,8 +15198,12 @@ var _user$project$Page_Home$home = A2(
 	},
 	{
 		ctor: '::',
-		_0: _elm_lang$html$Html$text('Home'),
-		_1: {ctor: '[]'}
+		_0: _user$project$Page_Home$profilePic,
+		_1: {
+			ctor: '::',
+			_0: _user$project$Page_Home$description,
+			_1: {ctor: '[]'}
+		}
 	});
 var _user$project$Page_Home$view = function (model) {
 	return A2(
@@ -15145,7 +15248,7 @@ var _user$project$Page_About$about = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html$text('Thanks for stopping by my page. My name is Trevor Rothaus and my interests lie in improving education.'),
+				_0: _elm_lang$html$Html$text('My name is Trevor Rothaus, I\'m a computer programmer, a pedagogy enthusiast and my passion is in improving education.'),
 				_1: {ctor: '[]'}
 			}),
 		_1: {
@@ -15155,7 +15258,7 @@ var _user$project$Page_About$about = A2(
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('I understand the best way to learn anything is interactively, so I am focusing on making educational games.'),
+					_0: _elm_lang$html$Html$text('I grew up in Orange County, California, moved to Boston for college at Tufts University, then moved back to Orange County for a career in software.'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -15165,7 +15268,7 @@ var _user$project$Page_About$about = A2(
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text('My background consists of a Bachelor\'s degree in Computer Science from Tufts University and about 3 years of high scale, distributed systems at SendGrid Inc. I was also involved in about 6 months of front end programming at SendGrid.'),
+						_0: _elm_lang$html$Html$text('As a pedagogy enthusiast, I understand the best way to learn is not through lectures and not through reading a book, but through interactivity. So I my dream is to design and create educational games.'),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
@@ -15191,6 +15294,212 @@ var _user$project$Page_About$Model = {};
 var _user$project$Page_About$HeaderMsg = function (a) {
 	return {ctor: 'HeaderMsg', _0: a};
 };
+var _user$project$Page_Projects$styles = function (_p0) {
+	return _elm_lang$html$Html_Attributes$style(
+		_rtfeldman$elm_css$Css$asPairs(_p0));
+};
+var _user$project$Page_Projects$projects = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Projects$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$padding(
+					_rtfeldman$elm_css$Css$px(10)),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$ul,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$li,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$href('https://github.com/trotha01/bee'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Bee Game'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Page_Projects$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Page_Projects$projects,
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Page_Projects$update = F2(
+	function (msg, model) {
+		return model;
+	});
+var _user$project$Page_Projects$init = {};
+var _user$project$Page_Projects$Model = {};
+var _user$project$Page_Projects$HeaderMsg = function (a) {
+	return {ctor: 'HeaderMsg', _0: a};
+};
+var _user$project$Page_Resume$styles = function (_p0) {
+	return _elm_lang$html$Html_Attributes$style(
+		_rtfeldman$elm_css$Css$asPairs(_p0));
+};
+var _user$project$Page_Resume$resume = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Resume$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$padding(
+					_rtfeldman$elm_css$Css$px(10)),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$ul,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$li,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('resume here'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Page_Resume$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Page_Resume$resume,
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Page_Resume$update = F2(
+	function (msg, model) {
+		return model;
+	});
+var _user$project$Page_Resume$init = {};
+var _user$project$Page_Resume$Model = {};
+var _user$project$Page_Resume$HeaderMsg = function (a) {
+	return {ctor: 'HeaderMsg', _0: a};
+};
+var _user$project$Page_Contact$styles = function (_p0) {
+	return _elm_lang$html$Html_Attributes$style(
+		_rtfeldman$elm_css$Css$asPairs(_p0));
+};
+var _user$project$Page_Contact$contact = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Contact$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$padding(
+					_rtfeldman$elm_css$Css$px(10)),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('How to reach me...'),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$ul,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$li,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('trotha01 at gmail'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Or through '),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href('https://www.linkedin.com/in/trevorrothaus/'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('LinkedIn'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Page_Contact$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Page_Contact$contact,
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Page_Contact$update = F2(
+	function (msg, model) {
+		return model;
+	});
+var _user$project$Page_Contact$init = {};
+var _user$project$Page_Contact$Model = {};
+var _user$project$Page_Contact$HeaderMsg = function (a) {
+	return {ctor: 'HeaderMsg', _0: a};
+};
 var _user$project$Page_Errored$Model = function (a) {
 	return {errorMessage: a};
 };
@@ -15204,10 +15513,19 @@ var _user$project$Main$styles = function (_p0) {
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
-var _user$project$Main$Model = F2(
-	function (a, b) {
-		return {page: a, header: b};
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {page: a, header: b, route: c};
 	});
+var _user$project$Main$Contact = function (a) {
+	return {ctor: 'Contact', _0: a};
+};
+var _user$project$Main$Resume = function (a) {
+	return {ctor: 'Resume', _0: a};
+};
+var _user$project$Main$Projects = function (a) {
+	return {ctor: 'Projects', _0: a};
+};
 var _user$project$Main$About = function (a) {
 	return {ctor: 'About', _0: a};
 };
@@ -15216,7 +15534,8 @@ var _user$project$Main$Home = function (a) {
 };
 var _user$project$Main$initialModel = {
 	page: _user$project$Main$Home(_user$project$Page_Home$init),
-	header: _user$project$Page_Header$init
+	header: _user$project$Page_Header$init,
+	route: _user$project$Route$Home
 };
 var _user$project$Main$setRoute = F2(
 	function (maybeRoute, model) {
@@ -15224,26 +15543,62 @@ var _user$project$Main$setRoute = F2(
 		if (_p1.ctor === 'Nothing') {
 			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		} else {
-			if (_p1._0.ctor === 'Home') {
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							page: _user$project$Main$Home(_user$project$Page_Home$init)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			} else {
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							page: _user$project$Main$About(_user$project$Page_About$init)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+			switch (_p1._0.ctor) {
+				case 'Home':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								route: _user$project$Route$Home,
+								page: _user$project$Main$Home(_user$project$Page_Home$init)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'About':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								route: _user$project$Route$About,
+								page: _user$project$Main$About(_user$project$Page_About$init)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'Projects':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								route: _user$project$Route$Projects,
+								page: _user$project$Main$Projects(_user$project$Page_Projects$init)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				case 'Resume':
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								route: _user$project$Route$Resume,
+								page: _user$project$Main$Resume(_user$project$Page_Resume$init)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				default:
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								route: _user$project$Route$Contact,
+								page: _user$project$Main$Contact(_user$project$Page_Contact$init)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
 			}
 		}
 	});
@@ -15275,7 +15630,7 @@ var _user$project$Main$update = F2(
 				_elm_lang$core$Platform_Cmd$none);
 		};
 		var _p2 = {ctor: '_Tuple2', _0: msg, _1: model.page};
-		_v1_4:
+		_v1_7:
 		do {
 			if (_p2.ctor === '_Tuple2') {
 				switch (_p2._0.ctor) {
@@ -15288,7 +15643,7 @@ var _user$project$Main$update = F2(
 								_user$project$Main$Home,
 								A2(_user$project$Page_Home$update, _p2._0._0, _p2._1._0));
 						} else {
-							break _v1_4;
+							break _v1_7;
 						}
 					case 'AboutMsg':
 						if (_p2._1.ctor === 'About') {
@@ -15297,20 +15652,56 @@ var _user$project$Main$update = F2(
 								_user$project$Main$About,
 								A2(_user$project$Page_About$update, _p2._0._0, _p2._1._0));
 						} else {
-							break _v1_4;
+							break _v1_7;
+						}
+					case 'ProjectsMsg':
+						if (_p2._1.ctor === 'Projects') {
+							return A2(
+								pageUpdate,
+								_user$project$Main$Projects,
+								A2(_user$project$Page_Projects$update, _p2._0._0, _p2._1._0));
+						} else {
+							break _v1_7;
+						}
+					case 'ResumeMsg':
+						if (_p2._1.ctor === 'Resume') {
+							return A2(
+								pageUpdate,
+								_user$project$Main$Resume,
+								A2(_user$project$Page_Resume$update, _p2._0._0, _p2._1._0));
+						} else {
+							break _v1_7;
+						}
+					case 'ContactMsg':
+						if (_p2._1.ctor === 'Contact') {
+							return A2(
+								pageUpdate,
+								_user$project$Main$Contact,
+								A2(_user$project$Page_Contact$update, _p2._0._0, _p2._1._0));
+						} else {
+							break _v1_7;
 						}
 					default:
 						return headerUpdate(
 							A2(_user$project$Page_Header$update, _p2._0._0, model.header));
 				}
 			} else {
-				break _v1_4;
+				break _v1_7;
 			}
 		} while(false);
 		return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
 	});
 var _user$project$Main$HeaderMsg = function (a) {
 	return {ctor: 'HeaderMsg', _0: a};
+};
+var _user$project$Main$ContactMsg = function (a) {
+	return {ctor: 'ContactMsg', _0: a};
+};
+var _user$project$Main$ResumeMsg = function (a) {
+	return {ctor: 'ResumeMsg', _0: a};
+};
+var _user$project$Main$ProjectsMsg = function (a) {
+	return {ctor: 'ProjectsMsg', _0: a};
 };
 var _user$project$Main$AboutMsg = function (a) {
 	return {ctor: 'AboutMsg', _0: a};
@@ -15321,16 +15712,32 @@ var _user$project$Main$HomeMsg = function (a) {
 var _user$project$Main$view = function (model) {
 	var page = function () {
 		var _p3 = model.page;
-		if (_p3.ctor === 'Home') {
-			return A2(
-				_elm_lang$html$Html$map,
-				_user$project$Main$HomeMsg,
-				_user$project$Page_Home$view(_p3._0));
-		} else {
-			return A2(
-				_elm_lang$html$Html$map,
-				_user$project$Main$AboutMsg,
-				_user$project$Page_About$view(_p3._0));
+		switch (_p3.ctor) {
+			case 'Home':
+				return A2(
+					_elm_lang$html$Html$map,
+					_user$project$Main$HomeMsg,
+					_user$project$Page_Home$view(_p3._0));
+			case 'About':
+				return A2(
+					_elm_lang$html$Html$map,
+					_user$project$Main$AboutMsg,
+					_user$project$Page_About$view(_p3._0));
+			case 'Projects':
+				return A2(
+					_elm_lang$html$Html$map,
+					_user$project$Main$ProjectsMsg,
+					_user$project$Page_Projects$view(_p3._0));
+			case 'Resume':
+				return A2(
+					_elm_lang$html$Html$map,
+					_user$project$Main$ResumeMsg,
+					_user$project$Page_Resume$view(_p3._0));
+			default:
+				return A2(
+					_elm_lang$html$Html$map,
+					_user$project$Main$ContactMsg,
+					_user$project$Page_Contact$view(_p3._0));
 		}
 	}();
 	return A2(
@@ -15341,7 +15748,7 @@ var _user$project$Main$view = function (model) {
 			_0: A2(
 				_elm_lang$html$Html$map,
 				_user$project$Main$HeaderMsg,
-				_user$project$Page_Header$view(model.header)),
+				A2(_user$project$Page_Header$view, model.route, model.header)),
 			_1: {
 				ctor: '::',
 				_0: A2(

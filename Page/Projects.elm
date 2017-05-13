@@ -2,7 +2,7 @@ module Page.Projects exposing (Model, Msg, init, view, update)
 
 import Css exposing (..)
 import Html exposing (Html, button, div, text, a, p, ul, li)
-import Html.Attributes
+import Html.Attributes as Attr
 import Route
 import Page.Header as Header
 
@@ -49,7 +49,7 @@ projects =
             ]
         ]
         [ ul []
-            [ li [] [ Html.text "Project 1" ] ]
+            [ li [] [ a [ Attr.href "https://github.com/trotha01/bee" ] [ Html.text "Bee Game" ] ] ]
         ]
 
 
@@ -58,4 +58,4 @@ projects =
 
 
 styles =
-    (Css.asPairs >> Html.Attributes.style)
+    (Css.asPairs >> Attr.style)
