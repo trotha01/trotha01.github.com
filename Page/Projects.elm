@@ -41,6 +41,12 @@ view model =
     div [] [ projects ]
 
 
+
+{-
+   - TODO: update to projects and ideas
+-}
+
+
 projects : Html msg
 projects =
     div

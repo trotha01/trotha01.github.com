@@ -14,6 +14,8 @@ import Page.Resume as Resume
 import Page.Contact as Contact
 import Page.Errored as Errored exposing (PageLoadError)
 import Navigation exposing (Location)
+import Window
+import Task
 
 
 main =
@@ -29,6 +31,7 @@ type alias Model =
     { page : Page
     , header : Header.Model
     , route : Route
+    , window : Window.Size
     }
 
 
@@ -42,15 +45,21 @@ type Page
 
 init : Location -> ( Model, Cmd Msg )
 init location =
-    setRoute
-        (Route.fromLocation location)
-        initialModel
+    let
+        ( newModel, cmd ) =
+            setRoute (Route.fromLocation location) initialModel
+
+        windowSizeCmd =
+            Task.perform WindowResize Window.size
+    in
+        newModel => Cmd.batch [ cmd, windowSizeCmd ]
 
 
 initialModel =
     { page = Home Home.init
     , header = Header.init
     , route = Route.Home
+    , window = { width = 0, height = 0 }
     }
 
 
@@ -60,6 +69,7 @@ initialModel =
 
 type Msg
     = SetRoute (Maybe Route)
+    | WindowResize Window.Size
     | HomeMsg Home.Msg
     | AboutMsg About.Msg
     | ProjectsMsg Projects.Msg
@@ -100,6 +110,9 @@ update msg model =
             { model | page = page update } => Cmd.none
     in
         case ( msg, model.page ) of
+            ( WindowResize size, _ ) ->
+                { model | window = size } => Cmd.none
+
             ( SetRoute route, _ ) ->
                 setRoute route model
 
@@ -157,17 +170,18 @@ view model =
                       --  property "background-color" "#282828"
                       -- , backgroundSize2 (px 16) (px 16)
                       property "background-image" "url('imgs/giraffe.svg')"
+                    , backgroundSize cover
                     , property "display" "flex"
                     , justifyContent center
                     , alignItems center
-                    , height (px 500)
+                    , height (px <| toFloat model.window.height)
                     ]
                 ]
                 [ div
                     [ styles
-                        [ backgroundColor (hsla 0 0 0.82 0.85)
-                        , width (px 700)
-                        , height (px 500)
+                        [ backgroundColor (hsla 0 0 1 0.85)
+                        , width (px <| toFloat (model.window.width - 40))
+                        , height (px <| toFloat (model.window.height - 40))
                         ]
                     ]
                     [ Header.view model.route model.header |> Html.map HeaderMsg
@@ -188,7 +202,7 @@ background =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Window.resizes WindowResize
 
 
 

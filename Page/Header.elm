@@ -92,11 +92,16 @@ button : Route -> Route -> String -> Html Msg
 button currentRoute page str =
     let
         background =
-            -- backgroundColor inherit
             if currentRoute == page then
                 backgroundColor (hsl 189 0.55 0.61)
             else
                 backgroundColor inherit
+
+        textColor =
+            if currentRoute == page then
+                color (hsl 0 0 1)
+            else
+                color (hsl 189 0.55 0.61)
     in
         a
             [ Route.href page
@@ -108,7 +113,8 @@ button currentRoute page str =
                 , padding2 (px 14) (px 16)
                 , fontSize (px 17)
                 , textDecoration none
-                , color (rgb 255 255 255)
+                , textColor
+                  -- , color (rgb 255 255 255)
                 , hover
                     [ backgroundColor (hsl 189 0.55 0.91)
                     ]
