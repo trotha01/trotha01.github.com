@@ -58,8 +58,9 @@ profilePic : Html msg
 profilePic =
     img
         [ styles
-            [ width (px 300)
-            , height (px 300)
+            [ width (px 100)
+            , height (px 100)
+            , borderRadius (px 250)
             ]
         , Attr.src "imgs/profile.jpg"
         ]

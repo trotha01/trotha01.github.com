@@ -51,8 +51,8 @@ view route (Model model) =
         div
             [ styles
                 [ overflow hidden
-                , backgroundColor (hsl 175 0.67 0.39)
-                , boxShadow4 (px 0) (px 2) (px 5) (rgb 100 100 100)
+                , backgroundColor (hsla 0 0.0 0.0 0)
+                , borderBottom3 (px 1) solid (rgb 0 0 0)
                 ]
             ]
             [ homeButton route

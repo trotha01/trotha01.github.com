@@ -1,8 +1,8 @@
 module Main exposing (..)
 
 import Css exposing (..)
-import Html exposing (Html, button, text, div)
-import Html.Attributes
+import Html exposing (Html, button, text, div, img)
+import Html.Attributes as Attr
 import Html.Events exposing (onClick)
 import Route exposing (Route)
 import Page.Header as Header
@@ -150,12 +150,13 @@ view model =
                     Contact.view subModel |> Html.map ContactMsg
     in
         div []
-            [ Header.view model.route model.header |> Html.map HeaderMsg
-            , div
+            [ -- , background
+              div
                 [ styles
-                    [ property "background" "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px"
-                    , property "background-color" "#282828"
-                    , backgroundSize2 (px 16) (px 16)
+                    [ -- property "background" "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px"
+                      --  property "background-color" "#282828"
+                      -- , backgroundSize2 (px 16) (px 16)
+                      property "background-image" "url('imgs/giraffe.svg')"
                     , property "display" "flex"
                     , justifyContent center
                     , alignItems center
@@ -164,14 +165,21 @@ view model =
                 ]
                 [ div
                     [ styles
-                        [ backgroundColor (rgb 255 255 255)
+                        [ backgroundColor (hsla 0 0 0.82 0.85)
                         , width (px 700)
                         , height (px 500)
                         ]
                     ]
-                    [ page ]
+                    [ Header.view model.route model.header |> Html.map HeaderMsg
+                    , page
+                    ]
                 ]
             ]
+
+
+background : Html a
+background =
+    img [ Attr.src "imgs/giraffe.svg" ] []
 
 
 
@@ -188,4 +196,4 @@ subscriptions model =
 
 
 styles =
-    (Css.asPairs >> Html.Attributes.style)
+    (Css.asPairs >> Attr.style)

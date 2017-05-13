@@ -15106,15 +15106,14 @@ var _user$project$Page_Header$view = F2(
 						_1: {
 							ctor: '::',
 							_0: _rtfeldman$elm_css$Css$backgroundColor(
-								A3(_rtfeldman$elm_css$Css$hsl, 175, 0.67, 0.39)),
+								A4(_rtfeldman$elm_css$Css$hsla, 0, 0.0, 0.0, 0)),
 							_1: {
 								ctor: '::',
-								_0: A4(
-									_rtfeldman$elm_css$Css$boxShadow4,
-									_rtfeldman$elm_css$Css$px(0),
-									_rtfeldman$elm_css$Css$px(2),
-									_rtfeldman$elm_css$Css$px(5),
-									A3(_rtfeldman$elm_css$Css$rgb, 100, 100, 100)),
+								_0: A3(
+									_rtfeldman$elm_css$Css$borderBottom3,
+									_rtfeldman$elm_css$Css$px(1),
+									_rtfeldman$elm_css$Css$solid,
+									A3(_rtfeldman$elm_css$Css$rgb, 0, 0, 0)),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -15168,12 +15167,17 @@ var _user$project$Page_Home$profilePic = A2(
 			{
 				ctor: '::',
 				_0: _rtfeldman$elm_css$Css$width(
-					_rtfeldman$elm_css$Css$px(300)),
+					_rtfeldman$elm_css$Css$px(100)),
 				_1: {
 					ctor: '::',
 					_0: _rtfeldman$elm_css$Css$height(
-						_rtfeldman$elm_css$Css$px(300)),
-					_1: {ctor: '[]'}
+						_rtfeldman$elm_css$Css$px(100)),
+					_1: {
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$borderRadius(
+							_rtfeldman$elm_css$Css$px(250)),
+						_1: {ctor: '[]'}
+					}
 				}
 			}),
 		_1: {
@@ -15513,6 +15517,14 @@ var _user$project$Main$styles = function (_p0) {
 var _user$project$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
+var _user$project$Main$background = A2(
+	_elm_lang$html$Html$img,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$src('imgs/giraffe.svg'),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
 var _user$project$Main$Model = F3(
 	function (a, b, c) {
 		return {page: a, header: b, route: c};
@@ -15746,85 +15758,74 @@ var _user$project$Main$view = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$map,
-				_user$project$Main$HeaderMsg,
-				A2(_user$project$Page_Header$view, model.route, model.header)),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _user$project$Main$styles(
-							{
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _user$project$Main$styles(
+						{
+							ctor: '::',
+							_0: A2(_rtfeldman$elm_css$Css$property, 'background-image', 'url(\'imgs/giraffe.svg\')'),
+							_1: {
 								ctor: '::',
-								_0: A2(_rtfeldman$elm_css$Css$property, 'background', 'radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px'),
+								_0: A2(_rtfeldman$elm_css$Css$property, 'display', 'flex'),
 								_1: {
 									ctor: '::',
-									_0: A2(_rtfeldman$elm_css$Css$property, 'background-color', '#282828'),
+									_0: _rtfeldman$elm_css$Css$justifyContent(_rtfeldman$elm_css$Css$center),
 									_1: {
 										ctor: '::',
-										_0: A2(
-											_rtfeldman$elm_css$Css$backgroundSize2,
-											_rtfeldman$elm_css$Css$px(16),
-											_rtfeldman$elm_css$Css$px(16)),
+										_0: _rtfeldman$elm_css$Css$alignItems(_rtfeldman$elm_css$Css$center),
 										_1: {
 											ctor: '::',
-											_0: A2(_rtfeldman$elm_css$Css$property, 'display', 'flex'),
-											_1: {
-												ctor: '::',
-												_0: _rtfeldman$elm_css$Css$justifyContent(_rtfeldman$elm_css$Css$center),
-												_1: {
-													ctor: '::',
-													_0: _rtfeldman$elm_css$Css$alignItems(_rtfeldman$elm_css$Css$center),
-													_1: {
-														ctor: '::',
-														_0: _rtfeldman$elm_css$Css$height(
-															_rtfeldman$elm_css$Css$px(500)),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
+											_0: _rtfeldman$elm_css$Css$height(
+												_rtfeldman$elm_css$Css$px(500)),
+											_1: {ctor: '[]'}
 										}
 									}
 								}
-							}),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _user$project$Main$styles(
-									{
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _user$project$Main$styles(
+								{
+									ctor: '::',
+									_0: _rtfeldman$elm_css$Css$backgroundColor(
+										A4(_rtfeldman$elm_css$Css$hsla, 0, 0, 0.82, 0.85)),
+									_1: {
 										ctor: '::',
-										_0: _rtfeldman$elm_css$Css$backgroundColor(
-											A3(_rtfeldman$elm_css$Css$rgb, 255, 255, 255)),
+										_0: _rtfeldman$elm_css$Css$width(
+											_rtfeldman$elm_css$Css$px(700)),
 										_1: {
 											ctor: '::',
-											_0: _rtfeldman$elm_css$Css$width(
-												_rtfeldman$elm_css$Css$px(700)),
-											_1: {
-												ctor: '::',
-												_0: _rtfeldman$elm_css$Css$height(
-													_rtfeldman$elm_css$Css$px(500)),
-												_1: {ctor: '[]'}
-											}
+											_0: _rtfeldman$elm_css$Css$height(
+												_rtfeldman$elm_css$Css$px(500)),
+											_1: {ctor: '[]'}
 										}
-									}),
-								_1: {ctor: '[]'}
-							},
-							{
+									}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$map,
+								_user$project$Main$HeaderMsg,
+								A2(_user$project$Page_Header$view, model.route, model.header)),
+							_1: {
 								ctor: '::',
 								_0: page,
 								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
 		});
 };
 var _user$project$Main$SetRoute = function (a) {

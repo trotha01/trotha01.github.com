@@ -34,6 +34,19 @@ update msg model =
 
 
 -- View
+{-
+   What got me interested in education?
+
+   Why do you want to create educational games specifically for adults?
+
+   What do you think is lacking in games now that you can fill in the market?
+
+   How have you learned this? (For credibility, why should we listen to you?)
+
+   What can you offer that no one else can offer?
+
+
+-}
 
 
 view : Model -> Html Msg
