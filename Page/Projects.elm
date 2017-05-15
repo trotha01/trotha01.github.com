@@ -55,8 +55,16 @@ projects =
             ]
         ]
         [ ul []
-            [ li [] [ a [ Attr.href "https://github.com/trotha01/bee" ] [ Html.text "Bee Game" ] ] ]
+            [ project "Boxes and Bubbles (built on top of jastice's library)" "https://github.com/trotha01/boxes-and-bubbles"
+            , project "Bee Game" "https://github.com/trotha01/bee"
+            , project "Treadmill" "https://github.com/trotha01/treadmill"
+            ]
         ]
+
+
+project : String -> String -> Html msg
+project title href =
+    li [] [ a [ Attr.href href ] [ Html.text title ] ]
 
 
 

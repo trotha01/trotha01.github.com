@@ -15275,40 +15275,80 @@ var _user$project$Page_Home$styles = function (_p0) {
 };
 var _user$project$Page_Home$description = A2(
 	_elm_lang$html$Html$div,
-	{ctor: '[]'},
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html$text('Welcome to my website! If you enjoy education or educational games, please reach out to me! I love talking with new people.'),
-		_1: {ctor: '[]'}
-	});
-var _user$project$Page_Home$profilePic = A2(
-	_elm_lang$html$Html$img,
 	{
 		ctor: '::',
 		_0: _user$project$Page_Home$styles(
 			{
 				ctor: '::',
 				_0: _rtfeldman$elm_css$Css$width(
-					_rtfeldman$elm_css$Css$px(100)),
+					_rtfeldman$elm_css$Css$pct(85)),
 				_1: {
 					ctor: '::',
-					_0: _rtfeldman$elm_css$Css$height(
-						_rtfeldman$elm_css$Css$px(100)),
+					_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
 					_1: {
 						ctor: '::',
-						_0: _rtfeldman$elm_css$Css$borderRadius(
-							_rtfeldman$elm_css$Css$px(250)),
+						_0: _rtfeldman$elm_css$Css$paddingTop(
+							_rtfeldman$elm_css$Css$px(20)),
 						_1: {ctor: '[]'}
 					}
 				}
 			}),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$src('imgs/profile.jpg'),
-			_1: {ctor: '[]'}
-		}
+		_1: {ctor: '[]'}
 	},
-	{ctor: '[]'});
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('Welcome to my website! If you enjoy education or educational games, please reach out to me! I love talking with new people.'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Page_Home$profilePic = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Home$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$width(
+					_rtfeldman$elm_css$Css$pct(15)),
+				_1: {
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$img,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Home$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$width(
+							_rtfeldman$elm_css$Css$px(100)),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$height(
+								_rtfeldman$elm_css$Css$px(100)),
+							_1: {
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$borderRadius(
+									_rtfeldman$elm_css$Css$px(250)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src('imgs/profile.jpg'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {ctor: '[]'}
+	});
 var _user$project$Page_Home$home = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -15437,6 +15477,28 @@ var _user$project$Page_Projects$styles = function (_p0) {
 	return _elm_lang$html$Html_Attributes$style(
 		_rtfeldman$elm_css$Css$asPairs(_p0));
 };
+var _user$project$Page_Projects$project = F2(
+	function (title, href) {
+		return A2(
+			_elm_lang$html$Html$li,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$href(href),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(title),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$Page_Projects$projects = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -15457,26 +15519,16 @@ var _user$project$Page_Projects$projects = A2(
 			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$li,
-					{ctor: '[]'},
-					{
+				_0: A2(_user$project$Page_Projects$project, 'Boxes and Bubbles (built on top of jastice\'s library)', 'https://github.com/trotha01/boxes-and-bubbles'),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$Page_Projects$project, 'Bee Game', 'https://github.com/trotha01/bee'),
+					_1: {
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$a,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$href('https://github.com/trotha01/bee'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Bee Game'),
-								_1: {ctor: '[]'}
-							}),
+						_0: A2(_user$project$Page_Projects$project, 'Treadmill', 'https://github.com/trotha01/treadmill'),
 						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
+					}
+				}
 			}),
 		_1: {ctor: '[]'}
 	});

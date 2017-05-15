@@ -56,20 +56,33 @@ home =
 
 profilePic : Html msg
 profilePic =
-    img
+    div
         [ styles
-            [ width (px 100)
-            , height (px 100)
-            , borderRadius (px 250)
+            [ width (pct 15)
+            , float left
             ]
-        , Attr.src "imgs/profile.jpg"
         ]
-        []
+        [ img
+            [ styles
+                [ width (px 100)
+                , height (px 100)
+                , borderRadius (px 250)
+                ]
+            , Attr.src "imgs/profile.jpg"
+            ]
+            []
+        ]
 
 
 description : Html msg
 description =
-    div []
+    div
+        [ styles
+            [ width (pct 85)
+            , float left
+            , paddingTop (px 20)
+            ]
+        ]
         [ Html.text "Welcome to my website! If you enjoy education or educational games, please reach out to me! I love talking with new people."
         ]
 
