@@ -70,7 +70,7 @@ profilePic =
 description : Html msg
 description =
     div []
-        [ Html.text "Home Page. TODO: add stuff here"
+        [ Html.text "Welcome to my website! If you enjoy education or educational games, please reach out to me! I love talking with new people."
         ]
 
 

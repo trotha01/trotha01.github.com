@@ -1,7 +1,7 @@
 module Page.About exposing (Model, Msg, init, view, update)
 
 import Css exposing (..)
-import Html exposing (Html, button, div, text, a, p)
+import Html exposing (Html, button, div, text, a)
 import Html.Attributes
 import Route
 import Page.Header as Header
@@ -43,7 +43,55 @@ view model =
 
 
 {-
-   p [] [ Html.text "As a pedagogy enthusiast, I understand the best way to learn is not through lectures and not through reading a book, but through interactivity. So I my dream is to design and create educational games." ]
+         p [] [ Html.text "As a pedagogy enthusiast, I understand the best way to learn is not through lectures and not through reading a book, but through interactivity. So I my dream is to design and create educational games." ]
+
+
+      Act 1
+      (once upon a time)
+      - Grew up in So Cal
+      I grew up in Sunny Southern California. I love going to the beach, I love the heat, and I love being with family and friends.
+
+      (every day - learn how the world works)
+      - Went to school
+      - Enjoyed sharing knowledge
+      Like most kids in the U.S., I went to school on the usual five day a week track for many years. I always enjoyed learning something new. Even more than that, I loved sharing that new piece of knowledge with those around me. If I learned something new at school, I would share it at home. If I learned something new at home, I would share it at school.
+
+      (until one day - inciting incident)
+      - School became boring and tedious
+      Slowly, school became less interesting to me. I was starting to do more tedius tasks. I didn't feel like I was learning as much anymore. The joy I had faded. I knew there had to be a better way to teach. I knew there had to be a better way to learn. I was going to figure out that way.
+
+      Act 2
+      (because of this)
+      From this, I grew a strong desire to improve education. Continuing through schooling, that desire only became stronger.
+      (because of this)
+      When I went to college, I discovered Computer Science. This was it! This was the way I could help improve education; through this platform. My first few ideas included creating an educational website filled with educational material. I had a problem though. From elementary school through college, I was fortunate enough to have amazing Mathematics teachers and I absolutely love Math! When in college, I knew I had to make the touch decision between following my own enjoyment, Mathematics, or pursuing a dream to improve education through Computer Science
+      (because of this)
+      - I choose computer science as a major.
+      - I still need industry experience if I want to make something (or research comp sci/edu)
+      I chose computer science as a major.
+
+      (because of this)
+      - I get a full time job in software
+      From this, I was lucky enough to get into the software industry straight out of college.
+
+      (because of this)
+      - After a few years in the software industry, I do not feel very close to my education goal.
+
+      (because of this - Low Point)
+      - I am hopeless to completing an eductional game
+      I spend all the free time I have working towards my education passion in the best way I know how. But I do not know if I am spending enough time learning game programming, if I am spending enough time reaching out to educators to network, or if I am spending enough time researching educational methods, or if I am spending enough time researching what games are already out there. I feel there is not enough time to do all the things I need to do.
+
+      Act 3
+      (until finally)
+      - My Fiancée helps me plan.
+      I have to give credit to my fiancée here. She is an aerialist pursuing her passion in the circus world. She got me a passion planner and gives me continual words of advice and motivation.
+
+      (ever since then)
+      I plan out each day to optimize my time for working on education projects, while trying to include time for family and friends.
+
+      (and the moral of the story is)
+   http://www.lifeclever.com/what-50-pounds-of-clay-can-teach-you-about-design/
+      I heard a story about a ceramics teacher that split their class in two. One half produced as many pots as they could, the other had to produce on perfect pot. The half that produced more pots actually also produced better quality pots as well. So I am currently focused on building games from scratch, making as much as I can, and hoping that quality will increase over time, instead of making it perfect the first time. If you want to join me on this educational journey, please reach out.
 -}
 
 
@@ -54,17 +102,21 @@ about =
             [ padding (px 10)
             ]
         ]
-        [ p []
-            [ Html.text "My name is Trevor Rothaus, I'm a computer programmer, a pedagogy enthusiast and my passion is in improving education." ]
-        , p [] [ Html.text "I grew up in Orange County, California, moved to Boston for college at Tufts University, then moved back to Orange County for a career in software." ]
-        , p [] [ Html.text "Like most kids, I grew up spending the majority of my time sitting in a classroom. I knew there had to be a better way to learn. I spent time trying to figure out how I wanted to make an impact on the education world, so I can improve the experience for others. I first thought websites would be the way to go, filled with educational content and a place for both teachers and students to ask questions and have discussions. I learned that the best way to learn anything is through interaction and immersion, so I decided making games would be the best way to go. Making online games would have the greatest potential reach." ]
-        , p [] [ Html.text "I do not want to get kids hooked on computers at a young age. I believe young kids should be running around outside, playing with physical objects, learning about the physical world. I do not want to stunt their development with a computer screen. That is why I would want to aim my educational games at students in high school, college, and for continuous learners." ]
-        , p [] [ Html.text "I do not want to get kids hooked on computers at a young age. I believe young kids should be running around outside, playing with physical objects, learning about the physical world. I do not want to stunt their development with a computer screen. That is why I would want to aim my educational games at students in high school, college, and for continuous learners." ]
-        , p [] [ Html.text "While I believe there is much room for improvement in the young education system, I do not believe that computer games are the complete answer. I believe they will be a good supplement to teachers and courses. Nothing can replace the quality of the in-person teaching, learning, and discussions. But if you do not have access to that, educational games can help. If you do have access to that, educational games will be a positive supplement." ]
-        , p [] [ Html.text "So far I have not found online educational games for adults that will get you hooked and make you want to learn. That is my goal. (If you know of any, please send them my way)" ]
-        , p [] [ Html.text "I have geared my decisions for this goal and have spend the majority of my free time working towards it. I chose Computer Science as my degree in college so I could learn how to make educational websites. Now I have am learning how to make online games. I read papers like The Montessori Method and _, to see different teaching strategies. I meet up with a game development group, an elm programming group, and a functional programming group, so I can make a stable platform for a game that I can quickly iterate new features on. I teach a classroom of teenagers, because reading about the experience is not enough, I know I must immerse myself to fully understand what it's like to teach. I use these experiences to learn and grow and so I can make the best educational games out there." ]
-        , p [] [ Html.text "I aim to offer games that get you hooked from the start. Games that make you want to learn. Games that make you learn without even knowing that you are learning. If you are interested in joining me on the journey, please reach out to me." ]
+        [ p "I grew up in Sunny Southern California. I love going to the beach, I love the heat, and I love being with family and friends."
+        , p "Like most kids in the U.S., I went to school on the usual five day a week track for many years. I always enjoyed learning something new. Even more than that, I loved sharing that new piece of knowledge with those around me. If I learned something new at school, I would share it at home. If I learned something new at home, I would share it at school."
+        , p "Slowly, school became less interesting to me. I was starting to do more tedius tasks. I didn't feel like I was learning as much anymore. The joy I had faded. I knew there had to be a better way to teach. I knew there had to be a better way to learn. I was going to figure out that way."
+        , p "From an early age, I grew a strong desire to improve education. Continuing through schooling, that desire only became stronger."
+        , p "When I went to college, I discovered Computer Science. This was it! This was the way I could help improve education; through this platform! I had a problem though. From elementary school through college, I was fortunate enough to have amazing Mathematics teachers and I absolutely love Math, the beauty of Mathematics and everything about Mathematics! While in college, I knew I had to make the touch decision between following my own enjoyment, Mathematics, or pursuing a dream to improve education through Computer Science"
+        , p "I decided on Computer Science as a major. From this, I was lucky enough to get into the software industry straight out of college. But after a few years in the software industry, I do not feel anywhere close to my education goal."
+        , p "I spend all the free time I have working towards my education passion in the best way I know how. But I do not know if I am spending enough time learning game programming, if I am spending enough time reaching out to educators to network, or if I am spending enough time researching educational methods, or if I am spending enough time researching what games are already out there. I feel there is not enough time to do all the things I need to do."
+        , p "I have to give credit to my fiancée here. She is an aerialist pursuing her passion in the circus world. She got me a passion planner and gives me continual words of advice and motivation. I use this planner to plan out each day to optimize my time for working on education projects, while trying to include time for family and friends."
+        , p "I heard a story about a ceramics teacher that split his class in two. One half produced as many pots as they could, the other had to produce one perfect pot. The half that produced more pots actually also produced better quality pots as well. So I am currently focused on building games from scratch, making as much as I can, and hoping that quality will increase over time, instead of making it perfect the first time. If you want to join me on this educational journey, please reach out, I look forward to hearing from you."
         ]
+
+
+p : String -> Html a
+p str =
+    Html.p [] [ Html.text str ]
 
 
 

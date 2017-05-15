@@ -157,7 +157,7 @@ view model =
                     Projects.view subModel |> Html.map ProjectsMsg
 
                 Resume subModel ->
-                    Resume.view subModel |> Html.map ResumeMsg
+                    Resume.view model.window subModel |> Html.map ResumeMsg
 
                 Contact subModel ->
                     Contact.view subModel |> Html.map ContactMsg
