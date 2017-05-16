@@ -15098,6 +15098,60 @@ var _user$project$Page_Header$styles = function (_p0) {
 	return _elm_lang$html$Html_Attributes$style(
 		_rtfeldman$elm_css$Css$asPairs(_p0));
 };
+var _user$project$Page_Header$profilePic = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Header$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$width(
+					_rtfeldman$elm_css$Css$pct(15)),
+				_1: {
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$img,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Header$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$width(
+							_rtfeldman$elm_css$Css$px(50)),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$height(
+								_rtfeldman$elm_css$Css$px(50)),
+							_1: {
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$borderRadius(
+									_rtfeldman$elm_css$Css$px(250)),
+								_1: {
+									ctor: '::',
+									_0: _rtfeldman$elm_css$Css$marginLeft(
+										_rtfeldman$elm_css$Css$px(12)),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src('imgs/profile.jpg'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {ctor: '[]'}
+	});
 var _user$project$Page_Header$InternalModel = function (a) {
 	return {selected: a};
 };
@@ -15121,10 +15175,13 @@ var _user$project$Page_Header$Select = function (a) {
 var _user$project$Page_Header$button = F3(
 	function (currentRoute, page, str) {
 		var textColor = _elm_lang$core$Native_Utils.eq(currentRoute, page) ? _rtfeldman$elm_css$Css$color(
-			A3(_rtfeldman$elm_css$Css$hsl, 0, 0, 1)) : _rtfeldman$elm_css$Css$color(
+			A3(_rtfeldman$elm_css$Css$hsl, 0, 0, 0)) : _rtfeldman$elm_css$Css$color(
 			A3(_rtfeldman$elm_css$Css$hsl, 189, 0.55, 0.61));
-		var background = _elm_lang$core$Native_Utils.eq(currentRoute, page) ? _rtfeldman$elm_css$Css$backgroundColor(
-			A3(_rtfeldman$elm_css$Css$hsl, 189, 0.55, 0.61)) : _rtfeldman$elm_css$Css$backgroundColor(_rtfeldman$elm_css$Css$inherit);
+		var background = _elm_lang$core$Native_Utils.eq(currentRoute, page) ? A3(
+			_rtfeldman$elm_css$Css$borderBottom3,
+			_rtfeldman$elm_css$Css$px(1),
+			_rtfeldman$elm_css$Css$solid,
+			A3(_rtfeldman$elm_css$Css$hsl, 0, 0, 0)) : _rtfeldman$elm_css$Css$backgroundColor(_rtfeldman$elm_css$Css$inherit);
 		return A2(
 			_elm_lang$html$Html$a,
 			{
@@ -15135,7 +15192,7 @@ var _user$project$Page_Header$button = F3(
 					_0: _user$project$Page_Header$styles(
 						{
 							ctor: '::',
-							_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
+							_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$right),
 							_1: {
 								ctor: '::',
 								_0: _rtfeldman$elm_css$Css$border(
@@ -15155,7 +15212,7 @@ var _user$project$Page_Header$button = F3(
 											_1: {
 												ctor: '::',
 												_0: _rtfeldman$elm_css$Css$fontSize(
-													_rtfeldman$elm_css$Css$px(17)),
+													_rtfeldman$elm_css$Css$px(10)),
 												_1: {
 													ctor: '::',
 													_0: _rtfeldman$elm_css$Css$textDecoration(_rtfeldman$elm_css$Css$none),
@@ -15229,40 +15286,37 @@ var _user$project$Page_Header$view = F2(
 							ctor: '::',
 							_0: _rtfeldman$elm_css$Css$backgroundColor(
 								A4(_rtfeldman$elm_css$Css$hsla, 0, 0.0, 0.0, 0)),
-							_1: {
-								ctor: '::',
-								_0: A3(
-									_rtfeldman$elm_css$Css$borderBottom3,
-									_rtfeldman$elm_css$Css$px(1),
-									_rtfeldman$elm_css$Css$solid,
-									A3(_rtfeldman$elm_css$Css$rgb, 0, 0, 0)),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						}
 					}),
 				_1: {ctor: '[]'}
 			},
-			{
-				ctor: '::',
-				_0: _user$project$Page_Header$homeButton(route),
-				_1: {
+			_elm_lang$core$List$reverse(
+				{
 					ctor: '::',
-					_0: _user$project$Page_Header$aboutButton(route),
+					_0: _user$project$Page_Header$homeButton(route),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Page_Header$projectsButton(route),
+						_0: _user$project$Page_Header$aboutButton(route),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Page_Header$resumeButton(route),
+							_0: _user$project$Page_Header$projectsButton(route),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Page_Header$contactButton(route),
-								_1: {ctor: '[]'}
+								_0: _user$project$Page_Header$resumeButton(route),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Page_Header$contactButton(route),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Page_Header$profilePic,
+										_1: {ctor: '[]'}
+									}
+								}
 							}
 						}
 					}
-				}
-			});
+				}));
 	});
 var _user$project$Util_ops = _user$project$Util_ops || {};
 _user$project$Util_ops['=>'] = F2(
@@ -15300,20 +15354,16 @@ var _user$project$Page_Home$description = A2(
 		_0: _elm_lang$html$Html$text('Welcome to my website! If you enjoy education or educational games, please reach out to me! I love talking with new people.'),
 		_1: {ctor: '[]'}
 	});
-var _user$project$Page_Home$profilePic = A2(
+var _user$project$Page_Home$topImage = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
 		_0: _user$project$Page_Home$styles(
 			{
 				ctor: '::',
-				_0: _rtfeldman$elm_css$Css$width(
-					_rtfeldman$elm_css$Css$pct(15)),
-				_1: {
-					ctor: '::',
-					_0: _rtfeldman$elm_css$Css$float(_rtfeldman$elm_css$Css$left),
-					_1: {ctor: '[]'}
-				}
+				_0: _rtfeldman$elm_css$Css$height(
+					_rtfeldman$elm_css$Css$pct(100)),
+				_1: {ctor: '[]'}
 			}),
 		_1: {ctor: '[]'}
 	},
@@ -15326,23 +15376,13 @@ var _user$project$Page_Home$profilePic = A2(
 				_0: _user$project$Page_Home$styles(
 					{
 						ctor: '::',
-						_0: _rtfeldman$elm_css$Css$width(
-							_rtfeldman$elm_css$Css$px(100)),
-						_1: {
-							ctor: '::',
-							_0: _rtfeldman$elm_css$Css$height(
-								_rtfeldman$elm_css$Css$px(100)),
-							_1: {
-								ctor: '::',
-								_0: _rtfeldman$elm_css$Css$borderRadius(
-									_rtfeldman$elm_css$Css$px(250)),
-								_1: {ctor: '[]'}
-							}
-						}
+						_0: _rtfeldman$elm_css$Css$height(
+							_rtfeldman$elm_css$Css$pct(100)),
+						_1: {ctor: '[]'}
 					}),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$src('imgs/profile.jpg'),
+					_0: _elm_lang$html$Html_Attributes$src('imgs/paper.svg'),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -15356,31 +15396,45 @@ var _user$project$Page_Home$home = A2(
 		_0: _user$project$Page_Home$styles(
 			{
 				ctor: '::',
-				_0: _rtfeldman$elm_css$Css$padding(
-					_rtfeldman$elm_css$Css$px(10)),
+				_0: _rtfeldman$elm_css$Css$height(
+					_rtfeldman$elm_css$Css$pct(100)),
 				_1: {ctor: '[]'}
 			}),
 		_1: {ctor: '[]'}
 	},
 	{
 		ctor: '::',
-		_0: _user$project$Page_Home$profilePic,
-		_1: {
-			ctor: '::',
-			_0: _user$project$Page_Home$description,
-			_1: {ctor: '[]'}
-		}
+		_0: _user$project$Page_Home$topImage,
+		_1: {ctor: '[]'}
 	});
-var _user$project$Page_Home$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$Page_Home$home,
-			_1: {ctor: '[]'}
-		});
-};
+var _user$project$Page_Home$view = F2(
+	function (window, model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Home$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$width(
+							_rtfeldman$elm_css$Css$px(
+								_elm_lang$core$Basics$toFloat(window.width))),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$height(
+								_rtfeldman$elm_css$Css$px(
+									_elm_lang$core$Basics$toFloat(window.height))),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Page_Home$home,
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$Page_Home$update = F2(
 	function (msg, model) {
 		return model;
@@ -15412,7 +15466,7 @@ var _user$project$Page_About$about = A2(
 			{
 				ctor: '::',
 				_0: _rtfeldman$elm_css$Css$padding(
-					_rtfeldman$elm_css$Css$px(10)),
+					_rtfeldman$elm_css$Css$px(100)),
 				_1: {ctor: '[]'}
 			}),
 		_1: {ctor: '[]'}
@@ -15450,16 +15504,95 @@ var _user$project$Page_About$about = A2(
 			}
 		}
 	});
-var _user$project$Page_About$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$Page_About$about,
-			_1: {ctor: '[]'}
-		});
-};
+var _user$project$Page_About$topImage = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_About$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$height(
+					_rtfeldman$elm_css$Css$pct(100)),
+				_1: {
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$width(
+						_rtfeldman$elm_css$Css$pct(100)),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$img,
+			{
+				ctor: '::',
+				_0: _user$project$Page_About$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$height(
+							_rtfeldman$elm_css$Css$pct(100)),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$width(
+								_rtfeldman$elm_css$Css$pct(100)),
+							_1: {
+								ctor: '::',
+								_0: A2(_rtfeldman$elm_css$Css$property, 'background', 'radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px, linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px, linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0'),
+								_1: {
+									ctor: '::',
+									_0: A2(_rtfeldman$elm_css$Css$property, 'backgroundColor', 'slategray'),
+									_1: {
+										ctor: '::',
+										_0: A2(_rtfeldman$elm_css$Css$property, 'backgroundSize', '100px 100px, 100px 100px, 50px 50px, 50px 50px'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src('imgs/notebook.svg'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Page_About$view = F2(
+	function (window, model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _user$project$Page_About$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$width(
+							_rtfeldman$elm_css$Css$px(
+								_elm_lang$core$Basics$toFloat(window.width))),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$height(
+								_rtfeldman$elm_css$Css$px(
+									_elm_lang$core$Basics$toFloat(window.height))),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Page_About$topImage,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Page_About$about,
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _user$project$Page_About$update = F2(
 	function (msg, model) {
 		return model;
@@ -15528,16 +15661,78 @@ var _user$project$Page_Projects$projects = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$Page_Projects$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$Page_Projects$projects,
-			_1: {ctor: '[]'}
-		});
-};
+var _user$project$Page_Projects$topImage = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Projects$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$height(
+					_rtfeldman$elm_css$Css$pct(100)),
+				_1: {
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$width(
+						_rtfeldman$elm_css$Css$pct(100)),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$img,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Projects$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$height(
+							_rtfeldman$elm_css$Css$pct(100)),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$width(
+								_rtfeldman$elm_css$Css$pct(100)),
+							_1: {
+								ctor: '::',
+								_0: A2(_rtfeldman$elm_css$Css$property, 'background', 'radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px'),
+								_1: {
+									ctor: '::',
+									_0: A2(_rtfeldman$elm_css$Css$property, 'backgroundColor', '#282828'),
+									_1: {
+										ctor: '::',
+										_0: A2(_rtfeldman$elm_css$Css$property, 'backgroundSize', '16px 16px'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src('imgs/tools.svg'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Page_Projects$view = F2(
+	function (window, model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _user$project$Page_Projects$topImage,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Page_Projects$projects,
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _user$project$Page_Projects$update = F2(
 	function (msg, model) {
 		return model;
@@ -15631,7 +15826,7 @@ var _user$project$Page_Contact$contact = A2(
 			{
 				ctor: '::',
 				_0: _rtfeldman$elm_css$Css$padding(
-					_rtfeldman$elm_css$Css$px(10)),
+					_rtfeldman$elm_css$Css$px(100)),
 				_1: {ctor: '[]'}
 			}),
 		_1: {ctor: '[]'}
@@ -15685,16 +15880,73 @@ var _user$project$Page_Contact$contact = A2(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$Page_Contact$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: _user$project$Page_Contact$contact,
-			_1: {ctor: '[]'}
-		});
-};
+var _user$project$Page_Contact$topImage = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _user$project$Page_Contact$styles(
+			{
+				ctor: '::',
+				_0: _rtfeldman$elm_css$Css$width(
+					_rtfeldman$elm_css$Css$pct(100)),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$img,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Contact$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$width(
+							_rtfeldman$elm_css$Css$pct(100)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src('imgs/mail.svg'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$Page_Contact$view = F2(
+	function (window, model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Contact$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$width(
+							_rtfeldman$elm_css$Css$px(
+								_elm_lang$core$Basics$toFloat(window.width))),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$height(
+								_rtfeldman$elm_css$Css$px(
+									_elm_lang$core$Basics$toFloat(window.height))),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Page_Contact$topImage,
+				_1: {
+					ctor: '::',
+					_0: _user$project$Page_Contact$contact,
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _user$project$Page_Contact$update = F2(
 	function (msg, model) {
 		return model;
@@ -15928,17 +16180,17 @@ var _user$project$Main$view = function (model) {
 				return A2(
 					_elm_lang$html$Html$map,
 					_user$project$Main$HomeMsg,
-					_user$project$Page_Home$view(_p3._0));
+					A2(_user$project$Page_Home$view, model.window, _p3._0));
 			case 'About':
 				return A2(
 					_elm_lang$html$Html$map,
 					_user$project$Main$AboutMsg,
-					_user$project$Page_About$view(_p3._0));
+					A2(_user$project$Page_About$view, model.window, _p3._0));
 			case 'Projects':
 				return A2(
 					_elm_lang$html$Html$map,
 					_user$project$Main$ProjectsMsg,
-					_user$project$Page_Projects$view(_p3._0));
+					A2(_user$project$Page_Projects$view, model.window, _p3._0));
 			case 'Resume':
 				return A2(
 					_elm_lang$html$Html$map,
@@ -15948,90 +16200,45 @@ var _user$project$Main$view = function (model) {
 				return A2(
 					_elm_lang$html$Html$map,
 					_user$project$Main$ContactMsg,
-					_user$project$Page_Contact$view(_p3._0));
+					A2(_user$project$Page_Contact$view, model.window, _p3._0));
 		}
 	}();
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Main$styles(
+				{
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$backgroundColor(
+						A4(_rtfeldman$elm_css$Css$hsla, 0, 0, 1, 0.85)),
+					_1: {
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$width(
+							_rtfeldman$elm_css$Css$px(
+								_elm_lang$core$Basics$toFloat(model.window.width))),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$height(
+								_rtfeldman$elm_css$Css$px(
+									_elm_lang$core$Basics$toFloat(model.window.height))),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _user$project$Main$styles(
-						{
-							ctor: '::',
-							_0: A2(_rtfeldman$elm_css$Css$property, 'background-image', 'url(\'imgs/giraffe.svg\')'),
-							_1: {
-								ctor: '::',
-								_0: _rtfeldman$elm_css$Css$backgroundSize(_rtfeldman$elm_css$Css$cover),
-								_1: {
-									ctor: '::',
-									_0: A2(_rtfeldman$elm_css$Css$property, 'display', 'flex'),
-									_1: {
-										ctor: '::',
-										_0: _rtfeldman$elm_css$Css$justifyContent(_rtfeldman$elm_css$Css$center),
-										_1: {
-											ctor: '::',
-											_0: _rtfeldman$elm_css$Css$alignItems(_rtfeldman$elm_css$Css$center),
-											_1: {
-												ctor: '::',
-												_0: _rtfeldman$elm_css$Css$height(
-													_rtfeldman$elm_css$Css$px(
-														_elm_lang$core$Basics$toFloat(model.window.height))),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _user$project$Main$styles(
-								{
-									ctor: '::',
-									_0: _rtfeldman$elm_css$Css$backgroundColor(
-										A4(_rtfeldman$elm_css$Css$hsla, 0, 0, 1, 0.85)),
-									_1: {
-										ctor: '::',
-										_0: _rtfeldman$elm_css$Css$width(
-											_rtfeldman$elm_css$Css$px(
-												_elm_lang$core$Basics$toFloat(model.window.width - 40))),
-										_1: {
-											ctor: '::',
-											_0: _rtfeldman$elm_css$Css$height(
-												_rtfeldman$elm_css$Css$px(
-													_elm_lang$core$Basics$toFloat(model.window.height - 40))),
-											_1: {ctor: '[]'}
-										}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$map,
-								_user$project$Main$HeaderMsg,
-								A2(_user$project$Page_Header$view, model.route, model.header)),
-							_1: {
-								ctor: '::',
-								_0: page,
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
+				_elm_lang$html$Html$map,
+				_user$project$Main$HeaderMsg,
+				A2(_user$project$Page_Header$view, model.route, model.header)),
+			_1: {
+				ctor: '::',
+				_0: page,
+				_1: {ctor: '[]'}
+			}
 		});
 };
 var _user$project$Main$WindowResize = function (a) {

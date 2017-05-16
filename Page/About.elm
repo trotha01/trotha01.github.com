@@ -1,10 +1,11 @@
 module Page.About exposing (Model, Msg, init, view, update)
 
 import Css exposing (..)
-import Html exposing (Html, button, div, text, a)
-import Html.Attributes
+import Html exposing (Html, button, div, text, a, img)
+import Html.Attributes as Attr
 import Route
 import Page.Header as Header
+import Window
 
 
 -- MODEL
@@ -36,9 +37,37 @@ update msg model =
 -- View
 
 
-view : Model -> Html Msg
-view model =
-    div [] [ about ]
+view : Window.Size -> Model -> Html Msg
+view window model =
+    div
+        [ styles
+            [ width (px <| toFloat window.width)
+            , height (px <| toFloat window.height)
+            ]
+        ]
+        [ topImage, about ]
+
+
+topImage : Html a
+topImage =
+    div
+        [ styles
+            [ height (pct 100)
+            , width (pct 100)
+            ]
+        ]
+        [ img
+            [ styles
+                [ height (pct 100)
+                , width (pct 100)
+                , property "background" "radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, slategray 20%, slategray 80%, transparent 80%, transparent) 50px 50px, linear-gradient(#A8B1BB 8px, transparent 8px) 0 -4px, linear-gradient(90deg, #A8B1BB 8px, transparent 8px) -4px 0"
+                , property "backgroundColor" "slategray"
+                , property "backgroundSize" "100px 100px, 100px 100px, 50px 50px, 50px 50px"
+                ]
+            , Attr.src "imgs/notebook.svg"
+            ]
+            []
+        ]
 
 
 
@@ -99,7 +128,7 @@ about : Html msg
 about =
     div
         [ styles
-            [ padding (px 10)
+            [ padding (px 100)
             ]
         ]
         [ p "Like most kids in the U.S., I went to school on the usual five day a week track for many years. I always enjoyed learning something new. Even more than that, I loved sharing that new piece of knowledge with those around me. If I learned something new at school, I would share it at home. If I learned something new at home, I would share it at school."
@@ -123,4 +152,4 @@ p str =
 
 
 styles =
-    (Css.asPairs >> Html.Attributes.style)
+    (Css.asPairs >> Attr.style)

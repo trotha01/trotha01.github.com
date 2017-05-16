@@ -1,8 +1,8 @@
 module Page.Header exposing (Model, Msg, view, init, update)
 
 import Css exposing (..)
-import Html exposing (Html, span, button, div, text, a)
-import Html.Attributes
+import Html exposing (Html, span, button, div, text, a, img)
+import Html.Attributes as Attr
 import Html.Events exposing (onClick)
 import Route exposing (Route, routeToString)
 
@@ -52,15 +52,18 @@ view route (Model model) =
             [ styles
                 [ overflow hidden
                 , backgroundColor (hsla 0 0.0 0.0 0)
-                , borderBottom3 (px 1) solid (rgb 0 0 0)
                 ]
             ]
-            [ homeButton route
-            , aboutButton route
-            , projectsButton route
-            , resumeButton route
-            , contactButton route
-            ]
+        <|
+            -- We have to revers because we float left
+            List.reverse
+                [ homeButton route
+                , aboutButton route
+                , projectsButton route
+                , resumeButton route
+                , contactButton route
+                , profilePic
+                ]
 
 
 homeButton : Route -> Html Msg
@@ -93,25 +96,25 @@ button currentRoute page str =
     let
         background =
             if currentRoute == page then
-                backgroundColor (hsl 189 0.55 0.61)
+                borderBottom3 (px 1) solid (hsl 0 0 0)
             else
                 backgroundColor inherit
 
         textColor =
             if currentRoute == page then
-                color (hsl 0 0 1)
+                color (hsl 0 0 0)
             else
                 color (hsl 189 0.55 0.61)
     in
         a
             [ Route.href page
             , styles
-                [ float left
+                [ float right
                 , border (px 0)
                 , background
                 , cursor pointer
                 , padding2 (px 14) (px 16)
-                , fontSize (px 17)
+                , fontSize (px 10)
                 , textDecoration none
                 , textColor
                   -- , color (rgb 255 255 255)
@@ -124,9 +127,30 @@ button currentRoute page str =
             [ Html.text str ]
 
 
+profilePic : Html msg
+profilePic =
+    div
+        [ styles
+            [ width (pct 15)
+            , float left
+            ]
+        ]
+        [ img
+            [ styles
+                [ width (px 50)
+                , height (px 50)
+                , borderRadius (px 250)
+                , marginLeft (px 12)
+                ]
+            , Attr.src "imgs/profile.jpg"
+            ]
+            []
+        ]
+
+
 
 -- STYLE
 
 
 styles =
-    (Css.asPairs >> Html.Attributes.style)
+    (Css.asPairs >> Attr.style)

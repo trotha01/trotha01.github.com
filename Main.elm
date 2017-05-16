@@ -148,46 +148,29 @@ view model =
         page =
             case model.page of
                 Home subModel ->
-                    Home.view subModel |> Html.map HomeMsg
+                    Home.view model.window subModel |> Html.map HomeMsg
 
                 About subModel ->
-                    About.view subModel |> Html.map AboutMsg
+                    About.view model.window subModel |> Html.map AboutMsg
 
                 Projects subModel ->
-                    Projects.view subModel |> Html.map ProjectsMsg
+                    Projects.view model.window subModel |> Html.map ProjectsMsg
 
                 Resume subModel ->
                     Resume.view model.window subModel |> Html.map ResumeMsg
 
                 Contact subModel ->
-                    Contact.view subModel |> Html.map ContactMsg
+                    Contact.view model.window subModel |> Html.map ContactMsg
     in
-        div []
-            [ -- , background
-              div
-                [ styles
-                    [ -- property "background" "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px"
-                      --  property "background-color" "#282828"
-                      -- , backgroundSize2 (px 16) (px 16)
-                      property "background-image" "url('imgs/giraffe.svg')"
-                    , backgroundSize cover
-                    , property "display" "flex"
-                    , justifyContent center
-                    , alignItems center
-                    , height (px <| toFloat model.window.height)
-                    ]
+        div
+            [ styles
+                [ backgroundColor (hsla 0 0 1 0.85)
+                , width (px <| toFloat model.window.width)
+                , height (px <| toFloat model.window.height)
                 ]
-                [ div
-                    [ styles
-                        [ backgroundColor (hsla 0 0 1 0.85)
-                        , width (px <| toFloat (model.window.width - 40))
-                        , height (px <| toFloat (model.window.height - 40))
-                        ]
-                    ]
-                    [ Header.view model.route model.header |> Html.map HeaderMsg
-                    , page
-                    ]
-                ]
+            ]
+            [ Header.view model.route model.header |> Html.map HeaderMsg
+            , page
             ]
 
 
