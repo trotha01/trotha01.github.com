@@ -5,6 +5,7 @@ import Html exposing (Html, button, div, text, a, img)
 import Html.Attributes as Attr
 import Route
 import Page.Header as Header
+import Window
 
 
 -- MODEL
@@ -36,9 +37,14 @@ update msg model =
 -- VIEW
 
 
-view : Model -> Html Msg
-view model =
-    div []
+view : Window.Size -> Model -> Html Msg
+view window model =
+    div
+        [ styles
+            [ width (px <| toFloat window.width)
+            , height (px <| toFloat window.height)
+            ]
+        ]
         [ home ]
 
 
@@ -46,31 +52,22 @@ home : Html msg
 home =
     div
         [ styles
-            [ padding (px 10)
+            [ height (pct 100)
             ]
         ]
-        [ profilePic
-        , description
+        [ topImage
+          -- , description
         ]
 
 
-profilePic : Html msg
-profilePic =
+topImage : Html msg
+topImage =
     div
         [ styles
-            [ width (pct 15)
-            , float left
+            [ height (pct 100)
             ]
         ]
-        [ img
-            [ styles
-                [ width (px 100)
-                , height (px 100)
-                , borderRadius (px 250)
-                ]
-            , Attr.src "imgs/profile.jpg"
-            ]
-            []
+        [ img [ styles [ height (pct 100) ], Attr.src "imgs/paper.svg" ] []
         ]
 
 

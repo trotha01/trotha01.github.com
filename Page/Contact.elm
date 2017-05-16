@@ -1,10 +1,11 @@
 module Page.Contact exposing (Model, Msg, init, view, update)
 
 import Css exposing (..)
-import Html exposing (Html, button, div, text, a, p, ul, li)
+import Html exposing (Html, button, div, text, a, p, ul, li, img)
 import Html.Attributes as Attr
 import Route
 import Page.Header as Header
+import Window
 
 
 -- MODEL
@@ -36,16 +37,39 @@ update msg model =
 -- View
 
 
-view : Model -> Html Msg
-view model =
-    div [] [ contact ]
+view : Window.Size -> Model -> Html Msg
+view window model =
+    div
+        [ styles
+            [ width (px <| toFloat window.width)
+            , height (px <| toFloat window.height)
+            ]
+        ]
+        [ topImage, contact ]
+
+
+topImage : Html a
+topImage =
+    div
+        [ styles
+            [ width (pct 100)
+            ]
+        ]
+        [ img
+            [ styles
+                [ width (pct 100)
+                ]
+            , Attr.src "imgs/mail.svg"
+            ]
+            []
+        ]
 
 
 contact : Html msg
 contact =
     div
         [ styles
-            [ padding (px 10)
+            [ padding (px 100)
             ]
         ]
         [ Html.text "How to reach me..."
