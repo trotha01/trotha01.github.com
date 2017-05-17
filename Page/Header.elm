@@ -4,7 +4,7 @@ import Css exposing (..)
 import Html exposing (Html, span, button, div, text, a, img)
 import Html.Attributes as Attr
 import Html.Events exposing (onClick)
-import Route exposing (Route, routeToString)
+import Route exposing (Route)
 
 
 -- MODEL

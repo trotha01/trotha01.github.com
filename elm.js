@@ -15061,7 +15061,7 @@ var _rtfeldman$elm_css$Css$thin = _rtfeldman$elm_css$Css$IntentionallyUnsupporte
 var _rtfeldman$elm_css$Css$thick = _rtfeldman$elm_css$Css$IntentionallyUnsupportedPleaseSeeDocs;
 var _rtfeldman$elm_css$Css$blink = _rtfeldman$elm_css$Css$IntentionallyUnsupportedPleaseSeeDocs;
 
-var _user$project$Route$routeToString = function (page) {
+var _user$project$Route$toString = function (page) {
 	var pieces = function () {
 		var _p0 = page;
 		switch (_p0.ctor) {
@@ -15100,7 +15100,7 @@ var _user$project$Route$routeToString = function (page) {
 };
 var _user$project$Route$href = function (route) {
 	return _elm_lang$html$Html_Attributes$href(
-		_user$project$Route$routeToString(route));
+		_user$project$Route$toString(route));
 };
 var _user$project$Route$Contact = {ctor: 'Contact'};
 var _user$project$Route$Resume = {ctor: 'Resume'};
@@ -16225,6 +16225,11 @@ var _user$project$Main$background = A2(
 		_1: {ctor: '[]'}
 	},
 	{ctor: '[]'});
+var _user$project$Main$setPage = _elm_lang$core$Native_Platform.outgoingPort(
+	'setPage',
+	function (v) {
+		return v;
+	});
 var _user$project$Main$Model = F4(
 	function (a, b, c, d) {
 		return {page: a, header: b, route: c, window: d};
@@ -16258,60 +16263,60 @@ var _user$project$Main$setRoute = F2(
 		} else {
 			switch (_p1._0.ctor) {
 				case 'Home':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
 							model,
 							{
 								route: _user$project$Route$Home,
 								page: _user$project$Main$Home(_user$project$Page_Home$init)
 							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+						_user$project$Main$setPage(
+							_user$project$Route$toString(_user$project$Route$Home)));
 				case 'About':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
 							model,
 							{
 								route: _user$project$Route$About,
 								page: _user$project$Main$About(_user$project$Page_About$init)
 							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+						_user$project$Main$setPage(
+							_user$project$Route$toString(_user$project$Route$About)));
 				case 'Projects':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
 							model,
 							{
 								route: _user$project$Route$Projects,
 								page: _user$project$Main$Projects(_user$project$Page_Projects$init)
 							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+						_user$project$Main$setPage(
+							_user$project$Route$toString(_user$project$Route$Projects)));
 				case 'Resume':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
 							model,
 							{
 								route: _user$project$Route$Resume,
 								page: _user$project$Main$Resume(_user$project$Page_Resume$init)
 							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+						_user$project$Main$setPage(
+							_user$project$Route$toString(_user$project$Route$Resume)));
 				default:
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
+					return A2(
+						_user$project$Util_ops['=>'],
+						_elm_lang$core$Native_Utils.update(
 							model,
 							{
 								route: _user$project$Route$Contact,
 								page: _user$project$Main$Contact(_user$project$Page_Contact$init)
 							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
+						_user$project$Main$setPage(
+							_user$project$Route$toString(_user$project$Route$Contact)));
 			}
 		}
 	});
