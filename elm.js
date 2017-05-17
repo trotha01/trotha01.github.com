@@ -16271,8 +16271,7 @@ var _user$project$Main$setRoute = F2(
 								route: _user$project$Route$Home,
 								page: _user$project$Main$Home(_user$project$Page_Home$init)
 							}),
-						_user$project$Main$setPage(
-							_user$project$Route$toString(_user$project$Route$Home)));
+						_user$project$Main$setPage(''));
 				case 'About':
 					return A2(
 						_user$project$Util_ops['=>'],
