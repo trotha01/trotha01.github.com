@@ -5,6 +5,7 @@ import Html exposing (Html, button, div, text, a, p, ul, li, img)
 import Html.Attributes as Attr
 import Route
 import Page.Header as Header
+import Page.Helper as Helper
 import Window
 
 
@@ -33,35 +34,22 @@ update msg model =
     model
 
 
-
--- View
-
-
 view : Window.Size -> Model -> Html Msg
 view window model =
-    div [] [ topImage, projects ]
+    Helper.topImageView window topImage projects
 
 
 topImage : Html a
 topImage =
-    div
-        [ styles
-            [ height (pct 100)
-            , width (pct 100)
-            ]
-        ]
-        [ img
-            [ styles
-                [ height (pct 100)
-                , width (pct 100)
-                , property "background" "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px"
-                , property "backgroundColor" "#282828"
-                , property "backgroundSize" "16px 16px"
-                ]
-            , Attr.src "imgs/tools.svg"
-            ]
-            []
-        ]
+    Helper.topImage "imgs/tools.svg" carbonFibreBackground
+
+
+carbonFibreBackground : List Css.Mixin
+carbonFibreBackground =
+    [ property "background" "radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px"
+    , property "backgroundColor" "#282828"
+    , property "backgroundSize" "16px 16px"
+    ]
 
 
 
@@ -77,17 +65,44 @@ projects =
             [ padding (px 10)
             ]
         ]
-        [ ul []
-            [ project "Boxes and Bubbles (built on top of jastice's library)" "https://github.com/trotha01/boxes-and-bubbles"
-            , project "Bee Game" "https://github.com/trotha01/bee"
-            , project "Treadmill" "https://github.com/trotha01/treadmill"
+        [ ul
+            [ styles
+                [ listStyleType none
+                , width (pct 100)
+                , padding (px 0)
+                ]
+            ]
+            [ project "Boxes and Bubbles" "https://github.com/trotha01/boxes-and-bubbles" <|
+                "Built on top of Jastice's library (also called boxes-and-bubbles), this is an exporation into collision detection with, as the name implies, boxes and bubbles."
+            , project "Bee Game" "https://github.com/trotha01/bee" <|
+                "Learn Spanish while traveling around the world as a bee."
+            , project "Treadmill" "https://github.com/trotha01/treadmill" <|
+                "Practice your spanish while making a cake."
             ]
         ]
 
 
-project : String -> String -> Html msg
-project title href =
-    li [] [ a [ Attr.href href ] [ Html.text title ] ]
+project : String -> String -> String -> Html msg
+project title href description =
+    li
+        [ Attr.class "projectListItem"
+        , styles
+            [ padding (px 10)
+            , cursor pointer
+            ]
+        ]
+        [ a
+            [ Attr.href href
+            , Attr.target "_blank"
+            , styles
+                [ textDecoration none
+                , color (hsl 0 0 0)
+                ]
+            ]
+            [ Html.h3 [] [ Html.text title ]
+            , p [ styles [ width (px 500) ] ] [ Html.text description ]
+            ]
+        ]
 
 
 

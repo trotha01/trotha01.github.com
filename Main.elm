@@ -166,7 +166,7 @@ view model =
             [ styles
                 [ backgroundColor (hsla 0 0 1 0.85)
                 , width (px <| toFloat model.window.width)
-                , height (px <| toFloat model.window.height)
+                , height (px <| toFloat (model.window.height - Header.tallness))
                 ]
             ]
             [ Header.view model.route model.header |> Html.map HeaderMsg

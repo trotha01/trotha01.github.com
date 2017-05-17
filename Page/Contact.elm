@@ -5,6 +5,7 @@ import Html exposing (Html, button, div, text, a, p, ul, li, img)
 import Html.Attributes as Attr
 import Route
 import Page.Header as Header
+import Page.Helper as Helper
 import Window
 
 
@@ -39,30 +40,12 @@ update msg model =
 
 view : Window.Size -> Model -> Html Msg
 view window model =
-    div
-        [ styles
-            [ width (px <| toFloat window.width)
-            , height (px <| toFloat window.height)
-            ]
-        ]
-        [ topImage, contact ]
+    Helper.topImageView window topImage contact
 
 
 topImage : Html a
 topImage =
-    div
-        [ styles
-            [ width (pct 100)
-            ]
-        ]
-        [ img
-            [ styles
-                [ width (pct 100)
-                ]
-            , Attr.src "imgs/mail.svg"
-            ]
-            []
-        ]
+    Helper.topImage "imgs/mail.svg" []
 
 
 contact : Html msg
@@ -76,8 +59,7 @@ contact =
         , ul []
             [ li [] [ Html.text "trotha01 at gmail" ]
             , li []
-                [ Html.text "Or through "
-                , a [ Attr.href "https://www.linkedin.com/in/trevorrothaus/" ] [ Html.text "LinkedIn" ]
+                [ a [ Attr.href "https://www.linkedin.com/in/trevorrothaus/" ] [ Html.text "LinkedIn" ]
                 ]
             ]
         ]

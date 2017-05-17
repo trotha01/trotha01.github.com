@@ -1,4 +1,4 @@
-module Page.Header exposing (Model, Msg, view, init, update)
+module Page.Header exposing (Model, Msg, view, init, update, tallness)
 
 import Css exposing (..)
 import Html exposing (Html, span, button, div, text, a, img)
@@ -40,6 +40,10 @@ update msg (Model model) =
 
 
 -- VIEW
+
+
+tallness =
+    54
 
 
 view : Route -> Model -> Html Msg
@@ -114,7 +118,8 @@ button currentRoute page str =
                 , background
                 , cursor pointer
                 , padding2 (px 14) (px 16)
-                , fontSize (px 10)
+                , fontSize (em 1)
+                , withMedia [ screen ] [ fontSize (px 20) ]
                 , textDecoration none
                 , textColor
                   -- , color (rgb 255 255 255)
