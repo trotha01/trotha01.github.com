@@ -361,8 +361,8 @@
     var node = document.getElementById('main');
     var app = Elm.Main.embed(node);
 
-    app.ports.setPage.subscribe(function(word) {
-        ga('set', 'page', '/'+word);
+    app.ports.setPage.subscribe(function(page) {
+        ga('set', 'page', '/'+page);
         ga('send', 'pageview');
     });
   </script>
