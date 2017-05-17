@@ -16013,6 +16013,116 @@ var _user$project$Page_Contact$styles = function (_p0) {
 	return _elm_lang$html$Html_Attributes$style(
 		_rtfeldman$elm_css$Css$asPairs(_p0));
 };
+var _user$project$Page_Contact$contactItem = F2(
+	function (num, contact) {
+		return A2(
+			_elm_lang$html$Html$li,
+			{
+				ctor: '::',
+				_0: _user$project$Page_Contact$styles(
+					{
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$position(_rtfeldman$elm_css$Css$relative),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$color(
+								A3(_rtfeldman$elm_css$Css$hsl, 203, 0.2, 0.44)),
+							_1: {
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$fontSize(
+									_rtfeldman$elm_css$Css$em(3)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$span,
+					{
+						ctor: '::',
+						_0: _user$project$Page_Contact$styles(
+							{
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$fontStyle(_rtfeldman$elm_css$Css$italic),
+								_1: {
+									ctor: '::',
+									_0: _rtfeldman$elm_css$Css$fontFamilies(
+										{
+											ctor: '::',
+											_0: 'Helvetica',
+											_1: {
+												ctor: '::',
+												_0: 'Verdana',
+												_1: {
+													ctor: '::',
+													_0: 'sans-serif',
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(num),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: contact,
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Page_Contact$contactDescription = function (str) {
+	return A2(
+		_elm_lang$html$Html$span,
+		{
+			ctor: '::',
+			_0: _user$project$Page_Contact$styles(
+				{
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$fontSize(
+						_rtfeldman$elm_css$Css$em(0.5)),
+					_1: {
+						ctor: '::',
+						_0: _rtfeldman$elm_css$Css$marginLeft(
+							_rtfeldman$elm_css$Css$px(10)),
+						_1: {
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$color(
+								A3(_rtfeldman$elm_css$Css$hsl, 0, 0, 0)),
+							_1: {
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$fontFamilies(
+									{
+										ctor: '::',
+										_0: 'Helvetica',
+										_1: {
+											ctor: '::',
+											_0: 'sans-serif',
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(str),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Page_Contact$contact = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -16032,39 +16142,62 @@ var _user$project$Page_Contact$contact = A2(
 		_1: {
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$ul,
-				{ctor: '[]'},
+				_elm_lang$html$Html$ol,
+				{
+					ctor: '::',
+					_0: _user$project$Page_Contact$styles(
+						{
+							ctor: '::',
+							_0: _rtfeldman$elm_css$Css$listStyleType(_rtfeldman$elm_css$Css$none),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$li,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('trotha01 at gmail'),
-							_1: {ctor: '[]'}
-						}),
+						_user$project$Page_Contact$contactItem,
+						'1',
+						_user$project$Page_Contact$contactDescription('trotha01 at gmail')),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$li,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$a,
-									{
+							_user$project$Page_Contact$contactItem,
+							'2',
+							A2(
+								_elm_lang$html$Html$a,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href('https://www.linkedin.com/in/trevorrothaus/'),
+									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$href('https://www.linkedin.com/in/trevorrothaus/'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('LinkedIn'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
+										_0: _elm_lang$html$Html_Attributes$target('_blank'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Page_Contact$styles(
+												{
+													ctor: '::',
+													_0: _rtfeldman$elm_css$Css$textDecoration(_rtfeldman$elm_css$Css$none),
+													_1: {
+														ctor: '::',
+														_0: _rtfeldman$elm_css$Css$color(
+															A3(_rtfeldman$elm_css$Css$hsl, 0, 0, 0)),
+														_1: {
+															ctor: '::',
+															_0: _rtfeldman$elm_css$Css$cursor(_rtfeldman$elm_css$Css$pointer),
+															_1: {ctor: '[]'}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Page_Contact$contactDescription('LinkedIn'),
+									_1: {ctor: '[]'}
+								})),
 						_1: {ctor: '[]'}
 					}
 				}),
