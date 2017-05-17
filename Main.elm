@@ -86,7 +86,7 @@ setRoute maybeRoute model =
 
         Just (Route.Home) ->
             { model | route = Route.Home, page = Home Home.init }
-                => setPage (Route.toString Route.Home)
+                => setPage ""
 
         Just (Route.About) ->
             { model | route = Route.About, page = About About.init }
