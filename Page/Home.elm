@@ -45,42 +45,38 @@ view window model =
             , height (px <| toFloat window.height)
             ]
         ]
-        [ home ]
+        [ submarinePaper ]
 
 
-home : Html msg
-home =
+submarinePaper =
     div
-        [ styles
-            [ height (pct 100)
+        [ Attr.class "sea"
+        , styles [ height (pct 100) ]
+        ]
+        [ bubble ]
+
+
+bubble =
+    div [ Attr.class "circle-wrapper" ]
+        [ div [ Attr.class "bubble" ] []
+        , submarine
+        ]
+
+
+submarine =
+    div [ Attr.class "submarine-wrapper" ]
+        [ div [ Attr.class "submarine-body" ]
+            [ div [ Attr.class "window" ] []
+            , div [ Attr.class "engine" ] []
+            , div [ Attr.class "light" ] []
             ]
-        ]
-        [ topImage
-          -- , description
-        ]
-
-
-topImage : Html msg
-topImage =
-    div
-        [ styles
-            [ height (pct 100)
+        , div [ Attr.class "helix" ] []
+        , div [ Attr.class "hat" ]
+            [ div [ Attr.class "leds-wrapper" ]
+                [ div [ Attr.class "periscope" ] []
+                , div [ Attr.class "leds" ] []
+                ]
             ]
-        ]
-        [ img [ styles [ height (pct 100) ], Attr.src "imgs/paper.svg" ] []
-        ]
-
-
-description : Html msg
-description =
-    div
-        [ styles
-            [ width (pct 85)
-            , float left
-            , paddingTop (px 20)
-            ]
-        ]
-        [ Html.text "Welcome to my website! If you enjoy education or educational games, please reach out to me! I love talking with new people."
         ]
 
 
