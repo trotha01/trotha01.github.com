@@ -1,4 +1,4 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Css exposing (..)
 import Html exposing (Html, button, text, div, img)
@@ -85,19 +85,24 @@ setRoute maybeRoute model =
             ( model, Cmd.none )
 
         Just (Route.Home) ->
-            ( { model | route = Route.Home, page = Home Home.init }, Cmd.none )
+            { model | route = Route.Home, page = Home Home.init }
+                => setPage (Route.toString Route.Home)
 
         Just (Route.About) ->
-            ( { model | route = Route.About, page = About About.init }, Cmd.none )
+            { model | route = Route.About, page = About About.init }
+                => setPage (Route.toString Route.About)
 
         Just (Route.Projects) ->
-            ( { model | route = Route.Projects, page = Projects Projects.init }, Cmd.none )
+            { model | route = Route.Projects, page = Projects Projects.init }
+                => setPage (Route.toString Route.Projects)
 
         Just (Route.Resume) ->
-            ( { model | route = Route.Resume, page = Resume Resume.init }, Cmd.none )
+            { model | route = Route.Resume, page = Resume Resume.init }
+                => setPage (Route.toString Route.Resume)
 
         Just (Route.Contact) ->
-            ( { model | route = Route.Contact, page = Contact Contact.init }, Cmd.none )
+            { model | route = Route.Contact, page = Contact Contact.init }
+                => setPage (Route.toString Route.Contact)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -186,6 +191,13 @@ background =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Window.resizes WindowResize
+
+
+
+-- PORTS
+
+
+port setPage : String -> Cmd msg
 
 
 

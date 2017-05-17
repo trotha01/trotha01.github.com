@@ -360,6 +360,11 @@
   <script type="text/javascript">
     var node = document.getElementById('main');
     var app = Elm.Main.embed(node);
+
+    app.ports.setPage.subscribe(function(word) {
+        ga('set', 'page', '/'+word);
+        ga('send', 'pageview');
+    });
   </script>
   </body>
 

@@ -1,4 +1,4 @@
-module Route exposing (Route(..), fromLocation, href, routeToString)
+module Route exposing (Route(..), fromLocation, href, toString)
 
 import UrlParser as Url exposing (parseHash, s, (</>), string, oneOf, Parser)
 import Navigation exposing (Location)
@@ -25,8 +25,8 @@ route =
         ]
 
 
-routeToString : Route -> String
-routeToString page =
+toString : Route -> String
+toString page =
     let
         pieces =
             case page of
@@ -50,7 +50,7 @@ routeToString page =
 
 href : Route -> Attribute msg
 href route =
-    Attr.href (routeToString route)
+    Attr.href (toString route)
 
 
 fromLocation : Location -> Maybe Route
