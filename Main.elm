@@ -69,6 +69,7 @@ initialModel =
 
 type Msg
     = SetRoute (Maybe Route)
+    | TrackLink String
     | WindowResize Window.Size
     | HomeMsg Home.Msg
     | AboutMsg About.Msg
@@ -121,6 +122,9 @@ update msg model =
             ( SetRoute route, _ ) ->
                 setRoute route model
 
+            ( TrackLink link, _ ) ->
+                model => trackLink link
+
             ( HomeMsg homeMsg, Home home ) ->
                 pageUpdate Home (Home.update homeMsg home)
 
@@ -159,13 +163,13 @@ view model =
                     About.view model.window subModel |> Html.map AboutMsg
 
                 Projects subModel ->
-                    Projects.view model.window subModel |> Html.map ProjectsMsg
+                    Projects.view TrackLink model.window subModel
 
                 Resume subModel ->
                     Resume.view model.window subModel |> Html.map ResumeMsg
 
                 Contact subModel ->
-                    Contact.view model.window subModel |> Html.map ContactMsg
+                    Contact.view TrackLink model.window subModel
     in
         div
             [ styles
@@ -198,6 +202,9 @@ subscriptions model =
 
 
 port setPage : String -> Cmd msg
+
+
+port trackLink : String -> Cmd msg
 
 
 

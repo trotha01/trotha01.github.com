@@ -3,6 +3,8 @@ module Page.Contact exposing (Model, Msg, init, view, update)
 import Css exposing (..)
 import Html exposing (Html, button, div, text, a, p, ul, li, img)
 import Html.Attributes as Attr
+import Html.Events as Event exposing (defaultOptions)
+import Json.Decode as Json
 import Route
 import Page.Header as Header
 import Page.Helper as Helper
@@ -38,9 +40,9 @@ update msg model =
 -- View
 
 
-view : Window.Size -> Model -> Html Msg
-view window model =
-    Helper.topImageView window topImage contact
+view : (String -> msg) -> Window.Size -> Model -> Html msg
+view onClick window model =
+    Helper.topImageView window topImage (contact onClick)
 
 
 topImage : Html a
@@ -48,8 +50,12 @@ topImage =
     Helper.topImage "imgs/mail.svg" []
 
 
-contact : Html msg
-contact =
+linkedInUrl =
+    "https://www.linkedin.com/in/trevorrothaus/"
+
+
+contact : (String -> msg) -> Html msg
+contact onClick =
     div
         [ styles
             [ padding (px 100)
@@ -63,8 +69,11 @@ contact =
                 contactDescription "trotha01 at gmail"
             , contactItem "2" <|
                 a
-                    [ Attr.href "https://www.linkedin.com/in/trevorrothaus/"
-                    , Attr.target "_blank"
+                    [ Attr.href linkedInUrl
+                    , Event.onWithOptions
+                        "click"
+                        { defaultOptions | preventDefault = True }
+                        (Json.succeed (onClick linkedInUrl))
                     , styles
                         [ textDecoration none
                         , color (hsl 0 0 0)
