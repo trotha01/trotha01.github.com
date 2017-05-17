@@ -15270,36 +15270,20 @@ var _user$project$Page_Header$button = F3(
 													_rtfeldman$elm_css$Css$em(1)),
 												_1: {
 													ctor: '::',
-													_0: A2(
-														_rtfeldman$elm_css$Css$withMedia,
-														{
-															ctor: '::',
-															_0: _rtfeldman$elm_css$Css$screen,
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: _rtfeldman$elm_css$Css$fontSize(
-																_rtfeldman$elm_css$Css$px(20)),
-															_1: {ctor: '[]'}
-														}),
+													_0: _rtfeldman$elm_css$Css$textDecoration(_rtfeldman$elm_css$Css$none),
 													_1: {
 														ctor: '::',
-														_0: _rtfeldman$elm_css$Css$textDecoration(_rtfeldman$elm_css$Css$none),
+														_0: textColor,
 														_1: {
 															ctor: '::',
-															_0: textColor,
-															_1: {
-																ctor: '::',
-																_0: _rtfeldman$elm_css$Css$hover(
-																	{
-																		ctor: '::',
-																		_0: _rtfeldman$elm_css$Css$backgroundColor(
-																			A3(_rtfeldman$elm_css$Css$hsl, 189, 0.55, 0.91)),
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															}
+															_0: _rtfeldman$elm_css$Css$hover(
+																{
+																	ctor: '::',
+																	_0: _rtfeldman$elm_css$Css$backgroundColor(
+																		A3(_rtfeldman$elm_css$Css$hsl, 189, 0.55, 0.91)),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
 														}
 													}
 												}

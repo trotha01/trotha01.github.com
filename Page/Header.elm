@@ -119,7 +119,6 @@ button currentRoute page str =
                 , cursor pointer
                 , padding2 (px 14) (px 16)
                 , fontSize (em 1)
-                , withMedia [ screen ] [ fontSize (px 20) ]
                 , textDecoration none
                 , textColor
                   -- , color (rgb 255 255 255)
