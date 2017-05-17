@@ -15754,8 +15754,8 @@ var _user$project$Page_Projects$styles = function (_p0) {
 	return _elm_lang$html$Html_Attributes$style(
 		_rtfeldman$elm_css$Css$asPairs(_p0));
 };
-var _user$project$Page_Projects$project = F3(
-	function (title, href, description) {
+var _user$project$Page_Projects$project = F4(
+	function (onClick, title, href, description) {
 		return A2(
 			_elm_lang$html$Html$li,
 			{
@@ -15786,7 +15786,14 @@ var _user$project$Page_Projects$project = F3(
 						_0: _elm_lang$html$Html_Attributes$href(href),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$target('_blank'),
+							_0: A3(
+								_elm_lang$html$Html_Events$onWithOptions,
+								'click',
+								_elm_lang$core$Native_Utils.update(
+									_elm_lang$html$Html_Events$defaultOptions,
+									{preventDefault: true}),
+								_elm_lang$core$Json_Decode$succeed(
+									onClick(href))),
 							_1: {
 								ctor: '::',
 								_0: _user$project$Page_Projects$styles(
@@ -15840,58 +15847,60 @@ var _user$project$Page_Projects$project = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Page_Projects$projects = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _user$project$Page_Projects$styles(
-			{
-				ctor: '::',
-				_0: _rtfeldman$elm_css$Css$padding(
-					_rtfeldman$elm_css$Css$px(10)),
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$ul,
-			{
-				ctor: '::',
-				_0: _user$project$Page_Projects$styles(
-					{
-						ctor: '::',
-						_0: _rtfeldman$elm_css$Css$listStyleType(_rtfeldman$elm_css$Css$none),
-						_1: {
+var _user$project$Page_Projects$projects = function (onClick) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _user$project$Page_Projects$styles(
+				{
+					ctor: '::',
+					_0: _rtfeldman$elm_css$Css$padding(
+						_rtfeldman$elm_css$Css$px(10)),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$ul,
+				{
+					ctor: '::',
+					_0: _user$project$Page_Projects$styles(
+						{
 							ctor: '::',
-							_0: _rtfeldman$elm_css$Css$width(
-								_rtfeldman$elm_css$Css$pct(100)),
+							_0: _rtfeldman$elm_css$Css$listStyleType(_rtfeldman$elm_css$Css$none),
 							_1: {
 								ctor: '::',
-								_0: _rtfeldman$elm_css$Css$padding(
-									_rtfeldman$elm_css$Css$px(0)),
-								_1: {ctor: '[]'}
+								_0: _rtfeldman$elm_css$Css$width(
+									_rtfeldman$elm_css$Css$pct(100)),
+								_1: {
+									ctor: '::',
+									_0: _rtfeldman$elm_css$Css$padding(
+										_rtfeldman$elm_css$Css$px(0)),
+									_1: {ctor: '[]'}
+								}
 							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A3(_user$project$Page_Projects$project, 'Boxes and Bubbles', 'https://github.com/trotha01/boxes-and-bubbles', 'Built on top of Jastice\'s library (also called boxes-and-bubbles), this is an exporation into collision detection with, as the name implies, boxes and bubbles.'),
-				_1: {
+						}),
+					_1: {ctor: '[]'}
+				},
+				{
 					ctor: '::',
-					_0: A3(_user$project$Page_Projects$project, 'Bee Game', 'https://github.com/trotha01/bee', 'Learn Spanish while traveling around the world as a bee.'),
+					_0: A4(_user$project$Page_Projects$project, onClick, 'Boxes and Bubbles', 'https://github.com/trotha01/boxes-and-bubbles', 'BuiltonClick  on top of Jastice\'s library (also called boxes-and-bubbles), this is an exporation into collision detection with, as the name implies, boxes and bubbles.'),
 					_1: {
 						ctor: '::',
-						_0: A3(_user$project$Page_Projects$project, 'Treadmill', 'https://github.com/trotha01/treadmill', 'Practice your spanish while making a cake.'),
-						_1: {ctor: '[]'}
+						_0: A4(_user$project$Page_Projects$project, onClick, 'Bee Game', 'https://github.com/trotha01/bee', 'LearnonClick  Spanish while traveling around the world as a bee.'),
+						_1: {
+							ctor: '::',
+							_0: A4(_user$project$Page_Projects$project, onClick, 'Treadmill', 'https://github.com/trotha01/treadmill', 'Practice your spanish while making a cake.'),
+							_1: {ctor: '[]'}
+						}
 					}
-				}
-			}),
-		_1: {ctor: '[]'}
-	});
+				}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Page_Projects$carbonFibreBackground = {
 	ctor: '::',
 	_0: A2(_rtfeldman$elm_css$Css$property, 'background', 'radial-gradient(black 15%, transparent 16%) 0 0, radial-gradient(black 15%, transparent 16%) 8px 8px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px, radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px'),
@@ -15906,9 +15915,13 @@ var _user$project$Page_Projects$carbonFibreBackground = {
 	}
 };
 var _user$project$Page_Projects$topImage = A2(_user$project$Page_Helper$topImage, 'imgs/tools.svg', _user$project$Page_Projects$carbonFibreBackground);
-var _user$project$Page_Projects$view = F2(
-	function (window, model) {
-		return A3(_user$project$Page_Helper$topImageView, window, _user$project$Page_Projects$topImage, _user$project$Page_Projects$projects);
+var _user$project$Page_Projects$view = F3(
+	function (onClick, window, model) {
+		return A3(
+			_user$project$Page_Helper$topImageView,
+			window,
+			_user$project$Page_Projects$topImage,
+			_user$project$Page_Projects$projects(onClick));
 	});
 var _user$project$Page_Projects$update = F2(
 	function (msg, model) {
@@ -16107,94 +16120,108 @@ var _user$project$Page_Contact$contactDescription = function (str) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Page_Contact$contact = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _user$project$Page_Contact$styles(
-			{
-				ctor: '::',
-				_0: _rtfeldman$elm_css$Css$padding(
-					_rtfeldman$elm_css$Css$px(100)),
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	},
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html$text('How to reach me...'),
-		_1: {
+var _user$project$Page_Contact$linkedInUrl = 'https://www.linkedin.com/in/trevorrothaus/';
+var _user$project$Page_Contact$contact = function (onClick) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$ol,
+			_0: _user$project$Page_Contact$styles(
 				{
 					ctor: '::',
-					_0: _user$project$Page_Contact$styles(
-						{
-							ctor: '::',
-							_0: _rtfeldman$elm_css$Css$listStyleType(_rtfeldman$elm_css$Css$none),
-							_1: {ctor: '[]'}
-						}),
+					_0: _rtfeldman$elm_css$Css$padding(
+						_rtfeldman$elm_css$Css$px(100)),
 					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_user$project$Page_Contact$contactItem,
-						'1',
-						_user$project$Page_Contact$contactDescription('trotha01 at gmail')),
-					_1: {
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('How to reach me...'),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ol,
+					{
+						ctor: '::',
+						_0: _user$project$Page_Contact$styles(
+							{
+								ctor: '::',
+								_0: _rtfeldman$elm_css$Css$listStyleType(_rtfeldman$elm_css$Css$none),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
 						ctor: '::',
 						_0: A2(
 							_user$project$Page_Contact$contactItem,
-							'2',
-							A2(
-								_elm_lang$html$Html$a,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href('https://www.linkedin.com/in/trevorrothaus/'),
-									_1: {
+							'1',
+							_user$project$Page_Contact$contactDescription('trotha01 at gmail')),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_user$project$Page_Contact$contactItem,
+								'2',
+								A2(
+									_elm_lang$html$Html$a,
+									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$target('_blank'),
+										_0: _elm_lang$html$Html_Attributes$href(_user$project$Page_Contact$linkedInUrl),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Page_Contact$styles(
-												{
-													ctor: '::',
-													_0: _rtfeldman$elm_css$Css$textDecoration(_rtfeldman$elm_css$Css$none),
-													_1: {
+											_0: A3(
+												_elm_lang$html$Html_Events$onWithOptions,
+												'click',
+												_elm_lang$core$Native_Utils.update(
+													_elm_lang$html$Html_Events$defaultOptions,
+													{preventDefault: true}),
+												_elm_lang$core$Json_Decode$succeed(
+													onClick(_user$project$Page_Contact$linkedInUrl))),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Page_Contact$styles(
+													{
 														ctor: '::',
-														_0: _rtfeldman$elm_css$Css$color(
-															A3(_rtfeldman$elm_css$Css$hsl, 0, 0, 0)),
+														_0: _rtfeldman$elm_css$Css$textDecoration(_rtfeldman$elm_css$Css$none),
 														_1: {
 															ctor: '::',
-															_0: _rtfeldman$elm_css$Css$cursor(_rtfeldman$elm_css$Css$pointer),
-															_1: {ctor: '[]'}
+															_0: _rtfeldman$elm_css$Css$color(
+																A3(_rtfeldman$elm_css$Css$hsl, 0, 0, 0)),
+															_1: {
+																ctor: '::',
+																_0: _rtfeldman$elm_css$Css$cursor(_rtfeldman$elm_css$Css$pointer),
+																_1: {ctor: '[]'}
+															}
 														}
-													}
-												}),
-											_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
 										}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _user$project$Page_Contact$contactDescription('LinkedIn'),
-									_1: {ctor: '[]'}
-								})),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {ctor: '[]'}
-		}
-	});
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Page_Contact$contactDescription('LinkedIn'),
+										_1: {ctor: '[]'}
+									})),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$Page_Contact$topImage = A2(
 	_user$project$Page_Helper$topImage,
 	'imgs/mail.svg',
 	{ctor: '[]'});
-var _user$project$Page_Contact$view = F2(
-	function (window, model) {
-		return A3(_user$project$Page_Helper$topImageView, window, _user$project$Page_Contact$topImage, _user$project$Page_Contact$contact);
+var _user$project$Page_Contact$view = F3(
+	function (onClick, window, model) {
+		return A3(
+			_user$project$Page_Helper$topImageView,
+			window,
+			_user$project$Page_Contact$topImage,
+			_user$project$Page_Contact$contact(onClick));
 	});
 var _user$project$Page_Contact$update = F2(
 	function (msg, model) {
@@ -16227,6 +16254,11 @@ var _user$project$Main$background = A2(
 	{ctor: '[]'});
 var _user$project$Main$setPage = _elm_lang$core$Native_Platform.outgoingPort(
 	'setPage',
+	function (v) {
+		return v;
+	});
+var _user$project$Main$trackLink = _elm_lang$core$Native_Platform.outgoingPort(
+	'trackLink',
 	function (v) {
 		return v;
 	});
@@ -16341,7 +16373,7 @@ var _user$project$Main$update = F2(
 				_elm_lang$core$Platform_Cmd$none);
 		};
 		var _p2 = {ctor: '_Tuple2', _0: msg, _1: model.page};
-		_v1_8:
+		_v1_9:
 		do {
 			if (_p2.ctor === '_Tuple2') {
 				switch (_p2._0.ctor) {
@@ -16354,6 +16386,11 @@ var _user$project$Main$update = F2(
 							_elm_lang$core$Platform_Cmd$none);
 					case 'SetRoute':
 						return A2(_user$project$Main$setRoute, _p2._0._0, model);
+					case 'TrackLink':
+						return A2(
+							_user$project$Util_ops['=>'],
+							model,
+							_user$project$Main$trackLink(_p2._0._0));
 					case 'HomeMsg':
 						if (_p2._1.ctor === 'Home') {
 							return A2(
@@ -16361,7 +16398,7 @@ var _user$project$Main$update = F2(
 								_user$project$Main$Home,
 								A2(_user$project$Page_Home$update, _p2._0._0, _p2._1._0));
 						} else {
-							break _v1_8;
+							break _v1_9;
 						}
 					case 'AboutMsg':
 						if (_p2._1.ctor === 'About') {
@@ -16370,7 +16407,7 @@ var _user$project$Main$update = F2(
 								_user$project$Main$About,
 								A2(_user$project$Page_About$update, _p2._0._0, _p2._1._0));
 						} else {
-							break _v1_8;
+							break _v1_9;
 						}
 					case 'ProjectsMsg':
 						if (_p2._1.ctor === 'Projects') {
@@ -16379,7 +16416,7 @@ var _user$project$Main$update = F2(
 								_user$project$Main$Projects,
 								A2(_user$project$Page_Projects$update, _p2._0._0, _p2._1._0));
 						} else {
-							break _v1_8;
+							break _v1_9;
 						}
 					case 'ResumeMsg':
 						if (_p2._1.ctor === 'Resume') {
@@ -16388,7 +16425,7 @@ var _user$project$Main$update = F2(
 								_user$project$Main$Resume,
 								A2(_user$project$Page_Resume$update, _p2._0._0, _p2._1._0));
 						} else {
-							break _v1_8;
+							break _v1_9;
 						}
 					case 'ContactMsg':
 						if (_p2._1.ctor === 'Contact') {
@@ -16397,14 +16434,14 @@ var _user$project$Main$update = F2(
 								_user$project$Main$Contact,
 								A2(_user$project$Page_Contact$update, _p2._0._0, _p2._1._0));
 						} else {
-							break _v1_8;
+							break _v1_9;
 						}
 					default:
 						return headerUpdate(
 							A2(_user$project$Page_Header$update, _p2._0._0, model.header));
 				}
 			} else {
-				break _v1_8;
+				break _v1_9;
 			}
 		} while(false);
 		return A2(_user$project$Util_ops['=>'], model, _elm_lang$core$Platform_Cmd$none);
@@ -16427,35 +16464,60 @@ var _user$project$Main$AboutMsg = function (a) {
 var _user$project$Main$HomeMsg = function (a) {
 	return {ctor: 'HomeMsg', _0: a};
 };
+var _user$project$Main$WindowResize = function (a) {
+	return {ctor: 'WindowResize', _0: a};
+};
+var _user$project$Main$init = function (location) {
+	var windowSizeCmd = A2(_elm_lang$core$Task$perform, _user$project$Main$WindowResize, _elm_lang$window$Window$size);
+	var _p3 = A2(
+		_user$project$Main$setRoute,
+		_user$project$Route$fromLocation(location),
+		_user$project$Main$initialModel);
+	var newModel = _p3._0;
+	var cmd = _p3._1;
+	return A2(
+		_user$project$Util_ops['=>'],
+		newModel,
+		_elm_lang$core$Platform_Cmd$batch(
+			{
+				ctor: '::',
+				_0: cmd,
+				_1: {
+					ctor: '::',
+					_0: windowSizeCmd,
+					_1: {ctor: '[]'}
+				}
+			}));
+};
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$window$Window$resizes(_user$project$Main$WindowResize);
+};
+var _user$project$Main$TrackLink = function (a) {
+	return {ctor: 'TrackLink', _0: a};
+};
 var _user$project$Main$view = function (model) {
 	var page = function () {
-		var _p3 = model.page;
-		switch (_p3.ctor) {
+		var _p4 = model.page;
+		switch (_p4.ctor) {
 			case 'Home':
 				return A2(
 					_elm_lang$html$Html$map,
 					_user$project$Main$HomeMsg,
-					A2(_user$project$Page_Home$view, model.window, _p3._0));
+					A2(_user$project$Page_Home$view, model.window, _p4._0));
 			case 'About':
 				return A2(
 					_elm_lang$html$Html$map,
 					_user$project$Main$AboutMsg,
-					A2(_user$project$Page_About$view, model.window, _p3._0));
+					A2(_user$project$Page_About$view, model.window, _p4._0));
 			case 'Projects':
-				return A2(
-					_elm_lang$html$Html$map,
-					_user$project$Main$ProjectsMsg,
-					A2(_user$project$Page_Projects$view, model.window, _p3._0));
+				return A3(_user$project$Page_Projects$view, _user$project$Main$TrackLink, model.window, _p4._0);
 			case 'Resume':
 				return A2(
 					_elm_lang$html$Html$map,
 					_user$project$Main$ResumeMsg,
-					A2(_user$project$Page_Resume$view, model.window, _p3._0));
+					A2(_user$project$Page_Resume$view, model.window, _p4._0));
 			default:
-				return A2(
-					_elm_lang$html$Html$map,
-					_user$project$Main$ContactMsg,
-					A2(_user$project$Page_Contact$view, model.window, _p3._0));
+				return A3(_user$project$Page_Contact$view, _user$project$Main$TrackLink, model.window, _p4._0);
 		}
 	}();
 	return A2(
@@ -16495,34 +16557,6 @@ var _user$project$Main$view = function (model) {
 				_1: {ctor: '[]'}
 			}
 		});
-};
-var _user$project$Main$WindowResize = function (a) {
-	return {ctor: 'WindowResize', _0: a};
-};
-var _user$project$Main$init = function (location) {
-	var windowSizeCmd = A2(_elm_lang$core$Task$perform, _user$project$Main$WindowResize, _elm_lang$window$Window$size);
-	var _p4 = A2(
-		_user$project$Main$setRoute,
-		_user$project$Route$fromLocation(location),
-		_user$project$Main$initialModel);
-	var newModel = _p4._0;
-	var cmd = _p4._1;
-	return A2(
-		_user$project$Util_ops['=>'],
-		newModel,
-		_elm_lang$core$Platform_Cmd$batch(
-			{
-				ctor: '::',
-				_0: cmd,
-				_1: {
-					ctor: '::',
-					_0: windowSizeCmd,
-					_1: {ctor: '[]'}
-				}
-			}));
-};
-var _user$project$Main$subscriptions = function (model) {
-	return _elm_lang$window$Window$resizes(_user$project$Main$WindowResize);
 };
 var _user$project$Main$SetRoute = function (a) {
 	return {ctor: 'SetRoute', _0: a};

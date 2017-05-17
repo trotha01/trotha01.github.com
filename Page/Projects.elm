@@ -3,6 +3,8 @@ module Page.Projects exposing (Model, Msg, init, view, update)
 import Css exposing (..)
 import Html exposing (Html, button, div, text, a, p, ul, li, img)
 import Html.Attributes as Attr
+import Html.Events as Event exposing (defaultOptions)
+import Json.Decode as Json
 import Route
 import Page.Header as Header
 import Page.Helper as Helper
@@ -34,9 +36,9 @@ update msg model =
     model
 
 
-view : Window.Size -> Model -> Html Msg
-view window model =
-    Helper.topImageView window topImage projects
+view : (String -> msg) -> Window.Size -> Model -> Html msg
+view onClick window model =
+    Helper.topImageView window topImage (projects onClick)
 
 
 topImage : Html a
@@ -52,14 +54,8 @@ carbonFibreBackground =
     ]
 
 
-
-{-
-   - TODO: update to projects and ideas
--}
-
-
-projects : Html msg
-projects =
+projects : (String -> msg) -> Html msg
+projects onClick =
     div
         [ styles
             [ padding (px 10)
@@ -72,18 +68,18 @@ projects =
                 , padding (px 0)
                 ]
             ]
-            [ project "Boxes and Bubbles" "https://github.com/trotha01/boxes-and-bubbles" <|
-                "Built on top of Jastice's library (also called boxes-and-bubbles), this is an exporation into collision detection with, as the name implies, boxes and bubbles."
-            , project "Bee Game" "https://github.com/trotha01/bee" <|
-                "Learn Spanish while traveling around the world as a bee."
-            , project "Treadmill" "https://github.com/trotha01/treadmill" <|
+            [ project onClick "Boxes and Bubbles" "https://github.com/trotha01/boxes-and-bubbles" <|
+                "BuiltonClick  on top of Jastice's library (also called boxes-and-bubbles), this is an exporation into collision detection with, as the name implies, boxes and bubbles."
+            , project onClick "Bee Game" "https://github.com/trotha01/bee" <|
+                "LearnonClick  Spanish while traveling around the world as a bee."
+            , project onClick "Treadmill" "https://github.com/trotha01/treadmill" <|
                 "Practice your spanish while making a cake."
             ]
         ]
 
 
-project : String -> String -> String -> Html msg
-project title href description =
+project : (String -> msg) -> String -> String -> String -> Html msg
+project onClick title href description =
     li
         [ Attr.class "projectListItem"
         , styles
@@ -93,7 +89,10 @@ project title href description =
         ]
         [ a
             [ Attr.href href
-            , Attr.target "_blank"
+            , Event.onWithOptions
+                "click"
+                { defaultOptions | preventDefault = True }
+                (Json.succeed (onClick href))
             , styles
                 [ textDecoration none
                 , color (hsl 0 0 0)
