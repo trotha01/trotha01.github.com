@@ -69,9 +69,9 @@ projects onClick =
                 ]
             ]
             [ project onClick "Boxes and Bubbles" "https://github.com/trotha01/boxes-and-bubbles" <|
-                "BuiltonClick  on top of Jastice's library (also called boxes-and-bubbles), this is an exporation into collision detection with, as the name implies, boxes and bubbles."
+                "Built on top of Jastice's library (also called boxes-and-bubbles); this is an exporation into collision detection with, as the name implies, boxes and bubbles."
             , project onClick "Bee Game" "https://github.com/trotha01/bee" <|
-                "LearnonClick  Spanish while traveling around the world as a bee."
+                "Learn Spanish while traveling around the world as a bee."
             , project onClick "Treadmill" "https://github.com/trotha01/treadmill" <|
                 "Practice your spanish while making a cake."
             ]

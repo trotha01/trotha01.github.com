@@ -15889,10 +15889,10 @@ var _user$project$Page_Projects$projects = function (onClick) {
 				},
 				{
 					ctor: '::',
-					_0: A4(_user$project$Page_Projects$project, onClick, 'Boxes and Bubbles', 'https://github.com/trotha01/boxes-and-bubbles', 'BuiltonClick  on top of Jastice\'s library (also called boxes-and-bubbles), this is an exporation into collision detection with, as the name implies, boxes and bubbles.'),
+					_0: A4(_user$project$Page_Projects$project, onClick, 'Boxes and Bubbles', 'https://github.com/trotha01/boxes-and-bubbles', 'Built on top of Jastice\'s library (also called boxes-and-bubbles); this is an exporation into collision detection with, as the name implies, boxes and bubbles.'),
 					_1: {
 						ctor: '::',
-						_0: A4(_user$project$Page_Projects$project, onClick, 'Bee Game', 'https://github.com/trotha01/bee', 'LearnonClick  Spanish while traveling around the world as a bee.'),
+						_0: A4(_user$project$Page_Projects$project, onClick, 'Bee Game', 'https://github.com/trotha01/bee', 'Learn Spanish while traveling around the world as a bee.'),
 						_1: {
 							ctor: '::',
 							_0: A4(_user$project$Page_Projects$project, onClick, 'Treadmill', 'https://github.com/trotha01/treadmill', 'Practice your spanish while making a cake.'),
