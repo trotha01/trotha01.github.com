@@ -47,7 +47,7 @@ view onClick window model =
 
 topImage : Html a
 topImage =
-    Helper.topImage "imgs/mail.svg" []
+    Helper.topImage "imgs/carrier-pigeon.svg" []
 
 
 linkedInUrl =
@@ -58,7 +58,7 @@ contact : (String -> msg) -> Html msg
 contact onClick =
     div
         [ styles
-            [ padding (px 100)
+            [ padding2 (px 0) (px 100)
             ]
         ]
         [ Html.text "How to reach me..."

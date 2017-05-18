@@ -15587,8 +15587,8 @@ var _user$project$Page_Helper$topImage = F2(
 				_0: _user$project$Page_Helper$styles(
 					{
 						ctor: '::',
-						_0: _rtfeldman$elm_css$Css$width(
-							_rtfeldman$elm_css$Css$pct(100)),
+						_0: _rtfeldman$elm_css$Css$height(
+							_rtfeldman$elm_css$Css$pct(50)),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
@@ -15678,7 +15678,9 @@ var _user$project$Page_About$about = A2(
 		_0: _user$project$Page_About$styles(
 			{
 				ctor: '::',
-				_0: _rtfeldman$elm_css$Css$padding(
+				_0: A2(
+					_rtfeldman$elm_css$Css$padding2,
+					_rtfeldman$elm_css$Css$px(10),
 					_rtfeldman$elm_css$Css$px(100)),
 				_1: {
 					ctor: '::',
@@ -15709,7 +15711,7 @@ var _user$project$Page_About$about = A2(
 							_0: _user$project$Page_About$p('I spend all the free time I have working towards my education passion in the best way I know how. But I do not know if I am spending enough time learning game programming, if I am spending enough time reaching out to educators to network, if I am spending enough time researching educational methods, or if I am spending enough time researching what games are already out there. I feel there is not enough time to do all the things I need to do.'),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Page_About$p('I decided to re-prioritize. I no longer try to go through all my emails, I work on educational games instead. I try to keep other tasks as simple as possible, and don\'t aim for perfection. This has given me even more time for working on educational games. My fiancée gave me a passion planner to help me schedule and I use this to dedicate time on my calendar each day to educational games. This helps ensure I work towards my goal every day. The passion planner is also nice because it reminds me look back at each month, evaluate, and improve for the next month, so I am constantly getting better month over month. Since she is trying to achieve her dream of being a professional aerial performer, we are always working together and constantly pushing each other to improve ourselves.'),
+								_0: _user$project$Page_About$p('I decided to re-prioritize. I no longer try to go through all my emails, I work on educational games instead. I try to keep other tasks as simple as possible and don\'t aim for perfection. This has given me even more time for working on educational games. My fiancée gave me a passion planner to help me schedule and I use this to dedicate time on my calendar each day to educational games. This helps ensure I work towards my goal every day. The passion planner is also nice because it reminds me look back at each month, evaluate, and improve for the next month, so I am constantly getting better month over month. Since she is trying to achieve her dream of being a professional aerial performer, we are always working together and constantly pushing each other to improve ourselves.'),
 								_1: {
 									ctor: '::',
 									_0: _user$project$Page_About$p('I heard a story about a ceramics teacher that split his class in two. One half produced as many pots as they could, the other had to produce one perfect pot. The half that produced more pots actually also produced better quality pots as well. So I am currently focused on building games from scratch, making as many games as I can, and seeing that quality increasing over time. If you want to join me on this educational journey, please reach out, I look forward to hearing from you.'),
@@ -16129,7 +16131,9 @@ var _user$project$Page_Contact$contact = function (onClick) {
 			_0: _user$project$Page_Contact$styles(
 				{
 					ctor: '::',
-					_0: _rtfeldman$elm_css$Css$padding(
+					_0: A2(
+						_rtfeldman$elm_css$Css$padding2,
+						_rtfeldman$elm_css$Css$px(0),
 						_rtfeldman$elm_css$Css$px(100)),
 					_1: {ctor: '[]'}
 				}),
@@ -16213,7 +16217,7 @@ var _user$project$Page_Contact$contact = function (onClick) {
 };
 var _user$project$Page_Contact$topImage = A2(
 	_user$project$Page_Helper$topImage,
-	'imgs/mail.svg',
+	'imgs/carrier-pigeon.svg',
 	{ctor: '[]'});
 var _user$project$Page_Contact$view = F3(
 	function (onClick, window, model) {

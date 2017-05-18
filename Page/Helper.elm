@@ -21,7 +21,7 @@ topImage : String -> List Css.Mixin -> Html a
 topImage src background =
     div
         [ styles
-            [ width (pct 100)
+            [ height (pct 50)
             ]
         ]
         [ img
