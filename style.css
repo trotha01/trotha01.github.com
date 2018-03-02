@@ -105,6 +105,7 @@ section {
   font-size: 1.5rem;
   text-decoration: none;
   color: black;
+  transition: .5s;
 }
 
 .button:hover, .button:active {
@@ -140,7 +141,6 @@ section {
    border: 1px solid grey;
    float: left;
    border-radius: 6rem;
-   
 }
 
 /* RESUME */
