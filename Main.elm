@@ -1,26 +1,17 @@
-port module Main exposing (..)
+module Main exposing (..)
 
-import Css exposing (..)
-import Html exposing (Html, button, text, div, img)
-import Html.Attributes as Attr
-import Html.Events exposing (onClick)
-import Route exposing (Route)
-import Page.Header as Header
-import Util exposing ((=>))
-import Page.Home as Home
-import Page.About as About
-import Page.Projects as Projects
-import Page.Resume as Resume
-import Page.Contact as Contact
-import Page.Errored as Errored exposing (PageLoadError)
-import Navigation exposing (Location)
-import Window
-import Task
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 
 
 main =
-    Navigation.program (Route.fromLocation >> SetRoute)
-        { init = init, update = update, view = view, subscriptions = subscriptions }
+    Html.program
+        { init = init
+        , update = update
+        , view = view
+        , subscriptions = subscriptions
+        }
 
 
 
@@ -28,39 +19,45 @@ main =
 
 
 type alias Model =
-    { page : Page
-    , header : Header.Model
-    , route : Route
-    , window : Window.Size
+    { projects : List Project }
+
+
+type alias Project =
+    { title : String
+    , description : String
+    , link : String
+    , coverImg : String
     }
 
 
-type Page
-    = Home Home.Model
-    | About About.Model
-    | Projects Projects.Model
-    | Resume Resume.Model
-    | Contact Contact.Model
+init : ( Model, Cmd Msg )
+init =
+    ( { projects = initProjects }, Cmd.none )
 
 
-init : Location -> ( Model, Cmd Msg )
-init location =
-    let
-        ( newModel, cmd ) =
-            setRoute (Route.fromLocation location) initialModel
-
-        windowSizeCmd =
-            Task.perform WindowResize Window.size
-    in
-        newModel => Cmd.batch [ cmd, windowSizeCmd ]
-
-
-initialModel =
-    { page = Home Home.init
-    , header = Header.init
-    , route = Route.Home
-    , window = { width = 0, height = 0 }
-    }
+initProjects : List Project
+initProjects =
+    [ { title = "Boxes and Bubles"
+      , description = "Built on top of Jastice's library (also called boxes-and-bubbles); this is an exporation into collision detection with, as the name implies, boxes and bubbles."
+      , link = "https://github.com/trotha01/boxes-and-bubbles"
+      , coverImg = "imgs/boxesandbubbles.png"
+      }
+    , { title = "Bee Game"
+      , description = "Learn Spanish while traveling around the world as a bee."
+      , link = "https://github.com/trotha01/bee"
+      , coverImg = "imgs/beegame.png"
+      }
+    , { title = "Safety Bubble"
+      , description = "Elm February Game Jam Result"
+      , link = "https://github.com/trotha01/safetybubble"
+      , coverImg = "imgs/safetybubble.png"
+      }
+    , { title = "Treadmill"
+      , description = "Practice your spanish while making a cake."
+      , link = "https://github.com/trotha01/treadmill"
+      , coverImg = "imgs/treadmill.png"
+      }
+    ]
 
 
 
@@ -68,83 +65,12 @@ initialModel =
 
 
 type Msg
-    = SetRoute (Maybe Route)
-    | TrackLink String
-    | WindowResize Window.Size
-    | HomeMsg Home.Msg
-    | AboutMsg About.Msg
-    | ProjectsMsg Projects.Msg
-    | ResumeMsg Resume.Msg
-    | ContactMsg Contact.Msg
-    | HeaderMsg Header.Msg
-
-
-setRoute : Maybe Route -> Model -> ( Model, Cmd Msg )
-setRoute maybeRoute model =
-    case maybeRoute of
-        Nothing ->
-            ( model, Cmd.none )
-
-        Just (Route.Home) ->
-            { model | route = Route.Home, page = Home Home.init }
-                => setPage ""
-
-        Just (Route.About) ->
-            { model | route = Route.About, page = About About.init }
-                => setPage (Route.toString Route.About)
-
-        Just (Route.Projects) ->
-            { model | route = Route.Projects, page = Projects Projects.init }
-                => setPage (Route.toString Route.Projects)
-
-        Just (Route.Resume) ->
-            { model | route = Route.Resume, page = Resume Resume.init }
-                => setPage (Route.toString Route.Resume)
-
-        Just (Route.Contact) ->
-            { model | route = Route.Contact, page = Contact Contact.init }
-                => setPage (Route.toString Route.Contact)
+    = NoOp
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    let
-        headerUpdate newHeader =
-            { model | header = newHeader } => Cmd.none
-
-        pageUpdate page update =
-            { model | page = page update } => Cmd.none
-    in
-        case ( msg, model.page ) of
-            ( WindowResize size, _ ) ->
-                { model | window = size } => Cmd.none
-
-            ( SetRoute route, _ ) ->
-                setRoute route model
-
-            ( TrackLink link, _ ) ->
-                model => trackLink link
-
-            ( HomeMsg homeMsg, Home home ) ->
-                pageUpdate Home (Home.update homeMsg home)
-
-            ( AboutMsg aboutMsg, About about ) ->
-                pageUpdate About (About.update aboutMsg about)
-
-            ( ProjectsMsg aboutMsg, Projects about ) ->
-                pageUpdate Projects (Projects.update aboutMsg about)
-
-            ( ResumeMsg aboutMsg, Resume about ) ->
-                pageUpdate Resume (Resume.update aboutMsg about)
-
-            ( ContactMsg aboutMsg, Contact about ) ->
-                pageUpdate Contact (Contact.update aboutMsg about)
-
-            ( HeaderMsg headerMsg, _ ) ->
-                headerUpdate (Header.update headerMsg model.header)
-
-            _ ->
-                model => Cmd.none
+    ( model, Cmd.none )
 
 
 
@@ -153,39 +79,104 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    let
-        page =
-            case model.page of
-                Home subModel ->
-                    Home.view model.window subModel |> Html.map HomeMsg
+    div []
+        [ -- navigationSection model
+          headerSection model
+        , mainSection model
+        , footerSection model
+        ]
 
-                About subModel ->
-                    About.view model.window subModel |> Html.map AboutMsg
 
-                Projects subModel ->
-                    Projects.view TrackLink model.window subModel
+navigationSection : Model -> Html Msg
+navigationSection model =
+    text "navigation"
 
-                Resume subModel ->
-                    Resume.view model.window subModel |> Html.map ResumeMsg
 
-                Contact subModel ->
-                    Contact.view TrackLink model.window subModel
-    in
-        div
-            [ styles
-                [ backgroundColor (hsla 0 0 1 0.85)
-                , width (px <| toFloat model.window.width)
-                , height (px <| toFloat (model.window.height - Header.tallness))
+headerSection : Model -> Html Msg
+headerSection model =
+    header [ class "header" ]
+        [ h1 [ class "heading-primary" ]
+            [ span [ class "heading-primary--main" ] [ text "Trevor Rothaus" ]
+            , span [ class "heading-primary--sub1" ] [ text "Pedagogy Enthusiast" ]
+            , span [ class "heading-primary--sub2" ] [ text "Software Engineer" ]
+            ]
+        ]
+
+
+mainSection : Model -> Html Msg
+mainSection model =
+    main_ []
+        [ parallax "imgs/bookshelf.jpg"
+        , aboutSection model
+        , parallax "imgs/tools.jpg"
+        , projectsSection model
+        , parallax "imgs/bookstack.jpg"
+        , resumeSection model
+        , parallax "imgs/paper.jpg"
+        , contactSection model
+        ]
+
+
+aboutSection : Model -> Html Msg
+aboutSection model =
+    section [ class "about" ]
+        [ h2 [ class "heading-secondary" ]
+            [ text "about" ]
+        , p [ class "section-text" ]
+            [ text "lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, ipsum sapiente aspernatur libero repellat quis consequatur ducimus quam nisi exercitationem omnis earum qui."
+            ]
+        ]
+
+
+projectsSection : Model -> Html Msg
+projectsSection model =
+    section [ class "projects" ]
+        [ h2 [ class "heading-secondary" ] [ text "projects" ]
+        , div [] (List.map viewProject model.projects)
+        ]
+
+
+viewProject : Project -> Html Msg
+viewProject project =
+    a [ class "project button", href project.link, target "_blank" ]
+        [ div [] [ img [ class "project-image", src project.coverImg ] [] ]
+        , h3 [ class "heading-tertiary" ] [ text project.title ]
+        , text project.description
+        ]
+
+
+resumeSection : Model -> Html Msg
+resumeSection model =
+    section [ class "resume" ]
+        [ h2 [ class "heading-secondary" ] [ text "resume" ]
+        , div []
+            [ Html.iframe
+                [ class "resume--iframe"
+                , src "https://docs.google.com/viewer?srcid=1ADJVDEkWIu0BQFGfS6JkJUUgS3mDyhh_lLsTslAUW0E&pid=explorer&efh=false&a=v&chrome=false&embedded=true"
                 ]
+                []
             ]
-            [ Header.view model.route model.header |> Html.map HeaderMsg
-            , page
-            ]
+        ]
 
 
-background : Html a
-background =
-    img [ Attr.src "imgs/giraffe.svg" ] []
+contactSection : Model -> Html Msg
+contactSection model =
+    section [ class "contact" ]
+        [ h2 [ class "heading-secondary" ] [ text "contact" ]
+        , div [ class "contact-item" ] [ text "1. trotha01 at gmail" ]
+        , a [ class "contact-item", href "https://www.linkedin.com/in/trevorrothaus/", target "_blank" ] [ text "2. LinkedIn" ]
+        ]
+
+
+footerSection : Model -> Html Msg
+footerSection model =
+    div [ class "footer" ]
+        [ div [] [ text "Credits" ]
+        , a [ href "https://unsplash.com/photos/HWbxSLvmSww" ] [ text "Paper Photo by Neven Krcmarek on Unsplash" ]
+        , a [ href "https://unsplash.com/photos/t5YUoHW6zRo" ] [ text "Tool Photo by Barn Images on Unsplash" ]
+        , a [ href "https://unsplash.com/photos/y0Fa1DEKOKspaper" ] [ text "Bookshelf Photo by Samuel Zeller on Unsplash" ]
+        , a [ href "https://unsplash.com/photos/tofagMI_UCM" ] [ text "Bookstack Photo by Jan Mellström on Unsplash" ]
+        ]
 
 
 
@@ -194,22 +185,24 @@ background =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Window.resizes WindowResize
+    Sub.none
 
 
 
--- PORTS
+-- HELPERS
 
 
-port setPage : String -> Cmd msg
-
-
-port trackLink : String -> Cmd msg
-
-
-
--- STYLE
-
-
-styles =
-    (Css.asPairs >> Attr.style)
+parallax : String -> Html Msg
+parallax image =
+    div
+        [ class "parallax"
+        , style
+            [ ( "background-image", """url(" """ ++ image ++ """ ")""" )
+            , ( "min-height", "500px" )
+            , ( "background-attachment", "fixed" )
+            , ( "background-position", "center" )
+            , ( "background-repeat", "no-repeat" )
+            , ( "background-size", "cover" )
+            ]
+        ]
+        []
