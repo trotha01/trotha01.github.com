@@ -8762,7 +8762,7 @@ var _user$project$Main$update = F2(
 	});
 var _user$project$Main$initProjects = {
 	ctor: '::',
-	_0: {title: 'Boxes and Bubles', description: 'Built on top of Jastice\'s library (also called boxes-and-bubbles); this is an exporation into collision detection with, as the name implies, boxes and bubbles.', link: 'https://github.com/trotha01/boxes-and-bubbles', coverImg: 'imgs/boxesandbubbles.png'},
+	_0: {title: 'Boxes and Bubbles', description: 'Built on top of Jastice\'s library (also called boxes-and-bubbles); this is an exporation into collision detection with, as the name implies, boxes and bubbles.', link: 'https://github.com/trotha01/boxes-and-bubbles', coverImg: 'imgs/boxesandbubbles.png'},
 	_1: {
 		ctor: '::',
 		_0: {title: 'Bee Game', description: 'Learn Spanish while traveling around the world as a bee.', link: 'https://github.com/trotha01/bee', coverImg: 'imgs/beegame.png'},

@@ -37,7 +37,7 @@ init =
 
 initProjects : List Project
 initProjects =
-    [ { title = "Boxes and Bubles"
+    [ { title = "Boxes and Bubbles"
       , description = "Built on top of Jastice's library (also called boxes-and-bubbles); this is an exporation into collision detection with, as the name implies, boxes and bubbles."
       , link = "https://github.com/trotha01/boxes-and-bubbles"
       , coverImg = "imgs/boxesandbubbles.png"

@@ -90,7 +90,7 @@ a {
 
 /* SECTION */
 section {
-  height: 95vh;
+  min-height: 95vh;
   margin: 5rem 3rem 3rem 3rem;
 }
 
@@ -146,8 +146,7 @@ section {
 /* RESUME */
 .resume--iframe {
   width: 95vw;
-  height: 80vh;
-  frameborder: 0;
+  height: 1100px;
 }
 
 /* CONTACT */
