@@ -8489,7 +8489,7 @@ var _user$project$Main$resumeSection = function (model) {
 								_0: _elm_lang$html$Html_Attributes$class('resume--iframe'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$src('https://docs.google.com/viewer?srcid=1ADJVDEkWIu0BQFGfS6JkJUUgS3mDyhh_lLsTslAUW0E&pid=explorer&efh=false&a=v&chrome=false&embedded=true'),
+									_0: _elm_lang$html$Html_Attributes$src('https://docs.google.com/document/d/e/2PACX-1vQDytJsvsbIXHn-DV6kGBz_maklGOq1nSdLegosyffbJDu5cayN0XE0xvCHq9hENblq0LMkXQGfGvas/pub?embedded=true'),
 									_1: {ctor: '[]'}
 								}
 							},
