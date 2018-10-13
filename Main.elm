@@ -1,12 +1,13 @@
-module Main exposing (..)
+module Main exposing (Model, Msg(..), Project, aboutSection, contactSection, footerSection, headerSection, init, initProjects, main, mainSection, navigationSection, parallax, projectsSection, resumeSection, subscriptions, update, view, viewProject)
 
+import Browser exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
 main =
-    Html.program
+    Browser.element
         { init = init
         , update = update
         , view = view
@@ -30,8 +31,12 @@ type alias Project =
     }
 
 
-init : ( Model, Cmd Msg )
-init =
+type alias Flags =
+    {}
+
+
+init : Flags -> ( Model, Cmd Msg )
+init flags =
     ( { projects = initProjects }, Cmd.none )
 
 
@@ -196,13 +201,11 @@ parallax : String -> Html Msg
 parallax image =
     div
         [ class "parallax"
-        , style
-            [ ( "background-image", """url(" """ ++ image ++ """ ")""" )
-            , ( "min-height", "500px" )
-            , ( "background-attachment", "fixed" )
-            , ( "background-position", "center" )
-            , ( "background-repeat", "no-repeat" )
-            , ( "background-size", "cover" )
-            ]
+        , style "background-image" ("""url(" """ ++ image ++ """ ")""")
+        , style "min-height" "500px"
+        , style "background-attachment" "fixed"
+        , style "background-position" "center"
+        , style "background-repeat" "no-repeat"
+        , style "background-size" "cover"
         ]
         []
