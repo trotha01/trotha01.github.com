@@ -122,7 +122,7 @@ initTitles =
 initProjects : List Project
 initProjects =
     [ { title = "Boxes and Bubbles"
-      , description = "An exporation into collision detection with, as the name implies, boxes and bubbles."
+      , description = "An exporation into collision detection."
       , link = "https://github.com/trotha01/boxes-and-bubbles"
       , coverImg = "imgs/boxesandbubbles.png"
       }
@@ -190,7 +190,7 @@ initEducation =
 initSkills : Skills
 initSkills =
     { csLanguages = [ "Golang", "Elm", "Javascript", "Html", "CSS", "Haskell", "Python", "Perl", "Ruby", "C", "C++", "Bash Script" ]
-    , other = [ "Mysql", "Linux", "Git", "Vim", "Chef", "Linux Tooling (ss, strace, ps, pgrep, ngrep, tcpdump, top, etc)" ]
+    , other = [ "Mysql", "Linux", "Git", "Vim", "Chef", "Linux Tooling (ss, strace, ps, pgrep, ngrep, tcpdump, top, etc)", "AWS" ]
     }
 
 
@@ -260,17 +260,19 @@ pages model =
         ]
         [ projects model
         , viewExperiences model
-        , div [] (List.map viewEducation model.education)
+        , div [ class "row page" ] (List.map viewEducation model.education)
         , technicalSkills model
-        , contact model
+        , viewContactInfo model
         ]
 
 
 viewExperiences : Model -> Html Msg
 viewExperiences model =
-    div [ class "page row" ]
-        [ h2 [] [ text "Experience" ]
-        , div [] (List.map viewExperience model.experience)
+    div [ class "row" ]
+        [ div [ class "page" ]
+            [ h2 [] [ text "Experience" ]
+            , div [] (List.map viewExperience model.experience)
+            ]
         ]
 
 
@@ -279,7 +281,9 @@ viewExperience experience =
     div []
         [ h3 [] [ text experience.title ]
         , div [ class "details" ] [ text experience.date ]
-        , ul [] (List.map viewExperienceTask experience.tasks)
+        , p []
+            [ ul [] (List.map viewExperienceTask experience.tasks)
+            ]
         ]
 
 
@@ -290,7 +294,7 @@ viewExperienceTask task =
 
 viewEducation : Education -> Html Msg
 viewEducation education =
-    div [ class "page row" ]
+    div []
         [ h2 [] [ text "Education" ]
         , h3 [] [ text education.school ]
         , div [ class "subheader" ] [ text education.graduation ]
@@ -305,15 +309,21 @@ technicalSkills : Model -> Html Msg
 technicalSkills model =
     div [ class "page row" ]
         [ h2 [] [ text "Technical Skills" ]
-        , div [] [ text <| "Languages: " ++ String.join ", " model.skills.csLanguages ]
-        , div [] [ text <| "Other: " ++ String.join ", " model.skills.other ]
+        , p []
+            [ div [ class "bold" ] [ text "Languages" ]
+            , div [] [ text <| String.join ", " model.skills.csLanguages ]
+            , br [] []
+            , div [ class "bold" ] [ text "Other" ]
+            , div [] [ text <| String.join ", " model.skills.other ]
+            ]
         ]
 
 
-contact : Model -> Html Msg
-contact model =
+viewContactInfo : Model -> Html Msg
+viewContactInfo model =
     div [ class "page row" ]
         [ h2 [] [ text "Contact" ]
+        , div [] [ text "trotha01 at gmail" ]
         ]
 
 

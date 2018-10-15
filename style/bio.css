@@ -15,7 +15,7 @@ body {
   letter-spacing: 0.1rem;
   line-height: 1.7rem;
   /* Snowflakes */
-  background-image: radial-gradient(hsl(229, 25%, 74%) 1px, transparent 2px), radial-gradient(hsl(229, 25%, 74%) 1px, transparent 2px), radial-gradient(hsl(229, 25%, 74%) 1px, transparent 2px), radial-gradient(hsl(229, 25%, 74%) 2px, transparent 3px), radial-gradient(hsl(229, 25%, 74%) 1px, transparent 3px), radial-gradient(hsl(229, 25%, 74%) 1px, transparent 3px), radial-gradient(hsl(229, 25%, 74%) 1px, transparent 3px);
+  background-image: radial-gradient(#acb2cd 1px, transparent 2px), radial-gradient(#acb2cd 1px, transparent 2px), radial-gradient(#acb2cd 1px, transparent 2px), radial-gradient(#acb2cd 2px, transparent 3px), radial-gradient(#acb2cd 1px, transparent 3px), radial-gradient(#acb2cd 1px, transparent 3px), radial-gradient(#acb2cd 1px, transparent 3px);
   background-size: 700px 660px;
   background-position: 1px 1px, 100px 155px, 10px 235px, 210px 320px, 10px 420px, 510px 520px, 110px 620px;
 }
@@ -29,6 +29,16 @@ h1 {
   margin-top: 0;
 }
 
+button {
+  width: 50px;
+  height: 50px;
+  color: white;
+  background-color: rgba(126, 16, 35, 0.8);
+  box-shadow: 4px 4px 2px black;
+  font-size: 2rem;
+  border-radius: 1rem;
+}
+
 .header {
   padding-top: 5rem;
 }
@@ -38,7 +48,10 @@ h1 {
 }
 
 .page {
-  padding-left: 5rem;
+  padding: 2rem 0 2rem 5rem;
+  margin-left: 5rem;
+  background-color: rgba(129, 193, 254, 0.5);
+  width: 80%;
 }
 
 .text {
@@ -79,23 +92,35 @@ h4 {
   margin-top: 0.1em;
 }
 
+p {
+  max-width: 40rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .project {
   /* size */
   min-width: 20rem;
   height: 10rem;
   margin: 1rem;
   padding: 0.5rem;
-  border-radius: 1px;
+  border-radius: 4px;
   /* position */
   float: left;
   /* border */
-  box-shadow: 0px 0px 3px hsl(214, 70%, 51%);
+  box-shadow: 7px 7px 2px black;
   /* text */
   color: white;
   text-align: left;
   /* background */
+  /*
   background-image: url(/imgs/biotexture.jpeg);
   background-size: cover;
+  */
+  background: #cecfcf;
+  cursor: pointer;
 }
 
 .project-background {
@@ -132,7 +157,7 @@ h4 {
 }
 
 .row:not(:last-child) {
-  margin-bottom: 8rem;
+  margin-bottom: 1rem;
 }
 
 .row::after {
