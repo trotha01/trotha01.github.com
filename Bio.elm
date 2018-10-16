@@ -259,11 +259,20 @@ pages model =
         , style "width" "100%"
         ]
         [ projects model
+        , viewResumeLink model
+
+        {--
         , viewExperiences model
         , div [ class "row page" ] (List.map viewEducation model.education)
         , technicalSkills model
+        --}
         , viewContactInfo model
         ]
+
+
+viewResumeLink : Model -> Html Msg
+viewResumeLink model =
+    button [ class "resumeButton" ] [ text "Resume" ]
 
 
 viewExperiences : Model -> Html Msg
@@ -411,10 +420,10 @@ viewSubTitle model =
 
 arrows : Model -> Html Msg
 arrows model =
-    div []
-        [ button [ class "button", Event.onClick LeftTitle ] [ leftArrow model ]
+    div [ class "arrows" ]
+        [ button [ class "leftArrow button", Event.onClick LeftTitle ] [ leftArrow model ]
         , text " . . . "
-        , button [ class "button", Event.onClick RightTitle ] [ rightArrow model ]
+        , button [ class "rightArrow button", Event.onClick RightTitle ] [ rightArrow model ]
         ]
 
 
