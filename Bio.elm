@@ -27,9 +27,6 @@ type alias Model =
     { viewport : Viewport
     , titles : Titles
     , projects : List Project
-    , experience : List Experience
-    , education : List Education
-    , skills : Skills
     }
 
 
@@ -51,33 +48,6 @@ type alias Project =
     }
 
 
-type alias Experience =
-    { title : String
-    , date : String
-    , tasks : List Task
-    }
-
-
-type alias Education =
-    { school : String
-    , graduation : String
-    , degree : String
-    , minor : String
-    , gpa : Float
-    , deansList : Bool
-    }
-
-
-type alias Skills =
-    { csLanguages : List String
-    , other : List String
-    }
-
-
-type alias Task =
-    { summary : String }
-
-
 type alias Flags =
     {}
 
@@ -87,9 +57,6 @@ init flags =
     ( { viewport = initViewport
       , titles = initTitles
       , projects = initProjects
-      , experience = initExperience
-      , education = initEducation
-      , skills = initSkills
       }
     , Task.perform InitialViewport getViewport
     )
@@ -142,56 +109,6 @@ initProjects =
       , coverImg = "imgs/treadmill.png"
       }
     ]
-
-
-initExperience : List Experience
-initExperience =
-    [ { title = "SendGrid Software Engineer"
-      , date = "June 2014 - Present"
-      , tasks =
-            [ { summary = "Created scalable, partition tolerant, and available systems for aggregating and storing marketing stats with at-most-once delivery, handling up to 45k events/s." }
-            , { summary = "Created a process that would stream data to Kafka on virtually every node in production to ensure a minimal amount of lost events, logs, and stats." }
-            , { summary = "Revamped SendGrid’s signup/upgrade/downgrade to be PCI compliant, user friendly, and scalable." }
-            , { summary = "Optimized our Database Abstraction Layer, used by nearly every service, to handle double the load." }
-            , { summary = "Presented at Golang meetups, Functional Programming meetups, as well as company brown bag events." }
-            ]
-      }
-    , { title = "DIRECTV Software Engineer Intern"
-      , date = "May - Aug 2013"
-      , tasks =
-            [ { summary = "Created scalable, partition tolerant, and available systems for aggregating and storing marketing stats with at-most-once delivery, handling up to 45k events/s." }
-            , { summary = "Created a process that would stream data to Kafka on virtually every node in production to ensure a minimal amount of lost events, logs, and stats." }
-            , { summary = "Revamped SendGrid’s signup/upgrade/downgrade to be PCI compliant, user friendly, and scalable." }
-            , { summary = "Optimized our Database Abstraction Layer, used by nearly every service, to handle double the load." }
-            ]
-      }
-    , { title = "DIRECTV Test Engineer Intern (Ultimate Staffing)"
-      , date = "May - Aug 2011/2012"
-      , tasks =
-            [ { summary = "Profiled and improved department automation tool, cutting it from an hour to a few seconds." }
-            , { summary = "Performed acceptance and regression testing on legacy and bleeding edge Set Top Box Products." }
-            ]
-      }
-    ]
-
-
-initEducation : List Education
-initEducation =
-    [ { school = "Tufts University"
-      , graduation = "May 2014"
-      , degree = "Bachelor of Sciences in Computer Science"
-      , minor = "Mathematics Minor"
-      , gpa = 3.52
-      , deansList = True
-      }
-    ]
-
-
-initSkills : Skills
-initSkills =
-    { csLanguages = [ "Golang", "Elm", "Javascript", "Html", "CSS", "Haskell", "Python", "Perl", "Ruby", "C", "C++", "Bash Script" ]
-    , other = [ "Mysql", "Linux", "Git", "Vim", "Chef", "Linux Tooling (ss, strace, ps, pgrep, ngrep, tcpdump, top, etc)", "AWS" ]
-    }
 
 
 
@@ -260,79 +177,15 @@ pages model =
         ]
         [ projects model
         , viewResumeLink model
-
-        {--
-        , viewExperiences model
-        , div [ class "row page" ] (List.map viewEducation model.education)
-        , technicalSkills model
-        --}
-        , viewContactInfo model
+        , br [] []
         ]
 
 
 viewResumeLink : Model -> Html Msg
 viewResumeLink model =
-    button [ class "resumeButton" ] [ text "Resume" ]
-
-
-viewExperiences : Model -> Html Msg
-viewExperiences model =
-    div [ class "row" ]
-        [ div [ class "page" ]
-            [ h2 [] [ text "Experience" ]
-            , div [] (List.map viewExperience model.experience)
-            ]
-        ]
-
-
-viewExperience : Experience -> Html Msg
-viewExperience experience =
-    div []
-        [ h3 [] [ text experience.title ]
-        , div [ class "details" ] [ text experience.date ]
-        , p []
-            [ ul [] (List.map viewExperienceTask experience.tasks)
-            ]
-        ]
-
-
-viewExperienceTask : Task -> Html Msg
-viewExperienceTask task =
-    li [] [ text task.summary ]
-
-
-viewEducation : Education -> Html Msg
-viewEducation education =
-    div []
-        [ h2 [] [ text "Education" ]
-        , h3 [] [ text education.school ]
-        , div [ class "subheader" ] [ text education.graduation ]
-        , div [] [ text education.degree ]
-        , div [] [ text ("Minor: " ++ education.minor) ]
-        , div [] [ text ("GPA: " ++ String.fromFloat education.gpa) ]
-        , div [] [ text "Dean's List" ]
-        ]
-
-
-technicalSkills : Model -> Html Msg
-technicalSkills model =
     div [ class "page row" ]
-        [ h2 [] [ text "Technical Skills" ]
-        , p []
-            [ div [ class "bold" ] [ text "Languages" ]
-            , div [] [ text <| String.join ", " model.skills.csLanguages ]
-            , br [] []
-            , div [ class "bold" ] [ text "Other" ]
-            , div [] [ text <| String.join ", " model.skills.other ]
-            ]
-        ]
-
-
-viewContactInfo : Model -> Html Msg
-viewContactInfo model =
-    div [ class "page row" ]
-        [ h2 [] [ text "Contact" ]
-        , div [] [ text "trotha01 at gmail" ]
+        [ button [ class "resumeButton" ]
+            [ text "Resume" ]
         ]
 
 
@@ -422,7 +275,6 @@ arrows : Model -> Html Msg
 arrows model =
     div [ class "arrows" ]
         [ button [ class "leftArrow button", Event.onClick LeftTitle ] [ leftArrow model ]
-        , text " . . . "
         , button [ class "rightArrow button", Event.onClick RightTitle ] [ rightArrow model ]
         ]
 

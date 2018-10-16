@@ -33,13 +33,13 @@ h1 {
   margin-top: 0;
 }
 
-resumeButton {
+.resumeButton {
+  cursor: pointer;
   height: 100%;
   color: white;
-  /* background-color: $accent-color; */
-  box-shadow: 4px 4px 2px black;
-  font-size: 2rem;
-  border-radius: 1rem;
+  background-color: #7390ce;
+  box-shadow: 1px 1px 1px black;
+  font-size: 1.5rem;
 }
 
 .header {
@@ -158,7 +158,7 @@ p {
   background-image: url(/imgs/biotexture.jpeg);
   background-size: cover;
   */
-  background: #cecfcf;
+  background: #66a8ff;
   cursor: pointer;
 }
 
@@ -196,7 +196,7 @@ p {
 }
 
 .row:not(:last-child) {
-  margin-bottom: 0rem;
+  margin-bottom: 6rem;
 }
 
 .row::after {

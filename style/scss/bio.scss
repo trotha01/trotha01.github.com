@@ -47,15 +47,15 @@ h1 {
 $shadow-color: black;
 $midtone-color: hsla(221, 48%, 63%, 1);
 $highlight-color: hsl(180, 92%, 81%);
-$accent-color: hsla(350, 77%, 28%, 0.8);
+$accent-color: hsla(214, 100%, 70%, 1);
 
-resumeButton {
+.resumeButton {
+  cursor: pointer;
   height: 100%;
   color: white;
-  /* background-color: $accent-color; */
-  box-shadow: 4px 4px 2px $shadow-color;
-  font-size: 2rem;
-  border-radius: 1rem;
+  background-color: $midtone-color;
+  box-shadow: 1px 1px 1px $shadow-color;
+  font-size: 1.5rem;
 }
 
 .header {
@@ -171,7 +171,7 @@ p {
   float: left;
 
   /* border */
-  box-shadow: 7px 7px 2px black;
+  box-shadow: 7px 7px 2px $shadow-color;
 
   /* text */
   text-align: left;
@@ -181,7 +181,7 @@ p {
   background-image: url(/imgs/biotexture.jpeg);
   background-size: cover;
   */
-  background: hsl(180, 1%, 81%);
+  background: $accent-color;
 
   cursor: pointer;
 }
@@ -219,7 +219,7 @@ p {
   max-width: 100%;
 }
 .row:not(:last-child) {
-  margin-bottom: 0rem;
+  margin-bottom: 6rem;
 }
 .row::after {
   content: "";
