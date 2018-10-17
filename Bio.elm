@@ -43,8 +43,11 @@ type alias Title =
 type alias Project =
     { title : String
     , description : String
-    , link : String
+    , srcLink : String
+    , playLink : String
     , coverImg : String
+    , hovering : Bool
+    , playing : Bool
     }
 
 
@@ -90,23 +93,51 @@ initProjects : List Project
 initProjects =
     [ { title = "Boxes and Bubbles"
       , description = "An exporation into collision detection."
-      , link = "https://github.com/trotha01/boxes-and-bubbles"
+      , srcLink = "https://github.com/trotha01/boxes-and-bubbles"
+      , playLink = "https://trotha01.github.io/boxes-and-bubbles"
       , coverImg = "imgs/boxesandbubbles.png"
+      , hovering = False
+      , playing = False
       }
-    , { title = "Bee Game"
-      , description = "Learn Spanish while traveling around the world as a bee."
-      , link = "https://github.com/trotha01/bee"
-      , coverImg = "imgs/beegame.png"
+    , { title = "Noah's Ark"
+      , description = "Playing around with physics"
+      , srcLink = "https://github.com/trotha01/elm-noahsark"
+      , playLink = "https://trotha01.github.io/elm-noahsark"
+      , coverImg = "imgs/noahsark.png"
+      , hovering = False
+      , playing = False
+      }
+    , { title = "Snake"
+      , description = "Implementing snake in elm"
+      , srcLink = "https://github.com/trotha01/elm-snake"
+      , playLink = "https://trotha01.github.io/elm-snake"
+      , coverImg = "imgs/snake.png"
+      , hovering = False
+      , playing = False
       }
     , { title = "Safety Bubble"
       , description = "Elm February Game Jam Result"
-      , link = "https://github.com/trotha01/safetybubble"
+      , srcLink = "https://github.com/trotha01/safetybubble"
+      , playLink = "https://trotha01.github.io/safetybubble"
       , coverImg = "imgs/safetybubble.png"
+      , hovering = False
+      , playing = False
+      }
+    , { title = "Bee Game"
+      , description = "Learn Spanish while traveling around the world as a bee."
+      , srcLink = "https://github.com/trotha01/bee"
+      , playLink = "https://trotha01.github.io/bee"
+      , coverImg = "imgs/beegame.png"
+      , hovering = False
+      , playing = False
       }
     , { title = "Treadmill"
       , description = "Practice your spanish while making a cake."
-      , link = "https://github.com/trotha01/treadmill"
+      , srcLink = "https://github.com/trotha01/treadmill"
+      , playLink = "https://trotha01.github.io/treadmill"
       , coverImg = "imgs/treadmill.png"
+      , hovering = False
+      , playing = False
       }
     ]
 
@@ -120,6 +151,7 @@ type Msg
     | Resize Int Int
     | LeftTitle
     | RightTitle
+    | PlayProject Project
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -137,10 +169,31 @@ update msg model =
         RightTitle ->
             ( model |> mapTitles nextTitle, Cmd.none )
 
+        PlayProject project ->
+            ( model |> mapProjects (playProject project), Cmd.none )
+
 
 mapTitles : (Titles -> Titles) -> Model -> Model
 mapTitles f model =
     { model | titles = f model.titles }
+
+
+mapProjects : (List Project -> List Project) -> Model -> Model
+mapProjects f model =
+    { model | projects = f model.projects }
+
+
+playProject : Project -> List Project -> List Project
+playProject project projects =
+    List.map
+        (\p ->
+            if p.title == project.title then
+                { p | playing = True }
+
+            else
+                { p | playing = False }
+        )
+        projects
 
 
 nextTitle : Titles -> Titles
@@ -173,9 +226,9 @@ pages model =
     div
         [ style "position" "absolute"
         , style "top" (px model.viewport.viewport.height)
-        , style "width" "100%"
+        , style "max-width" "100%"
         ]
-        [ projects model
+        [ viewProjects model
         , viewResumeLink model
         , br [] []
         ]
@@ -189,23 +242,54 @@ viewResumeLink model =
         ]
 
 
-projects : Model -> Html Msg
-projects model =
+viewProjects : Model -> Html Msg
+viewProjects model =
     div [ class "page row" ]
         [ h2 [] [ text "Projects" ]
-        , div [] (List.map viewProject model.projects)
+        , div [ class "project-list" ] (List.map viewProject model.projects)
+
+        {--
+         viewGame model.viewport model.projects
+         --}
         ]
 
 
 viewProject : Project -> Html Msg
 viewProject project =
-    div [ class "project col-1-of-3" ]
-        [ a [ class "project-button", href project.link, target "_blank" ]
+    a [ class "project", href project.playLink, target "_blank" ]
+        [ div [ class "project-button" ]
             [ div [] [ img [ class "project-image", src project.coverImg ] [] ]
             , h3 [ class "heading-tertiary" ] [ text project.title ]
-            , text project.description
             ]
         ]
+
+
+viewGame : Viewport -> List Project -> Html Msg
+viewGame viewport projects =
+    let
+        activeProject =
+            projects
+                |> List.filter (\p -> p.playing)
+                |> List.head
+    in
+    case activeProject of
+        Nothing ->
+            div [] []
+
+        Just project ->
+            div [ class "row" ]
+                [ div
+                    [ class "game-frame"
+                    , style "height" (px viewport.viewport.height)
+                    ]
+                    [ iframe
+                        [ src project.playLink
+                        , style "height" "100%"
+                        , style "width" "100%"
+                        ]
+                        []
+                    ]
+                ]
 
 
 projectBackground : Html Msg
@@ -240,9 +324,7 @@ header model =
 headerText : Model -> Html Msg
 headerText model =
     div
-        [ class "text"
-        , style "width" "100%"
-        ]
+        [ class "text" ]
         [ viewTitles model
         , arrows model
         ]

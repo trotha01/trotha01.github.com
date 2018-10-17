@@ -47,7 +47,7 @@ h1 {
 $shadow-color: black;
 $midtone-color: hsla(221, 48%, 63%, 1);
 $highlight-color: hsl(180, 92%, 81%);
-$accent-color: hsla(214, 100%, 70%, 1);
+$accent-color: hsla(213, 24%, 33%, 1);
 
 .resumeButton {
   cursor: pointer;
@@ -159,16 +159,23 @@ p {
   font-weight: bold;
 }
 
+.project-list {
+  overflow-x: hidden;
+  overflow: auto;
+  height: 13rem;
+  white-space: nowrap;
+}
+
 .project {
+  /* display */
+  display: inline-block;
+
   /* size */
-  min-width: 20rem;
+  width: 20rem;
   height: 10rem;
   margin: 1rem;
   padding: 0.5rem;
   border-radius: 4px;
-
-  /* position */
-  float: left;
 
   /* border */
   box-shadow: 7px 7px 2px $shadow-color;
@@ -205,18 +212,23 @@ p {
 }
 
 .project-image {
-   height: 8rem;
-   width: 8rem;
+   height: 4rem;
+   width: 4rem;
    margin-right: 2rem;
    border: 1px solid grey;
    float: left;
    border-radius: 6rem;
 }
 
+.game-frame {
+  padding: 0 10rem 10rem 0;
+}
+
 /* COMMON */
 .row {
   /*width: 100%;*/
   max-width: 100%;
+  box-sizing: border-box;
 }
 .row:not(:last-child) {
   margin-bottom: 6rem;
@@ -240,6 +252,10 @@ p {
 }
 .row .col-2-of-3 {
   width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem);
+}
+.row .col-3-of-3 {
+  width: 100%;
+  transition: 2s;
 }
 .row .col-1-of-4 {
   width: calc((100% - 3 * 6rem) / 4);
