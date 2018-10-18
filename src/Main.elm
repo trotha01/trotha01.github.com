@@ -302,11 +302,6 @@ viewGame viewport projects =
                 ]
 
 
-projectBackground : Html Msg
-projectBackground =
-    div [ class "project-background" ] []
-
-
 headerRow : Model -> Html Msg
 headerRow model =
     div [ class "row" ]

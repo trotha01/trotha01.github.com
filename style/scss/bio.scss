@@ -3,16 +3,9 @@
     src: url("fonts/Berkshire Swash regular.ttf");
 }
 
-@font-face {
-    font-family: MagicMedieval;
-    src: url("/style/fonts/WizardsMagic.ttf");
-    /*src: url("/style/fonts/MagicMedieval.ttf");*/
-}
-
 body {
   padding: 0;
   margin: 0;
-  /* background-color: #131416;*/
   background-color: white;
 
   /* font */
@@ -21,18 +14,6 @@ body {
   line-height: 1.7rem;
   font-family: sans-serif;
   font-weight: 200;
-
-  /* Snowflakes */
-  background-image:
-  radial-gradient(hsl(229,25%,74%) 1px, transparent 2px),
-  radial-gradient(hsl(229,25%,74%) 1px, transparent 2px),
-  radial-gradient(hsl(229,25%,74%) 1px, transparent 2px),
-  radial-gradient(hsl(229,25%,74%) 2px, transparent 3px),
-  radial-gradient(hsl(229,25%,74%) 1px, transparent 3px),
-  radial-gradient(hsl(229,25%,74%) 1px, transparent 3px),
-  radial-gradient(hsl(229,25%,74%) 1px, transparent 3px);
-  background-size: 700px 660px;
-  background-position: 1px 1px, 100px 155px, 10px 235px, 210px 320px, 10px 420px, 510px 520px, 110px 620px;
 }
 
 h1 {
@@ -69,7 +50,6 @@ $accent-color: hsla(213, 24%, 33%, 1);
 .page {
   padding: 0rem 0 0rem 0rem;
   margin-left: 0rem;
-  /*background-color: $midtone-color; */
   width:100%;
   padding-left: 5rem;
 }
@@ -134,9 +114,7 @@ ul {
 }
 
 h2 {
-  /*color: white;*/
   font-size: 2em;
-
   font-family: sans-serif;
   font-weight: 200;
   letter-spacing: 7px;
@@ -193,20 +171,9 @@ p {
   text-align: left;
 
   /* background */
-  /*
-  background-image: url(/imgs/biotexture.jpeg);
-  background-size: cover;
-  */
   background: $accent-color;
 
   cursor: pointer;
-}
-
-.project-background {
-  background: url(/imgs/biotexture.jpeg) 10px 10px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
 }
 
 .project-content {
@@ -235,7 +202,6 @@ p {
 
 /* COMMON */
 .row {
-  /*width: 100%;*/
   max-width: 100%;
   box-sizing: border-box;
 }
