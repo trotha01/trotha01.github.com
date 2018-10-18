@@ -224,9 +224,7 @@ view model =
 pages : Model -> Html Msg
 pages model =
     div
-        [ style "position" "absolute"
-        , style "top" (px model.viewport.viewport.height)
-        , style "max-width" "100%"
+        [ style "max-width" "100%"
         ]
         [ viewProjects model
         , viewContact model
@@ -251,7 +249,6 @@ viewProjects model =
             [ class "project-list"
             ]
             (List.map viewProject model.projects)
-        , div [ class "project-tail" ] []
 
         {--
          viewGame model.viewport model.projects
@@ -318,7 +315,7 @@ header model =
     div
         [ class "header"
         , style "background-image" ("linear-gradient(transparent 80%, #131416), url(imgs/" ++ img ++ ")")
-        , style "min-height" "500px"
+        , style "height" (px (model.viewport.viewport.height - 35))
         , style "background-position" "center"
         , style "background-repeat" "no-repeat"
         , style "background-size" "cover"
@@ -332,12 +329,18 @@ headerText model =
         [ class "text" ]
         [ viewTitles model
         , arrows model
+        , downArrow model
         ]
 
 
 viewTitles : Model -> Html Msg
 viewTitles model =
-    div [ class "row" ]
+    div
+        [ class "titles row"
+        , style "position" "absolute"
+        , style "top" <| px (model.viewport.viewport.height / 5)
+        , style "left" "5rem"
+        ]
         [ viewTitle model
         , viewSubTitle model
         ]
@@ -360,9 +363,40 @@ viewSubTitle model =
 
 arrows : Model -> Html Msg
 arrows model =
-    div [ class "arrows" ]
-        [ button [ class "leftArrow button", Event.onClick LeftTitle ] [ leftArrow model ]
-        , button [ class "rightArrow button", Event.onClick RightTitle ] [ rightArrow model ]
+    div [ class "arrows row" ]
+        [ button
+            [ class "arrow leftArrow button"
+            , style "position" "absolute"
+            , style "top" <| px ((model.viewport.viewport.height / 5) + 20)
+            , Event.onClick LeftTitle
+            ]
+            [ leftArrow model ]
+        , button
+            [ class "arrow rightArrow button"
+            , style "position" "absolute"
+            , style "top" <| px ((model.viewport.viewport.height / 5) + 20)
+            , Event.onClick RightTitle
+            ]
+            [ rightArrow model ]
+        ]
+
+
+downArrow : Model -> Html Msg
+downArrow model =
+    div
+        [ class "down-arrow"
+        , style "position" "absolute"
+        , style "bottom" "0"
+        , style "left" <| px (model.viewport.viewport.width / 2)
+        , style "transform" "translate(-50%, 40%)"
+        ]
+        [ img
+            [ {--src "imgs/arrow.svg"--}
+              src "imgs/down-arrow-24px.svg"
+            , width 100
+            , height 100
+            ]
+            []
         ]
 
 

@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 sass style/scss/bio.scss style/bio.css
+elm make --optimize src/Main.elm

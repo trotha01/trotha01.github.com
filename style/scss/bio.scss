@@ -3,6 +3,12 @@
     src: url("fonts/Berkshire Swash regular.ttf");
 }
 
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -39,10 +45,6 @@ $accent-color: hsla(213, 24%, 33%, 1);
   font-size: 1.5rem;
 }
 
-.header {
-  padding-top: 5rem;
-}
-
 .button {
   cursor: pointer;
 }
@@ -61,10 +63,9 @@ $accent-color: hsla(213, 24%, 33%, 1);
   height: 100%;
   width: 100%;
 
-  .leftArrow {
+  .arrow {
     position: absolute;
     top: 0;
-    left: 0;
     height: 100%;
     width: 10rem;
     background-color: transparent;
@@ -73,22 +74,16 @@ $accent-color: hsla(213, 24%, 33%, 1);
     user-select: none;
     outline: none;
     color: white;
-    font-size: 2rem;
+    font-size: 7rem;
+    font-weight: 100;
+  }
+
+  .leftArrow {
+    left: 0;
   }
 
   .rightArrow {
-    position: absolute;
-    top: 0;
     right: 0;
-    height: 100%;
-    width: 10rem;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    user-select: none;
-    outline: none;
-    color: white;
-    font-size: 2rem;
   }
 }
 
@@ -142,15 +137,6 @@ p {
   overflow: auto;
   height: 13rem;
   white-space: nowrap;
-}
-
-.project-tail {
-  position:absolute;
-  top: 0;
-  right: 0;
-  width: 7rem;
-  height: 20rem;
-  background: linear-gradient(-72deg, white 50%, transparent 50%);
 }
 
 .project {
