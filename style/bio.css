@@ -147,11 +147,20 @@ p {
   white-space: nowrap;
 }
 
+.project-tail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 7rem;
+  height: 20rem;
+  background: linear-gradient(-72deg, white 50%, transparent 50%);
+}
+
 .project {
   /* display */
   display: inline-block;
   /* size */
-  width: 20rem;
+  width: 18rem;
   height: 10rem;
   margin: 1rem;
   padding: 0.5rem;

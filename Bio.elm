@@ -229,16 +229,17 @@ pages model =
         , style "max-width" "100%"
         ]
         [ viewProjects model
-        , viewResumeLink model
+        , viewContact model
         , br [] []
         ]
 
 
-viewResumeLink : Model -> Html Msg
-viewResumeLink model =
+viewContact : Model -> Html Msg
+viewContact model =
     div [ class "page row" ]
-        [ button [ class "resumeButton" ]
-            [ text "Resume" ]
+        [ h2 [] [ text "Contact" ]
+        , div []
+            [ text "trotha01 at gmail" ]
         ]
 
 
@@ -246,12 +247,21 @@ viewProjects : Model -> Html Msg
 viewProjects model =
     div [ class "page row" ]
         [ h2 [] [ text "Projects" ]
-        , div [ class "project-list" ] (List.map viewProject model.projects)
+        , div
+            [ class "project-list"
+            ]
+            (List.map viewProject model.projects)
+        , div [ class "project-tail" ] []
 
         {--
          viewGame model.viewport model.projects
          --}
         ]
+
+
+remFromInt : Int -> String
+remFromInt x =
+    String.fromInt x ++ "rem"
 
 
 viewProject : Project -> Html Msg
