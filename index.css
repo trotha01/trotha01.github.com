@@ -34,7 +34,7 @@ a {
 .header {
   height: 95vh;
 }
-    
+
 /* HEADING-PRIMARY */
 .heading-primary {
   position: absolute;
@@ -55,7 +55,7 @@ a {
   animation-duration: 1s;
   animation-timing-function: ease-out;
 }
-    
+
 .heading-primary--sub1, .heading-primary--sub2 {
   display: block;
   font-size: 2rem;
@@ -140,7 +140,7 @@ section {
    margin-right: 2rem;
    border: 1px solid grey;
    float: left;
-   border-radius: 6rem;
+   border-radius: 1rem;
 }
 
 /* RESUME */
