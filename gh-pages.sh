@@ -2,11 +2,11 @@
 set -e
 
 # compile
-elm make Main.elm --yes --output=elm.js
+elm make src/Main.elm
 
-# remove elm.js from .gitignore
+# remove index.html from .gitignore
 # compatible with both GNU and BSD/Mac sed
-sed -i.bak '/elm.js/d' .gitignore
+sed -i.bak '/index.html/d' .gitignore
 rm .gitignore.bak
 
 echo "ls"
@@ -20,4 +20,4 @@ git checkout -b gh-pages
 git add .
 git status
 git commit -m "Deploy to GitHub Pages [skip ci]"
-git push --force "https://${GITHUB_TOKEN}@github.com/trotha01/trotha01.github.com.git" gh-pages
+git push --force "https://${GITHUB_TOKEN}@github.com/trotha01/elm-snake.git" gh-pages
