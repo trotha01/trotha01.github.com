@@ -20,4 +20,4 @@ git checkout -b gh-pages
 git add .
 git status
 git commit -m "Deploy to GitHub Pages [skip ci]"
-git push --force "https://${GITHUB_TOKEN}@github.com/trotha01/elm-snake.git" gh-pages
+git push --force "https://${GITHUB_TOKEN}@github.com/trotha01/trotha01.github.com" gh-pages
