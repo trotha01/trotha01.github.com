@@ -246,9 +246,11 @@ viewProjects model =
     div [ class "page row" ]
         [ h2 [] [ text "Projects" ]
         , div
-            [ class "project-list"
+            [ class "project-list-wrapper"
             ]
-            (List.map viewProject model.projects)
+            [ div [ class "project-list" ]
+                (List.map viewProject model.projects)
+            ]
 
         {--
          viewGame model.viewport model.projects
@@ -265,8 +267,11 @@ viewProject : Project -> Html Msg
 viewProject project =
     a [ class "project", href project.playLink, target "_blank" ]
         [ div [ class "project-button" ]
-            [ div [] [ img [ class "project-image", src project.coverImg ] [] ]
-            , h3 [ class "heading-tertiary" ] [ text project.title ]
+            [ div [ class "col-1-of-5" ] [ img [ class "project-image", src project.coverImg ] [] ]
+            , div [ class "col-4-of-5" ]
+                [ h3 [ class "heading-tertiary" ] [ text project.title ]
+                , p [ class "project-descriotion" ] [ text project.description ]
+                ]
             ]
         ]
 
