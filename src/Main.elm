@@ -6,6 +6,7 @@ import Browser.Events exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events as Event exposing (..)
+import Json.Decode as Decode exposing (Decoder)
 import List.Zipper as Zipper exposing (..)
 import Task
 
@@ -152,6 +153,9 @@ type Msg
     | LeftTitle
     | RightTitle
     | PlayProject Project
+    | Tick Float
+    | NewViewport Viewport
+    | NoOp
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -171,6 +175,54 @@ update msg model =
 
         PlayProject project ->
             ( model |> mapProjects (playProject project), Cmd.none )
+
+        Tick _ ->
+            ( model, Task.perform NewViewport Browser.Dom.getViewport )
+
+        NewViewport viewport ->
+            ( { model | viewport = viewport }, scrollProjects viewport model )
+
+        NoOp ->
+            ( model, Cmd.none )
+
+
+scrollProjects : Viewport -> Model -> Cmd Msg
+scrollProjects viewport model =
+    if didScrollDown model.viewport viewport then
+        scrollRight "project-list"
+
+    else if didScrollUp model.viewport viewport then
+        scrollLeft "project-list"
+
+    else
+        Cmd.none
+
+
+didScrollUp : Viewport -> Viewport -> Bool
+didScrollUp oldViewport newViewport =
+    newViewport.viewport.y < oldViewport.viewport.y
+
+
+didScrollDown : Viewport -> Viewport -> Bool
+didScrollDown oldViewport newViewport =
+    newViewport.viewport.y > oldViewport.viewport.y
+
+
+scrollRight : String -> Cmd Msg
+scrollRight id =
+    scroll id 2
+
+
+scrollLeft : String -> Cmd Msg
+scrollLeft id =
+    scroll id -2
+
+
+scroll : String -> Float -> Cmd Msg
+scroll id x =
+    Browser.Dom.getViewportOf id
+        |> Task.andThen (\info -> Browser.Dom.setViewportOf id (info.viewport.x + x) info.viewport.y)
+        |> Task.attempt (\_ -> NoOp)
 
 
 mapTitles : (Titles -> Titles) -> Model -> Model
@@ -248,7 +300,13 @@ viewProjects model =
         , div
             [ class "project-list-wrapper"
             ]
-            [ div [ class "project-list" ]
+            [ div
+                [ class "project-list"
+                , id "project-list"
+
+                -- , style "position" "relative"
+                -- , style "left" (px <| scaleProjectScroll <| 0 - model.viewport.viewport.y)
+                ]
                 (List.map viewProject model.projects)
             ]
 
@@ -256,6 +314,11 @@ viewProjects model =
          viewGame model.viewport model.projects
          --}
         ]
+
+
+scaleProjectScroll : Float -> Float
+scaleProjectScroll x =
+    x / 2
 
 
 remFromInt : Int -> String
@@ -440,4 +503,7 @@ px x =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Browser.Events.onResize Resize
+    Sub.batch
+        [ Browser.Events.onResize Resize
+        , Browser.Events.onAnimationFrameDelta Tick
+        ]
