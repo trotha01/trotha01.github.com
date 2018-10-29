@@ -2653,7 +2653,7 @@ var _VirtualDom_mapEventTuple = F2(function(func, tuple)
 var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
-		p: func(record.p),
+		q: func(record.q),
 		V: record.V,
 		T: record.T
 	}
@@ -2923,7 +2923,7 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 		// 3 = Custom
 
 		var value = result.a;
-		var message = !tag ? value : tag < 3 ? value.a : value.p;
+		var message = !tag ? value : tag < 3 ? value.a : value.q;
 		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.V;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
@@ -4385,12 +4385,12 @@ var elm$core$Set$toList = function (_n0) {
 };
 var author$project$Main$initProjects = _List_fromArray(
 	[
-		{o: 'imgs/boxesandbubbles.png', s: 'An exporation into collision detection.', v: false, l: 'https://trotha01.github.io/boxes-and-bubbles', i: false, y: 'https://github.com/trotha01/boxes-and-bubbles', j: 'Boxes and Bubbles'},
-		{o: 'imgs/noahsark.png', s: 'Playing around with physics', v: false, l: 'https://trotha01.github.io/elm-noahsark', i: false, y: 'https://github.com/trotha01/elm-noahsark', j: 'Noah\'s Ark'},
-		{o: 'imgs/snake.png', s: 'Implementing snake in elm', v: false, l: 'https://trotha01.github.io/elm-snake', i: false, y: 'https://github.com/trotha01/elm-snake', j: 'Snake'},
-		{o: 'imgs/safetybubble.png', s: 'Elm February Game Jam Result', v: false, l: 'https://trotha01.github.io/safetybubble', i: false, y: 'https://github.com/trotha01/safetybubble', j: 'Safety Bubble'},
-		{o: 'imgs/beegame.png', s: 'Learn Spanish while traveling around the world as a bee.', v: false, l: 'https://trotha01.github.io/bee', i: false, y: 'https://github.com/trotha01/bee', j: 'Bee Game'},
-		{o: 'imgs/treadmill.png', s: 'Practice your spanish while making a cake.', v: false, l: 'https://trotha01.github.io/treadmill', i: false, y: 'https://github.com/trotha01/treadmill', j: 'Treadmill'}
+		{o: 'imgs/boxesandbubbles.png', p: 'An exporation into collision detection.', v: false, l: 'https://trotha01.github.io/boxes-and-bubbles', i: false, y: 'https://github.com/trotha01/boxes-and-bubbles', j: 'Boxes and Bubbles'},
+		{o: 'imgs/noahsark.png', p: 'Playing around with physics', v: false, l: 'https://trotha01.github.io/elm-noahsark', i: false, y: 'https://github.com/trotha01/elm-noahsark', j: 'Noah\'s Ark'},
+		{o: 'imgs/snake.png', p: 'Implementing snake in elm', v: false, l: 'https://trotha01.github.io/elm-snake', i: false, y: 'https://github.com/trotha01/elm-snake', j: 'Snake'},
+		{o: 'imgs/safetybubble.png', p: 'Elm February Game Jam Result', v: false, l: 'https://trotha01.github.io/safetybubble', i: false, y: 'https://github.com/trotha01/safetybubble', j: 'Safety Bubble'},
+		{o: 'imgs/beegame.png', p: 'Learn Spanish while traveling around the world as a bee.', v: false, l: 'https://trotha01.github.io/bee', i: false, y: 'https://github.com/trotha01/bee', j: 'Bee Game'},
+		{o: 'imgs/treadmill.png', p: 'Practice your spanish while making a cake.', v: false, l: 'https://trotha01.github.io/treadmill', i: false, y: 'https://github.com/trotha01/treadmill', j: 'Treadmill'}
 	]);
 var elm$core$Basics$apR = F2(
 	function (x, f) {
@@ -6021,6 +6021,7 @@ var author$project$Main$viewContact = function (model) {
 };
 var elm$html$Html$a = _VirtualDom_node('a');
 var elm$html$Html$h3 = _VirtualDom_node('h3');
+var elm$html$Html$p = _VirtualDom_node('p');
 var elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		elm$html$Html$Attributes$stringProperty,
@@ -6049,7 +6050,10 @@ var author$project$Main$viewProject = function (project) {
 					[
 						A2(
 						elm$html$Html$div,
-						_List_Nil,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('col-1-of-5')
+							]),
 						_List_fromArray(
 							[
 								A2(
@@ -6062,14 +6066,33 @@ var author$project$Main$viewProject = function (project) {
 								_List_Nil)
 							])),
 						A2(
-						elm$html$Html$h3,
+						elm$html$Html$div,
 						_List_fromArray(
 							[
-								elm$html$Html$Attributes$class('heading-tertiary')
+								elm$html$Html$Attributes$class('col-4-of-5')
 							]),
 						_List_fromArray(
 							[
-								elm$html$Html$text(project.j)
+								A2(
+								elm$html$Html$h3,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('heading-tertiary')
+									]),
+								_List_fromArray(
+									[
+										elm$html$Html$text(project.j)
+									])),
+								A2(
+								elm$html$Html$p,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('project-descriotion')
+									]),
+								_List_fromArray(
+									[
+										elm$html$Html$text(project.p)
+									]))
 							]))
 					]))
 			]));
@@ -6094,9 +6117,18 @@ var author$project$Main$viewProjects = function (model) {
 				elm$html$Html$div,
 				_List_fromArray(
 					[
-						elm$html$Html$Attributes$class('project-list')
+						elm$html$Html$Attributes$class('project-list-wrapper')
 					]),
-				A2(elm$core$List$map, author$project$Main$viewProject, model.L))
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('project-list')
+							]),
+						A2(elm$core$List$map, author$project$Main$viewProject, model.L))
+					]))
 			]));
 };
 var elm$html$Html$br = _VirtualDom_node('br');

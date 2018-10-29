@@ -115,35 +115,47 @@ h4 {
 
 p {
   max-width: 40rem;
+  white-space: normal;
 }
 
 .bold {
   font-weight: bold;
 }
 
-.project-list {
+.project-list-wrapper {
+  overflow-y: hidden;
   overflow-x: hidden;
-  overflow: auto;
-  height: 13rem;
+}
+
+.project-list {
+  overflow-y: hidden;
+  overflow-x: auto;
+  height: 25rem;
   white-space: nowrap;
 }
 
 .project {
   /* display */
   display: inline-block;
+  overflow: hidden;
   /* size */
-  width: 18rem;
-  height: 10rem;
+  width: 25rem;
+  height: 20rem;
   margin: 1rem;
-  padding: 0.5rem;
+  padding: 1.5rem;
   border-radius: 4px;
   /* border */
   box-shadow: 7px 7px 2px black;
   /* text */
   text-align: left;
+  text-decoration: none;
   /* background */
   background: #405268;
   cursor: pointer;
+}
+
+.project-header {
+  margin-bottom: 1rem !important;
 }
 
 .project-content {
@@ -158,8 +170,8 @@ p {
 }
 
 .project-image {
-  height: 4rem;
-  width: 4rem;
+  height: 5rem;
+  width: 5rem;
   margin-right: 2rem;
   border: 1px solid grey;
   float: left;
