@@ -303,9 +303,6 @@ viewProjects model =
             [ div
                 [ class "project-list"
                 , id "project-list"
-
-                -- , style "position" "relative"
-                -- , style "left" (px <| scaleProjectScroll <| 0 - model.viewport.viewport.y)
                 ]
                 (List.map viewProject model.projects)
             ]
