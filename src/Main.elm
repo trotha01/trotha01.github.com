@@ -280,13 +280,12 @@ pages model =
         ]
         [ viewProjects model
         , viewContact model
-        , br [] []
         ]
 
 
 viewContact : Model -> Html Msg
 viewContact model =
-    div [ class "page row" ]
+    div [ class "page row contact-row" ]
         [ h2 [] [ text "Contact" ]
         , div []
             [ text "trotha01 at gmail" ]

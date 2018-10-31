@@ -6210,7 +6210,7 @@ var author$project$Main$viewContact = function (model) {
 		elm$html$Html$div,
 		_List_fromArray(
 			[
-				elm$html$Html$Attributes$class('page row')
+				elm$html$Html$Attributes$class('page row contact-row')
 			]),
 		_List_fromArray(
 			[
@@ -6344,7 +6344,6 @@ var author$project$Main$viewProjects = function (model) {
 					]))
 			]));
 };
-var elm$html$Html$br = _VirtualDom_node('br');
 var author$project$Main$pages = function (model) {
 	return A2(
 		elm$html$Html$div,
@@ -6355,8 +6354,7 @@ var author$project$Main$pages = function (model) {
 		_List_fromArray(
 			[
 				author$project$Main$viewProjects(model),
-				author$project$Main$viewContact(model),
-				A2(elm$html$Html$br, _List_Nil, _List_Nil)
+				author$project$Main$viewContact(model)
 			]));
 };
 var author$project$Main$view = function (model) {
