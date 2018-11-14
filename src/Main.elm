@@ -28,7 +28,13 @@ type alias Model =
     { viewport : Viewport
     , titles : Titles
     , projects : List Project
+    , highlighting : Maybe Highlightable
     }
+
+
+type Highlightable
+    = LeftArrow
+    | RightArrow
 
 
 type alias Titles =
@@ -61,6 +67,7 @@ init flags =
     ( { viewport = initViewport
       , titles = initTitles
       , projects = initProjects
+      , highlighting = Nothing
       }
     , Task.perform InitialViewport getViewport
     )
@@ -125,13 +132,18 @@ initProjects =
       , playing = False
       }
     , { title = "Bee Game"
-      , description = "Learn Spanish while traveling around the world as a bee."
+      , description = "Playing with screenpusher rpg"
       , srcLink = "https://github.com/trotha01/bee"
       , playLink = "https://trotha01.github.io/bee"
       , coverImg = "imgs/beegame.png"
       , hovering = False
       , playing = False
       }
+    ]
+
+
+
+{--
     , { title = "Treadmill"
       , description = "Practice your spanish while making a cake."
       , srcLink = "https://github.com/trotha01/treadmill"
@@ -141,9 +153,7 @@ initProjects =
       , playing = False
       }
     ]
-
-
-
+    --}
 -- UPDATE
 
 
@@ -155,6 +165,8 @@ type Msg
     | PlayProject Project
     | Tick Float
     | NewViewport Viewport
+    | Highlight Highlightable
+    | Unhighlight Highlightable
     | NoOp
 
 
@@ -168,10 +180,10 @@ update msg model =
             ( model, Task.perform InitialViewport getViewport )
 
         LeftTitle ->
-            ( model |> mapTitles previousTitle, Cmd.none )
+            ( model |> mapTitles previousTitle |> mapHighlight Nothing, Cmd.none )
 
         RightTitle ->
-            ( model |> mapTitles nextTitle, Cmd.none )
+            ( model |> mapTitles nextTitle |> mapHighlight Nothing, Cmd.none )
 
         PlayProject project ->
             ( model |> mapProjects (playProject project), Cmd.none )
@@ -182,8 +194,19 @@ update msg model =
         NewViewport viewport ->
             ( { model | viewport = viewport }, scrollProjects viewport model )
 
+        Highlight item ->
+            ( model |> mapHighlight (Just item), Cmd.none )
+
+        Unhighlight item ->
+            ( model |> mapHighlight Nothing, Cmd.none )
+
         NoOp ->
             ( model, Cmd.none )
+
+
+mapHighlight : Maybe Highlightable -> Model -> Model
+mapHighlight highlight model =
+    { model | highlighting = highlight }
 
 
 scrollProjects : Viewport -> Model -> Cmd Msg
@@ -431,15 +454,33 @@ arrows model =
         [ button
             [ class "arrow leftArrow button"
             , style "position" "absolute"
-            , style "top" <| px ((model.viewport.viewport.height / 5) + 20)
+            , style "top" <| px 0
+            , style "background-color" <|
+                case model.highlighting of
+                    Just LeftArrow ->
+                        "rgba(255, 255, 255, 0.5)"
+
+                    _ ->
+                        "rgba(255, 255, 255, 0)"
             , Event.onClick LeftTitle
+            , Event.onMouseOver (Highlight LeftArrow)
+            , Event.onMouseOut (Unhighlight LeftArrow)
             ]
             [ leftArrow model ]
         , button
             [ class "arrow rightArrow button"
             , style "position" "absolute"
-            , style "top" <| px ((model.viewport.viewport.height / 5) + 20)
+            , style "top" <| px 0
+            , style "background-color" <|
+                case model.highlighting of
+                    Just RightArrow ->
+                        "rgba(255, 255, 255, 0.5)"
+
+                    _ ->
+                        "rgba(255, 255, 255, 0)"
             , Event.onClick RightTitle
+            , Event.onMouseOver (Highlight RightArrow)
+            , Event.onMouseOut (Unhighlight RightArrow)
             ]
             [ rightArrow model ]
         ]
@@ -467,14 +508,20 @@ downArrow model =
 leftArrow : Model -> Html Msg
 leftArrow model =
     div
-        [ class "button" ]
+        [ class "button"
+        , style "position" "absolute"
+        , style "top" <| px ((model.viewport.viewport.height / 3) + 20)
+        ]
         [ text "<" ]
 
 
 rightArrow : Model -> Html Msg
 rightArrow model =
     div
-        [ class "button" ]
+        [ class "button"
+        , style "position" "absolute"
+        , style "top" <| px ((model.viewport.viewport.height / 3) + 20)
+        ]
         [ text ">" ]
 
 
