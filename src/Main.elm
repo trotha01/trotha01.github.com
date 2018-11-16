@@ -301,8 +301,8 @@ pages model =
     div
         [ style "max-width" "100%"
         ]
-        [ viewProjects model
-        , viewContact model
+        [ -- viewProjects model
+          viewContact model
         ]
 
 
@@ -416,7 +416,8 @@ headerText model =
         [ class "text" ]
         [ viewTitles model
         , arrows model
-        , downArrow model
+
+        -- , downArrow model
         ]
 
 

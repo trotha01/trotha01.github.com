@@ -6123,52 +6123,6 @@ var author$project$Main$arrows = function (model) {
 					]))
 			]));
 };
-var elm$html$Html$img = _VirtualDom_node('img');
-var elm$html$Html$Attributes$height = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'height',
-		elm$core$String$fromInt(n));
-};
-var elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var elm$html$Html$Attributes$width = function (n) {
-	return A2(
-		_VirtualDom_attribute,
-		'width',
-		elm$core$String$fromInt(n));
-};
-var author$project$Main$downArrow = function (model) {
-	return A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('down-arrow'),
-				A2(elm$html$Html$Attributes$style, 'position', 'absolute'),
-				A2(elm$html$Html$Attributes$style, 'bottom', '0'),
-				A2(
-				elm$html$Html$Attributes$style,
-				'left',
-				author$project$Main$px(model.a.a.Y / 2)),
-				A2(elm$html$Html$Attributes$style, 'transform', 'translate(-50%, 40%)')
-			]),
-		_List_fromArray(
-			[
-				A2(
-				elm$html$Html$img,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$src('imgs/down-arrow-24px.svg'),
-						elm$html$Html$Attributes$width(100),
-						elm$html$Html$Attributes$height(100)
-					]),
-				_List_Nil)
-			]));
-};
 var elm$html$Html$h4 = _VirtualDom_node('h4');
 var wernerdegroot$listzipper$List$Zipper$current = function (_n0) {
 	var x = _n0.b;
@@ -6230,8 +6184,7 @@ var author$project$Main$headerText = function (model) {
 		_List_fromArray(
 			[
 				author$project$Main$viewTitles(model),
-				author$project$Main$arrows(model),
-				author$project$Main$downArrow(model)
+				author$project$Main$arrows(model)
 			]));
 };
 var author$project$Main$header = function (model) {
@@ -6316,120 +6269,6 @@ var author$project$Main$viewContact = function (model) {
 					]))
 			]));
 };
-var elm$html$Html$a = _VirtualDom_node('a');
-var elm$html$Html$h3 = _VirtualDom_node('h3');
-var elm$html$Html$p = _VirtualDom_node('p');
-var elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
-var elm$html$Html$Attributes$target = elm$html$Html$Attributes$stringProperty('target');
-var author$project$Main$viewProject = function (project) {
-	return A2(
-		elm$html$Html$a,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('project'),
-				elm$html$Html$Attributes$href(project.p),
-				elm$html$Html$Attributes$target('_blank')
-			]),
-		_List_fromArray(
-			[
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$class('project-button')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						elm$html$Html$div,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$class('col-1-of-5')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								elm$html$Html$img,
-								_List_fromArray(
-									[
-										elm$html$Html$Attributes$class('project-image'),
-										elm$html$Html$Attributes$src(project.r)
-									]),
-								_List_Nil)
-							])),
-						A2(
-						elm$html$Html$div,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$class('col-4-of-5')
-							]),
-						_List_fromArray(
-							[
-								A2(
-								elm$html$Html$h3,
-								_List_fromArray(
-									[
-										elm$html$Html$Attributes$class('heading-tertiary')
-									]),
-								_List_fromArray(
-									[
-										elm$html$Html$text(project.k)
-									])),
-								A2(
-								elm$html$Html$p,
-								_List_fromArray(
-									[
-										elm$html$Html$Attributes$class('project-descriotion')
-									]),
-								_List_fromArray(
-									[
-										elm$html$Html$text(project.s)
-									]))
-							]))
-					]))
-			]));
-};
-var elm$html$Html$Attributes$id = elm$html$Html$Attributes$stringProperty('id');
-var author$project$Main$viewProjects = function (model) {
-	return A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('page row')
-			]),
-		_List_fromArray(
-			[
-				A2(
-				elm$html$Html$h2,
-				_List_Nil,
-				_List_fromArray(
-					[
-						elm$html$Html$text('Projects')
-					])),
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$class('project-list-wrapper')
-					]),
-				_List_fromArray(
-					[
-						A2(
-						elm$html$Html$div,
-						_List_fromArray(
-							[
-								elm$html$Html$Attributes$class('project-list'),
-								elm$html$Html$Attributes$id('project-list')
-							]),
-						A2(elm$core$List$map, author$project$Main$viewProject, model.N))
-					]))
-			]));
-};
 var author$project$Main$pages = function (model) {
 	return A2(
 		elm$html$Html$div,
@@ -6439,7 +6278,6 @@ var author$project$Main$pages = function (model) {
 			]),
 		_List_fromArray(
 			[
-				author$project$Main$viewProjects(model),
 				author$project$Main$viewContact(model)
 			]));
 };
